@@ -1,0 +1,48 @@
+﻿@using Akademinya.Models;
+
+@{ 
+    Layout = null;
+    AkademinyaEntities db = new AkademinyaEntities();
+    var kategoriler = db.Kategori.ToList();
+}
+
+ <!-- Categories Menu -->
+
+<div class="cat_menu_container">
+    <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+        <div class="cat_burger"><span></span><span></span><span></span></div>
+        <div class="cat_menu_text">Kategoriler</div>
+    </div>
+
+    <ul class="cat_menu">
+        @foreach (var item in kategoriler.Where(x => x.UstId == 0))
+        {
+            if (kategoriler.ToList().Where(m => m.UstId == item.Id).Count() >= 1)
+            {
+                <li class="hassubs">
+                    <a href="#">@item.Ad<i class="fas fa-chevron-right"></i></a>
+                    <ul>
+                        @foreach (var item2 in kategoriler.ToList().Where(m => m.UstId == item.Id))
+                        {
+                            <li><a href="#">@item2.Ad<i class="fas fa-chevron-right"></i></a></li>
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li><a href="#">@item.Ad<i class="fas fa-chevron-right ml-auto"></i></a></li>
+            }
+        }
+        </ul>
+</div>
+
+<!-- Main Nav Menu -->
+
+<div class="main_nav_menu ml-auto">
+    <ul class="standard_dropdown main_nav_dropdown">
+
+        <li><a href="blog.html">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
+        <li><a href="contact.html">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
+    </ul>
+</div>

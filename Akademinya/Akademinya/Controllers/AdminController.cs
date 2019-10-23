@@ -7,33 +7,44 @@ using Akademinya.Models;
 
 namespace Akademinya.Controllers
 {
+    [RoutePrefix("Admin")]
     public class AdminController : Controller
     {
         // GET: Admin
         AkademinyaEntities db = new AkademinyaEntities();
-        [Route("Admin")]
+        [Route("")]
         public ActionResult Admin()
         {
             return View();
         }
 
-        [Route("KategoriEkleDuzenle")]
-        public ActionResult KategoriEkleDuzenle()
+        [Route("KategoriEkle")]
+        public ActionResult KategoriEkle()
         {
-            var UstKategoriler = db.Kategori.ToList().Where(x => x.UstId == 0);
+            var UstKategoriler = db.Kategori.ToList().Where(x => x.UstId == 0&&x.Silindi!=true);
             ViewBag.UstKategoriler = UstKategoriler;
 
             return View();
         }
 
-        [Route("KategoriEkleDuzenle")]
+        [Route("KategoriEkle")]
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult KategoriEkleDuzenle(Kategori kat)
+        public ActionResult KategoriEkle(Kategori kat)
         {
 
             db.Kategori.Add(kat);
-            return View();
+            db.SaveChanges();
+            return RedirectToAction("KategoriEkle");
+        }
+
+        [Route("KategoriSil/{id}")]
+        public ActionResult KategoriSil(int id)
+        {
+            Kategori kat = db.Kategori.FirstOrDefault(x => x.Id == id);
+            kat.Silindi = true;
+            db.SaveChanges();
+            return RedirectToAction("KategoriEkle");
         }
     }
 }

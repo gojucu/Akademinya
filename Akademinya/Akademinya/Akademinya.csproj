@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AnasayfaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,14 +159,23 @@
     <Compile Include="Models\Kategori.cs">
       <DependentUpon>AkademinyaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Kurs.cs">
+      <DependentUpon>AkademinyaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>AkademinyaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Uye.cs">
       <DependentUpon>AkademinyaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminContent\css\Admin.css" />
+    <Content Include="Content\AdminContent\icons\arrow-down.png" />
+    <Content Include="Content\AdminContent\icons\arrow-left.png" />
     <Content Include="Content\AdminContent\index.html" />
+    <Content Include="Content\AdminContent\jquery.treeView.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -6752,6 +6762,167 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\OneTech\blog.html" />
+    <Content Include="Content\OneTech\blog_single.html" />
+    <Content Include="Content\OneTech\cart.html" />
+    <Content Include="Content\OneTech\contact.html" />
+    <Content Include="Content\OneTech\images\adv_1.png" />
+    <Content Include="Content\OneTech\images\adv_2.png" />
+    <Content Include="Content\OneTech\images\adv_3.png" />
+    <Content Include="Content\OneTech\images\banner_2_background.jpg" />
+    <Content Include="Content\OneTech\images\banner_2_product.png" />
+    <Content Include="Content\OneTech\images\banner_background.jpg" />
+    <Content Include="Content\OneTech\images\banner_product.png" />
+    <Content Include="Content\OneTech\images\best_1.png" />
+    <Content Include="Content\OneTech\images\best_2.png" />
+    <Content Include="Content\OneTech\images\best_3.png" />
+    <Content Include="Content\OneTech\images\best_4.png" />
+    <Content Include="Content\OneTech\images\best_5.png" />
+    <Content Include="Content\OneTech\images\best_6.png" />
+    <Content Include="Content\OneTech\images\blog_1.jpg" />
+    <Content Include="Content\OneTech\images\blog_2.jpg" />
+    <Content Include="Content\OneTech\images\blog_3.jpg" />
+    <Content Include="Content\OneTech\images\blog_4.jpg" />
+    <Content Include="Content\OneTech\images\blog_5.jpg" />
+    <Content Include="Content\OneTech\images\blog_6.jpg" />
+    <Content Include="Content\OneTech\images\blog_7.jpg" />
+    <Content Include="Content\OneTech\images\blog_8.jpg" />
+    <Content Include="Content\OneTech\images\blog_9.jpg" />
+    <Content Include="Content\OneTech\images\blog_single_background.jpg" />
+    <Content Include="Content\OneTech\images\brands_1.jpg" />
+    <Content Include="Content\OneTech\images\brands_2.jpg" />
+    <Content Include="Content\OneTech\images\brands_3.jpg" />
+    <Content Include="Content\OneTech\images\brands_4.jpg" />
+    <Content Include="Content\OneTech\images\brands_5.jpg" />
+    <Content Include="Content\OneTech\images\brands_6.jpg" />
+    <Content Include="Content\OneTech\images\brands_7.jpg" />
+    <Content Include="Content\OneTech\images\brands_8.jpg" />
+    <Content Include="Content\OneTech\images\cart.png" />
+    <Content Include="Content\OneTech\images\char_1.png" />
+    <Content Include="Content\OneTech\images\char_2.png" />
+    <Content Include="Content\OneTech\images\char_3.png" />
+    <Content Include="Content\OneTech\images\char_4.png" />
+    <Content Include="Content\OneTech\images\contact_1.png" />
+    <Content Include="Content\OneTech\images\contact_2.png" />
+    <Content Include="Content\OneTech\images\contact_3.png" />
+    <Content Include="Content\OneTech\images\deals.png" />
+    <Content Include="Content\OneTech\images\featured_1.png" />
+    <Content Include="Content\OneTech\images\featured_2.png" />
+    <Content Include="Content\OneTech\images\featured_3.png" />
+    <Content Include="Content\OneTech\images\featured_4.png" />
+    <Content Include="Content\OneTech\images\featured_5.png" />
+    <Content Include="Content\OneTech\images\featured_6.png" />
+    <Content Include="Content\OneTech\images\featured_7.png" />
+    <Content Include="Content\OneTech\images\featured_8.png" />
+    <Content Include="Content\OneTech\images\heart.png" />
+    <Content Include="Content\OneTech\images\logos_1.png" />
+    <Content Include="Content\OneTech\images\logos_2.png" />
+    <Content Include="Content\OneTech\images\logos_3.png" />
+    <Content Include="Content\OneTech\images\logos_4.png" />
+    <Content Include="Content\OneTech\images\mail.png" />
+    <Content Include="Content\OneTech\images\mail_white.png" />
+    <Content Include="Content\OneTech\images\marker.png" />
+    <Content Include="Content\OneTech\images\new_1.jpg" />
+    <Content Include="Content\OneTech\images\new_10.jpg" />
+    <Content Include="Content\OneTech\images\new_2.jpg" />
+    <Content Include="Content\OneTech\images\new_3.jpg" />
+    <Content Include="Content\OneTech\images\new_4.jpg" />
+    <Content Include="Content\OneTech\images\new_5.jpg" />
+    <Content Include="Content\OneTech\images\new_6.jpg" />
+    <Content Include="Content\OneTech\images\new_7.jpg" />
+    <Content Include="Content\OneTech\images\new_8.jpg" />
+    <Content Include="Content\OneTech\images\new_9.jpg" />
+    <Content Include="Content\OneTech\images\new_single.png" />
+    <Content Include="Content\OneTech\images\phone.png" />
+    <Content Include="Content\OneTech\images\phone_white.png" />
+    <Content Include="Content\OneTech\images\popular_1.png" />
+    <Content Include="Content\OneTech\images\popular_2.png" />
+    <Content Include="Content\OneTech\images\popular_3.png" />
+    <Content Include="Content\OneTech\images\popular_4.png" />
+    <Content Include="Content\OneTech\images\popular_5.png" />
+    <Content Include="Content\OneTech\images\quote.png" />
+    <Content Include="Content\OneTech\images\review_1.jpg" />
+    <Content Include="Content\OneTech\images\review_2.jpg" />
+    <Content Include="Content\OneTech\images\review_3.jpg" />
+    <Content Include="Content\OneTech\images\search.png" />
+    <Content Include="Content\OneTech\images\send.png" />
+    <Content Include="Content\OneTech\images\shopping_cart.jpg" />
+    <Content Include="Content\OneTech\images\shop_1.jpg" />
+    <Content Include="Content\OneTech\images\shop_2.jpg" />
+    <Content Include="Content\OneTech\images\shop_background.jpg" />
+    <Content Include="Content\OneTech\images\single_1.jpg" />
+    <Content Include="Content\OneTech\images\single_2.jpg" />
+    <Content Include="Content\OneTech\images\single_3.jpg" />
+    <Content Include="Content\OneTech\images\single_4.jpg" />
+    <Content Include="Content\OneTech\images\trends_1.jpg" />
+    <Content Include="Content\OneTech\images\trends_2.jpg" />
+    <Content Include="Content\OneTech\images\trends_3.jpg" />
+    <Content Include="Content\OneTech\images\trends_background.jpg" />
+    <Content Include="Content\OneTech\images\user.png" />
+    <Content Include="Content\OneTech\images\user.svg" />
+    <Content Include="Content\OneTech\images\view_1.jpg" />
+    <Content Include="Content\OneTech\images\view_2.jpg" />
+    <Content Include="Content\OneTech\images\view_3.jpg" />
+    <Content Include="Content\OneTech\images\view_4.jpg" />
+    <Content Include="Content\OneTech\images\view_5.jpg" />
+    <Content Include="Content\OneTech\images\view_6.jpg" />
+    <Content Include="Content\OneTech\index.html" />
+    <Content Include="Content\OneTech\js\blog_custom.js" />
+    <Content Include="Content\OneTech\js\blog_single_custom.js" />
+    <Content Include="Content\OneTech\js\cart_custom.js" />
+    <Content Include="Content\OneTech\js\contact_custom.js" />
+    <Content Include="Content\OneTech\js\custom.js" />
+    <Content Include="Content\OneTech\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\OneTech\js\product_custom.js" />
+    <Content Include="Content\OneTech\js\regular_custom.js" />
+    <Content Include="Content\OneTech\js\shop_custom.js" />
+    <Content Include="Content\OneTech\plugins\easing\easing.js" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\css\fontawesome-all.css" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\OneTech\plugins\greensock\animation.gsap.min.js" />
+    <Content Include="Content\OneTech\plugins\greensock\ScrollToPlugin.min.js" />
+    <Content Include="Content\OneTech\plugins\greensock\TimelineMax.min.js" />
+    <Content Include="Content\OneTech\plugins\greensock\TweenMax.min.js" />
+    <Content Include="Content\OneTech\plugins\Isotope\isotope.pkgd.min.js" />
+    <Content Include="Content\OneTech\plugins\jquery-ui-1.12.1.custom\jquery-ui.css" />
+    <Content Include="Content\OneTech\plugins\jquery-ui-1.12.1.custom\jquery-ui.js" />
+    <Content Include="Content\OneTech\plugins\OwlCarousel2-2.2.1\ajax-loader.gif" />
+    <Content Include="Content\OneTech\plugins\OwlCarousel2-2.2.1\animate.css" />
+    <Content Include="Content\OneTech\plugins\OwlCarousel2-2.2.1\owl.carousel.css" />
+    <Content Include="Content\OneTech\plugins\OwlCarousel2-2.2.1\owl.carousel.js" />
+    <Content Include="Content\OneTech\plugins\OwlCarousel2-2.2.1\owl.theme.default.css" />
+    <Content Include="Content\OneTech\plugins\OwlCarousel2-2.2.1\owl.video.play.png" />
+    <Content Include="Content\OneTech\plugins\parallax-js-master\parallax.min.js" />
+    <Content Include="Content\OneTech\plugins\scrollmagic\ScrollMagic.min.js" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\ajax-loader.gif" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\fonts\slick.svg" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\index.html" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\slick.css" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\slick.js" />
+    <Content Include="Content\OneTech\product.html" />
+    <Content Include="Content\OneTech\regular.html" />
+    <Content Include="Content\OneTech\shop.html" />
+    <Content Include="Content\OneTech\styles\blog_responsive.css" />
+    <Content Include="Content\OneTech\styles\blog_single_responsive.css" />
+    <Content Include="Content\OneTech\styles\blog_single_styles.css" />
+    <Content Include="Content\OneTech\styles\blog_styles.css" />
+    <Content Include="Content\OneTech\styles\bootstrap4\bootstrap.min.css" />
+    <Content Include="Content\OneTech\styles\bootstrap4\bootstrap.min.js" />
+    <Content Include="Content\OneTech\styles\bootstrap4\popper.js" />
+    <Content Include="Content\OneTech\styles\cart_responsive.css" />
+    <Content Include="Content\OneTech\styles\cart_styles.css" />
+    <Content Include="Content\OneTech\styles\contact_responsive.css" />
+    <Content Include="Content\OneTech\styles\contact_styles.css" />
+    <Content Include="Content\OneTech\styles\main_styles.css" />
+    <Content Include="Content\OneTech\styles\product_responsive.css" />
+    <Content Include="Content\OneTech\styles\product_styles.css" />
+    <Content Include="Content\OneTech\styles\regular_responsive.css" />
+    <Content Include="Content\OneTech\styles\regular_styles.css" />
+    <Content Include="Content\OneTech\styles\responsive.css" />
+    <Content Include="Content\OneTech\styles\shop_responsive.css" />
+    <Content Include="Content\OneTech\styles\shop_styles.css" />
     <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\plugins\bootstrap-slider\slider.css" />
     <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -6908,6 +7079,8 @@
       <DependentUpon>AkademinyaModel.edmx</DependentUpon>
       <LastGenOutput>AkademinyaModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bower_components\bootstrap-colorpicker\.bower.json" />
@@ -7507,6 +7680,21 @@
     <Content Include="Models\AkademinyaModel.edmx.diagram">
       <DependentUpon>AkademinyaModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\fonts\slick.eot" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\fonts\slick.ttf" />
+    <Content Include="Content\OneTech\plugins\slick-1.8.0\fonts\slick.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7518,6 +7706,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -7534,7 +7723,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
-    <Content Include="Views\Admin\KategoriEkleDuzenle.cshtml" />
+    <Content Include="Views\Admin\KategoriEkle.cshtml" />
+    <Content Include="Views\Anasayfa\Index.cshtml" />
+    <Content Include="Views\Anasayfa\MenuList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

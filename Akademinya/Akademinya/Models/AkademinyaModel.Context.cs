@@ -25,7 +25,9 @@ namespace Akademinya.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Kategori> Kategori { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Kategori> Kategori { get; set; }
+        public virtual DbSet<Kurs> Kurs { get; set; }
+        public virtual DbSet<Uye> Uye { get; set; }
     }
 }

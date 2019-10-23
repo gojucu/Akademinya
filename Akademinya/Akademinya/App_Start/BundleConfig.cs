@@ -8,6 +8,12 @@ namespace Akademinya
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/Content/css")
+              .Include("~/Content/bootstrap.css")
+              .Include("~/Content/bower_components/datatables.net-bs/css/datatables.min.css")
+              );
+
+
             bundles.Add(new StyleBundle("~/bundles/AdminCss")
                           .Include("~/Content/bower_components/bootstrap/dist/css/bootstrap.min.css")
                           //.Include("~/Content/all.css")
