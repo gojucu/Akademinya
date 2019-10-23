@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "UyeGirisi";
+}
+<div class="shop">
+    <div class="container" style="text-align: -webkit-center;">
+        <h2>GirisYap</h2>
+        @if (ViewBag.Kullanici != null)
+        {
+            <p> @ViewBag.Kullanici.KullaniciAdi Hoşgeldiniz</p>
+        }
+        else
+        {
+            <p>Giriş yapılmadı.</p>
+        }
+        @using (Html.BeginForm())
+        {
+            <table align="center">
+                <tr>
+                    <td colspan="2">
+                        @ViewBag.Mesaj
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kullanıcı Adı</td>
+                    <td><input class="form-control" type="text" name="KullaniciAdi" value="" required /></td>
+                </tr>
+                <tr>
+                    <td>Parola</td>
+                    <td><input class="form-control" type="password" name="Sifre" value="" required /></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input class="form-control" type="submit" name="btnKayit01" value="Giriş Yap" />
+                    </td>
+                </tr>
+
+            </table>
+        }
+        @if (ViewBag.Kullanici != null)
+        {
+            <a class="btn btn-bitbucket" href="/UyeCikis" title="UyeCikis" itemprop="name">Çıkış Yap</a>
+        }
+        else
+        {
+            <a class="btn btn-bitbucket" href="/UyeOl" title="UyeOl" itemprop="name">Üye Ol</a>
+        }
+</div>
+</div>

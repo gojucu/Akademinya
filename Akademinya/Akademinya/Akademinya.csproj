@@ -138,36 +138,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnasayfaController.cs" />
+    <Compile Include="Controllers\UyelikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AkademinyaModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AkademinyaModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AkademinyaModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AkademinyaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AkademinyaModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AkademinyaModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Kategori.cs">
-      <DependentUpon>AkademinyaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Kurs.cs">
-      <DependentUpon>AkademinyaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>AkademinyaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Uye.cs">
-      <DependentUpon>AkademinyaModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AkademinyaEntities.cs" />
+    <Compile Include="Models\aspnet_Applications.cs" />
+    <Compile Include="Models\aspnet_Membership.cs" />
+    <Compile Include="Models\aspnet_Paths.cs" />
+    <Compile Include="Models\aspnet_PersonalizationAllUsers.cs" />
+    <Compile Include="Models\aspnet_PersonalizationPerUser.cs" />
+    <Compile Include="Models\aspnet_Profile.cs" />
+    <Compile Include="Models\aspnet_Roles.cs" />
+    <Compile Include="Models\aspnet_SchemaVersions.cs" />
+    <Compile Include="Models\aspnet_Users.cs" />
+    <Compile Include="Models\aspnet_WebEvent_Events.cs" />
+    <Compile Include="Models\Kategori.cs" />
+    <Compile Include="Models\Kurs.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\Uye.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -7069,16 +7058,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\AkademinyaModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AkademinyaModel.Context.cs</LastGenOutput>
-      <DependentUpon>AkademinyaModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\AkademinyaModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AkademinyaModel.edmx</DependentUpon>
-      <LastGenOutput>AkademinyaModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -7673,13 +7652,6 @@
     <Content Include="Content\dist\css\adminlte.min.css.map" />
     <Content Include="Content\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\plugins\input-mask\phone-codes\phone-codes.json" />
-    <EntityDeploy Include="Models\AkademinyaModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AkademinyaModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AkademinyaModel.edmx.diagram">
-      <DependentUpon>AkademinyaModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.eot" />
     <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.ttf" />
     <Content Include="Content\OneTech\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.woff" />
@@ -7718,14 +7690,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\KategoriEkle.cshtml" />
     <Content Include="Views\Anasayfa\Index.cshtml" />
     <Content Include="Views\Anasayfa\MenuList.cshtml" />
+    <Content Include="Views\Uyelik\UyeOl.cshtml" />
+    <Content Include="Views\Uyelik\UyeGirisi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

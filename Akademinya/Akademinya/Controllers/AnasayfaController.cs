@@ -23,11 +23,6 @@ namespace Akademinya.Controllers
             return View();
         }
 
-        //Uyelik
-        [Route("UyeOl")]
-        public ActionResult UyeOl()
-        {
-            return View();
-        }
+
     }
 }

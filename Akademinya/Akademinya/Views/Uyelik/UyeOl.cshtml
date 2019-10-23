@@ -1,0 +1,43 @@
+﻿
+@{
+    //Layout = null;
+}
+
+<div class="shop">
+    <div class="container" style="text-align: -webkit-center;">
+        <h2>KayitOl</h2>
+        <h4 style="color:red">@ViewBag.Hata</h4>
+        @using (Html.BeginForm("KayitOl", "Uyelik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <table align="center">
+                <tr><td>Kullanıcı Adı</td></tr>
+                <tr>
+                    
+                    <td><input class="form-control" type="text" name="KullaniciAdi" value="" required /></td>
+                </tr>
+                <tr><td>Email</td></tr>
+                <tr>
+                    
+                    <td><input class="form-control" type="email" name="Mail" value="" required /></td>
+                </tr>
+                <tr><td>Parola</td></tr>
+                <tr>
+                    
+                    <td><input class="form-control" type="password" name="Sifre" minlength="6" value="" required /></td>
+                </tr>
+                @*<tr>
+                        <td>Parola Tekrar</td>
+                        <td><input class="form-control" type="password" name="ParolaTekrar" value="" required /></td>
+                    </tr>*@
+
+                <tr><td> </td></tr>
+                <tr>
+                    
+                    <td>
+                        <input class="form-control btn btn-outline-dark" type="submit" name="btnKayit01" value="Kayıt Ol" />
+                    </td>
+                </tr>
+            </table>
+        }
+</div>
+</div>
