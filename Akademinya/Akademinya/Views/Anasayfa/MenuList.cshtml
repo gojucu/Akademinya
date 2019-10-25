@@ -20,18 +20,18 @@
             if (kategoriler.ToList().Where(m => m.UstId == item.Id).Count() >= 1)
             {
                 <li class="hassubs">
-                    <a href="#">@item.Ad<i class="fas fa-chevron-right"></i></a>
+                    <a href="/Kurslarr/@item.Ad">@item.Ad<i class="fas fa-chevron-right"></i></a>
                     <ul>
                         @foreach (var item2 in kategoriler.ToList().Where(m => m.UstId == item.Id))
                         {
-                            <li><a href="#">@item2.Ad<i class="fas fa-chevron-right"></i></a></li>
+                            <li><a href="/Kurslarr/@item2.Ad">@item2.Ad<i class="fas fa-chevron-right"></i></a></li>
                         }
                     </ul>
                 </li>
             }
             else
             {
-                <li><a href="#">@item.Ad<i class="fas fa-chevron-right ml-auto"></i></a></li>
+                <li><a href="/Kurslarr/@item.Ad">@item.Ad<i class="fas fa-chevron-right ml-auto"></i></a></li>
             }
         }
         </ul>
@@ -41,8 +41,24 @@
 
 <div class="main_nav_menu ml-auto">
     <ul class="standard_dropdown main_nav_dropdown">
-
-        <li><a href="UyeOl">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
-        <li><a href="UyeGirisi">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
+        @if (ViewBag.Uye != null)
+        {
+            <li><a href="UyeOl">Kurslarım<i class="fas fa-chevron-down"></i></a></li>
+            <li class="hassubs">
+                <a href="#">Hesap<i class="fas fa-chevron-down"></i></a>
+                <ul>
+                    <li><a href="#">@ViewBag.Uye.KullaniciAdi<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Bildirimler<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Mesajlar<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Satın alma geçmişi<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Eğitmen sayfası<i class="fas fa-chevron-down"></i></a></li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li><a href="UyeOl">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
+            <li><a href="UyeGirisi">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
+        }
     </ul>
 </div>

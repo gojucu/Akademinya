@@ -11,7 +11,7 @@ namespace Akademinya.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Kurs()
         {
-            Uye = new HashSet<Uye>();
+            Uye1 = new HashSet<Uye>();
         }
 
         public int Id { get; set; }
@@ -27,20 +27,24 @@ namespace Akademinya.Models
 
         public string Icerik { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string KursSahibi { get; set; }
+        public decimal? Fiyat { get; set; }
+
+        public Guid? KursSahibiID { get; set; }
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? SonGuncellemeTarih { get; set; }
 
         public int? KategoriID { get; set; }
 
+        public int? UstKategoriID { get; set; }
+
         public string Resim { get; set; }
 
         public virtual Kategori Kategori { get; set; }
 
+        public virtual Uye Uye { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Uye> Uye { get; set; }
+        public virtual ICollection<Uye> Uye1 { get; set; }
     }
 }

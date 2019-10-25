@@ -8,7 +8,7 @@ namespace Akademinya.Models
     public partial class AkademinyaEntities : DbContext
     {
         public AkademinyaEntities()
-            : base("name=AkademinyaEntities1")
+            : base("name=AkademinyaEntities")
         {
         }
 
@@ -84,9 +84,14 @@ namespace Akademinya.Models
                 .HasPrecision(19, 0);
 
             modelBuilder.Entity<Kurs>()
-                .HasMany(e => e.Uye)
-                .WithMany(e => e.Kurs)
+                .HasMany(e => e.Uye1)
+                .WithMany(e => e.Kurs1)
                 .Map(m => m.ToTable("UyeKurs").MapLeftKey("KursID").MapRightKey("UyeID"));
+
+            modelBuilder.Entity<Uye>()
+                .HasMany(e => e.Kurs)
+                .WithOptional(e => e.Uye)
+                .HasForeignKey(e => e.KursSahibiID);
         }
     }
 }

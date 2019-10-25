@@ -17,40 +17,64 @@ namespace Akademinya.Controllers
         [Route("UyeOl")]
         public ActionResult UyeOl()
         {
-            return View();
+            if (Session["Uye"] == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Anasayfa");
+            }
+
         }
         [HttpPost]
         [Route("UyeOl")]
         [ValidateInput(false)]
         public ActionResult UyeOl(Uye uye, string Sifre)
         {
-            try
+            if (Session["Uye"] == null)
             {
-                MembershipUser user = Membership.CreateUser(uye.KullaniciAdi, Sifre, uye.Mail);
-                uye.Id = (Guid)user.ProviderUserKey;
-                Session["Uye"] = uye;
+                try
+                {
+                    MembershipUser user = Membership.CreateUser(uye.KullaniciAdi, Sifre, uye.Mail);
+                    uye.Id = (Guid)user.ProviderUserKey;
+                    Session["Uye"] = uye;
 
-                db.Uye.Add(uye);
-                db.SaveChanges();
+                    db.Uye.Add(uye);
+                    db.SaveChanges();
 
-                FormsAuthentication.RedirectFromLoginPage(uye.KullaniciAdi, true);
-                Session["Uye"] = uye;
+                    FormsAuthentication.RedirectFromLoginPage(uye.KullaniciAdi, true);
+                    Session["Uye"] = uye;
 
+                    return RedirectToAction("Index", "Anasayfa");
+                }
+                catch
+                {
+                    ViewBag.Hata = "Bu bilgilere ait kayıtlı kullanıcı bulunmakta tekrar deneyiniz";
+                    return View();
+                }
+            }
+            else
+            {
                 return RedirectToAction("Index", "Anasayfa");
             }
-            catch
-            {
-                ViewBag.Hata = "Bu bilgilere ait kayıtlı kullanıcı bulunmakta tekrar deneyiniz";
-                return View();
-            }
+
 
 
         }
         [Route("UyeGirisi")]
         public ActionResult UyeGirisi()
         {
-            ViewBag.Kullanici = Session["Kullanici"];
-            return View();
+            if (Session["Uye"] == null)
+            {
+                ViewBag.Kullanici = Session["Uye"];
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Anasayfa");
+            }
+
         }
 
         [HttpPost]
@@ -58,23 +82,29 @@ namespace Akademinya.Controllers
         [ValidateInput(false)]
         public ActionResult UyeGirisi(string kullaniciAdi, string Sifre)
         {
-            if (Membership.ValidateUser(kullaniciAdi, Sifre))
+            if (Session["Uye"] == null)
             {
-                FormsAuthentication.RedirectFromLoginPage(kullaniciAdi, true);
-                Uye uye = db.Uye.FirstOrDefault(x => x.KullaniciAdi == kullaniciAdi);
-                Session["Kullanici"] = uye;
-                Session["KullaniXID"] = uye.Id;
+                if (Membership.ValidateUser(kullaniciAdi, Sifre))
+                {
+                    FormsAuthentication.RedirectFromLoginPage(kullaniciAdi, true);
+                    Uye uye = db.Uye.FirstOrDefault(x => x.KullaniciAdi == kullaniciAdi);
+                    Session["Uye"] = uye;
+                    Session["UyeXID"] = uye.Id;
 
-                //string gor = uye.Id.ToString();
+                    //string gor = uye.Id.ToString();
 
-                return RedirectToAction("Index", "Anasayfa");
+                    return RedirectToAction("Index", "Anasayfa");
+                }
+                else
+                {
+                    ViewBag.Mesaj = "Kullanıcı Adı Veya Parola Yanlış";
+                    return View();
+                }
             }
             else
             {
-                ViewBag.Mesaj = "Kullanıcı Adı Veya Parola Yanlış";
-                return View();
+                return RedirectToAction("Index", "Anasayfa");
             }
-
         }
 
         [Route("UyeCikis")]
@@ -82,7 +112,7 @@ namespace Akademinya.Controllers
         public ActionResult UyeCikis()
         {
 
-            Session["Kullanici"] = null;
+            Session["Uye"] = null;
             return RedirectToAction("GirisYap", "Uyelik");
         }
     }

@@ -13,6 +13,7 @@ namespace Akademinya.Models
         public Uye()
         {
             Kurs = new HashSet<Kurs>();
+            Kurs1 = new HashSet<Kurs>();
         }
 
         public Guid Id { get; set; }
@@ -29,5 +30,8 @@ namespace Akademinya.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kurs> Kurs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kurs> Kurs1 { get; set; }
     }
 }

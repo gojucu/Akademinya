@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = null;
+}
+@model IEnumerable<Akademinya.Models.Kurs>
+<div class="container" style="background-color:white">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach(var item in Model)
+            {
+                @item.Ad <br />
+            }
+
+        </div>
+    </div>
+</div>
