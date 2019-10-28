@@ -108,12 +108,11 @@ namespace Akademinya.Controllers
         }
 
         [Route("UyeCikis")]
-        [HttpPost]
         public ActionResult UyeCikis()
         {
 
             Session["Uye"] = null;
-            return RedirectToAction("GirisYap", "Uyelik");
+            return RedirectToAction("Index", "Anasayfa");
         }
     }
 }

@@ -5,10 +5,36 @@
 @model IEnumerable<Akademinya.Models.Kurs>
 <div class="container" style="background-color:white">
     <div class="row">
-        <div class="col-md-12">
-            @foreach(var item in Model)
+        <div class="col-md-12" style="margin:auto" >
+            @foreach (var item in Model)
             {
-                @item.Ad <br />
+                <a href="../Kurslar/KursDetay/@item.Id">
+                    <div class="katKurs-Liste row" >
+                        <div class="img-responsive col-sm-3" style="float:left">
+                            <img src="~/Content/SampleImages/pc.jpg" style="width:100%;height:100%" />
+                        </div>
+                        <div class="col-sm-9">
+                           <div class="col-md-12">
+                               <ul>
+                                   <li>
+                                       <h3 class="float-left">@item.Ad</h3> <h4 class="float-right">@item.Fiyat ₺</h4> <br /><br />
+                                   </li>
+                                   <li>
+                                       <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
+                                       <h4 class="float-right">**** 4 puan</h4>
+                                   </li>
+                                   <li>
+                                       @item.Icerik
+                                   </li>
+                               </ul>
+                               </div>
+
+                        </div>
+
+
+                    </div>
+                </a>
+                <hr />
             }
 
         </div>

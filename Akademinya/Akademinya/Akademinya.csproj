@@ -138,11 +138,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnasayfaController.cs" />
+    <Compile Include="Controllers\Genel.cs" />
     <Compile Include="Controllers\UyelikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AkademinyaEntities.cs" />
+    <Compile Include="Models\AlisverisSepeti.cs" />
     <Compile Include="Models\aspnet_Applications.cs" />
     <Compile Include="Models\aspnet_Membership.cs" />
     <Compile Include="Models\aspnet_Paths.cs" />
@@ -153,6 +155,8 @@
     <Compile Include="Models\aspnet_SchemaVersions.cs" />
     <Compile Include="Models\aspnet_Users.cs" />
     <Compile Include="Models\aspnet_WebEvent_Events.cs" />
+    <Compile Include="Models\Islemler.cs" />
+    <Compile Include="Models\Kartlar.cs" />
     <Compile Include="Models\Kategori.cs" />
     <Compile Include="Models\Kurs.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
@@ -167,6 +171,7 @@
     <Content Include="Content\AdminContent\jquery.treeView.js" />
     <Content Include="Content\AnasayfaContent\css\owl.carousel.css" />
     <Content Include="Content\AnasayfaContent\css\owl.theme.default.min.css" />
+    <Content Include="Content\AnasayfaContent\js\Anasayfa.js" />
     <Content Include="Content\AnasayfaContent\owl.carousel.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -7746,9 +7751,13 @@
     <Content Include="Views\Anasayfa\KursDetay.cshtml" />
     <Content Include="Views\Shared\KursListe.cshtml" />
     <Content Include="Views\Anasayfa\Kurslar.cshtml" />
+    <Content Include="Views\Anasayfa\AlisverisSepeti.cshtml" />
+    <Content Include="Views\Anasayfa\Odeme.cshtml" />
+    <Content Include="Views\Anasayfa\IstekSepet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Genel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

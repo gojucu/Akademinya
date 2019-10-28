@@ -8,10 +8,11 @@ namespace Akademinya.Models
     public partial class AkademinyaEntities : DbContext
     {
         public AkademinyaEntities()
-            : base("name=AkademinyaEntities")
+            : base("name=AkademinyaEntities9")
         {
         }
 
+        public virtual DbSet<AlisverisSepeti> AlisverisSepeti { get; set; }
         public virtual DbSet<aspnet_Applications> aspnet_Applications { get; set; }
         public virtual DbSet<aspnet_Membership> aspnet_Membership { get; set; }
         public virtual DbSet<aspnet_Paths> aspnet_Paths { get; set; }
@@ -22,6 +23,8 @@ namespace Akademinya.Models
         public virtual DbSet<aspnet_SchemaVersions> aspnet_SchemaVersions { get; set; }
         public virtual DbSet<aspnet_Users> aspnet_Users { get; set; }
         public virtual DbSet<aspnet_WebEvent_Events> aspnet_WebEvent_Events { get; set; }
+        public virtual DbSet<Islemler> Islemler { get; set; }
+        public virtual DbSet<Kartlar> Kartlar { get; set; }
         public virtual DbSet<Kategori> Kategori { get; set; }
         public virtual DbSet<Kurs> Kurs { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
@@ -83,10 +86,29 @@ namespace Akademinya.Models
                 .Property(e => e.EventOccurrence)
                 .HasPrecision(19, 0);
 
+            modelBuilder.Entity<Kartlar>()
+                .Property(e => e.Cvc)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Kurs>()
+                .HasMany(e => e.Islemler)
+                .WithRequired(e => e.Kurs)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Kurs>()
                 .HasMany(e => e.Uye1)
                 .WithMany(e => e.Kurs1)
                 .Map(m => m.ToTable("UyeKurs").MapLeftKey("KursID").MapRightKey("UyeID"));
+
+            modelBuilder.Entity<Uye>()
+                .HasMany(e => e.Islemler)
+                .WithRequired(e => e.Uye)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Uye>()
+                .HasMany(e => e.Kartlar)
+                .WithRequired(e => e.Uye)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Uye>()
                 .HasMany(e => e.Kurs)

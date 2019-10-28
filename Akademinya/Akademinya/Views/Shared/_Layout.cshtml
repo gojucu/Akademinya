@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/Content/OneTech/styles/bootstrap4/bootstrap.min.css">
     <link href="/Content/OneTech/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/AnasayfaContent/css/owl.carousel.css">
     <link rel="stylesheet" href="~/Content/AnasayfaContent/css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="/Content/OneTech/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
@@ -63,29 +64,8 @@
 
                         <!-- Wishlist -->
                         <div class="col-lg-3 col-9 order-lg-3 order-2 text-lg-left text-right">
-                            <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                                <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                                    <div class="wishlist_icon"><img src="/Content/OneTech/images/heart.png" alt=""></div>
-                                    <div class="wishlist_content">
-                                        <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                        <div class="wishlist_count">115</div>
-                                    </div>
-                                </div>
+                            @{Html.RenderAction("IstekSepet", "Anasayfa");}
 
-                                <!-- Cart -->
-                                <div class="cart">
-                                    <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                        <div class="cart_icon">
-                                            <img src="/Content/OneTech/images/cart.png" alt="">
-                                            <div class="cart_count"><span>10</span></div>
-                                        </div>
-                                        <div class="cart_content">
-                                            <div class="cart_text"><a href="#">Cart</a></div>
-                                            <div class="cart_price">$85</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -342,7 +322,9 @@
     <script src="/Content/OneTech/plugins/Isotope/isotope.pkgd.min.js"></script>
     <script src="/Content/OneTech/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
     <script src="/Content/OneTech/plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
     <script src="/Content/OneTech/js/shop_custom.js"></script>
+    <script src="~/Content/AnasayfaContent/js/Anasayfa.js"></script>
 </body>
 
 </html>

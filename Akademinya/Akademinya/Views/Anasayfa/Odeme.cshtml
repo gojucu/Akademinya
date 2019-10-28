@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Odeme";
+}
+
+    <div class="container odeme" style="background-color:white;padding-top: 1%; padding-bottom:1%">
+
+        <div class="row">
+            <div class="col-75">
+                <div class="container">
+                    <form id="OdemeYap">
+
+                        <div class="row">
+
+
+                            <div class="col-50">
+                                <h3>Ödeme</h3>
+                                <label for="fname">Geçerli Kartlar</label>
+                                <div class="icon-container">
+                                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                </div>
+                                <label for="cname">KayıtAdı</label>
+                                <input type="text" id="KayitAdi" name="cardname" placeholder="A kartı">
+                                <label for="cname">Kart üzerindeki isim</label>
+                                <input type="text" id="KartUstundekiIsım" name="cardname" placeholder="John More Doe">
+                                <label for="ccnum">Kart numarası</label>
+                                <input type="text" id="Kartno" name="cardnumber" placeholder="1111-2222-3333-4444">
+                                <label for="expmonth">Son kullanma ay</label>
+                                <input type="text" id="Ay" name="expmonth" placeholder="September">
+                                <div class="row">
+                                    <div class="col-50">
+                                        <label for="expyear">Son kullanma yıl</label>
+                                        <input type="text" id="Yil" name="expyear" placeholder="2019">
+                                    </div>
+                                    <div class="col-50">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" id="Cvc" name="cvv" placeholder="352">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <label>
+                            <input type="checkbox" checked="checked" id="Kaydet" name="sameadr"> Kart bilgilerimi kaydet
+                        </label>
+                        <input type="submit" value="Ödeme işlemini tamamla" class="btn">
+                        @foreach (var item in ViewBag.Sepet)
+                        {
+                            <input type="hidden" value="@item.Id" class="sepetID" />
+                        }
+                        </form>
+                </div>
+            </div>
+            <div class="col-25">
+                <div class="container">
+                    <h4>Sepet <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>Sayı @ViewBag.SepetSayi</b></span></h4>
+                    @foreach (var item in ViewBag.Sepet)
+                    {
+
+                        <p><a href="/Kurslar/KursDetay/@item.Kurs.Id">@item.Kurs.Ad</a> <span class="price">@item.Kurs.Fiyat ₺</span></p>
+                    }
+
+                    <hr>
+                    <p>
+                        Toplam <span class="price" style="color:black">
+                            <b>
+                                @{
+                                    decimal? toplam = 0;
+                                    foreach (var item in ViewBag.Sepet)
+                                    {
+                                        toplam += item.Kurs.Fiyat;
+                                    }
+                                }@toplam ₺
+                            </b>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#OdemeYap').submit(function () {
+            islemler.OdemeYap();
+            return false;
+        });
+    })
+</script>

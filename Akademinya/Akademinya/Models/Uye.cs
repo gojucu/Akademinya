@@ -12,6 +12,9 @@ namespace Akademinya.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Uye()
         {
+            AlisverisSepeti = new HashSet<AlisverisSepeti>();
+            Islemler = new HashSet<Islemler>();
+            Kartlar = new HashSet<Kartlar>();
             Kurs = new HashSet<Kurs>();
             Kurs1 = new HashSet<Kurs>();
         }
@@ -26,7 +29,16 @@ namespace Akademinya.Models
         [StringLength(50)]
         public string Mail { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AlisverisSepeti> AlisverisSepeti { get; set; }
+
         public virtual aspnet_Membership aspnet_Membership { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Islemler> Islemler { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kartlar> Kartlar { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kurs> Kurs { get; set; }

@@ -43,22 +43,23 @@
     <ul class="standard_dropdown main_nav_dropdown">
         @if (ViewBag.Uye != null)
         {
-            <li><a href="UyeOl">Kurslarım<i class="fas fa-chevron-down"></i></a></li>
+            <li><a href="/UyeOl">Kurslarım<i class="fas fa-chevron-down"></i></a></li>
             <li class="hassubs">
                 <a href="#">Hesap<i class="fas fa-chevron-down"></i></a>
-                <ul>
+                <ul style="z-index:5">
                     <li><a href="#">@ViewBag.Uye.KullaniciAdi<i class="fas fa-chevron-down"></i></a></li>
                     <li><a href="#">Bildirimler<i class="fas fa-chevron-down"></i></a></li>
                     <li><a href="#">Mesajlar<i class="fas fa-chevron-down"></i></a></li>
                     <li><a href="#">Satın alma geçmişi<i class="fas fa-chevron-down"></i></a></li>
                     <li><a href="#">Eğitmen sayfası<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="/UyeCikis">Çıkış yap<i class="fas fa-chevron-down"></i></a></li>
                 </ul>
             </li>
         }
         else
         {
-            <li><a href="UyeOl">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
-            <li><a href="UyeGirisi">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
+            <li><a href="/UyeOl">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
+            <li><a href="/UyeGirisi">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
         }
     </ul>
 </div>
