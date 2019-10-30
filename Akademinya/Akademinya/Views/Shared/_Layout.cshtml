@@ -40,27 +40,8 @@
                         </div>
 
                         <!-- Search -->
-                        <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
-                            <div class="header_search">
-                                <div class="header_search_content">
-                                    <div class="header_search_form_container">
-                                        <form action="#" class="header_search_form clearfix">
-                                            <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
-                                            <!--Alt tara display none yaptın bozulmaması için son'a kadar-->
-                                            <div class="custom_dropdown" style="display:none">
-                                                <div class="custom_dropdown_list">
-                                                    <span class="custom_dropdown_placeholder clc">ara</span>
-
-                                                    <ul class="custom_list clc"></ul>
-                                                </div>
-                                            </div>
-                                            <!--son-->
-                                            <button type="submit" class="header_search_button trans_300" value="Submit"><img src="/Content/OneTech/images/search.png" alt=""></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @{Html.RenderAction("AramaMenu", "Anasayfa");}
+                        
 
                         <!-- Wishlist -->
                         <div class="col-lg-3 col-9 order-lg-3 order-2 text-lg-left text-right">

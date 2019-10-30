@@ -65,4 +65,5 @@ var islemler = {
 
         })
     },
+
 }

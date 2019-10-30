@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Akademinya.Models.Kurs>
+
+@{
+    ViewBag.Title = "Kurslarim";
+}
+
+<div class="shop">
+    <div class="container">
+        <div style="margin-top:20px">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="card h-100 col-lg-3 col-md-4">
+                        <div class="img-responsive" style="height:145px">
+                            <img src="~/Content/SampleImages/pc.jpg" alt="Denim Jeans" style="width:100%;height:100%">
+                        </div>
+
+                        <h4>@item.Ad</h4>
+                        <p class="price">@item.Fiyat ₺</p>
+                        @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
+                        <p><button onclick="window.location.href='../Kurslar/KursDetay/@item.Id'">Kursunuza gidin</button></p>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

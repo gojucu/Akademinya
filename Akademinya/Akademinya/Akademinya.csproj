@@ -7754,6 +7754,9 @@
     <Content Include="Views\Anasayfa\AlisverisSepeti.cshtml" />
     <Content Include="Views\Anasayfa\Odeme.cshtml" />
     <Content Include="Views\Anasayfa\IstekSepet.cshtml" />
+    <Content Include="Views\Anasayfa\Kurslarim.cshtml" />
+    <Content Include="Views\Anasayfa\Kurslar2.cshtml" />
+    <Content Include="Views\Anasayfa\AramaMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

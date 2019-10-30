@@ -5,42 +5,52 @@
 
 <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
     @*<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-        <div class="wishlist_icon"><img src="/Content/OneTech/images/heart.png" alt=""></div>
-        <div class="wishlist_content">
-            @if (ViewBag.Uye != null)
-            {
-                <div class="wishlist_text"><a href="#">İstek</a></div>
-            }
-            else {
-                <div class="cart_text"><a href="#" class="Sepet">Sepet</a></div>
-            }
-                <div class="wishlist_count">115</div>
-            </div>
-    </div>*@
+            <div class="wishlist_icon"><img src="/Content/OneTech/images/heart.png" alt=""></div>
+            <div class="wishlist_content">
+                @if (ViewBag.Uye != null)
+                {
+                    <div class="wishlist_text"><a href="#">İstek</a></div>
+                }
+                else {
+                    <div class="cart_text"><a href="#" class="Sepet">Sepet</a></div>
+                }
+                    <div class="wishlist_count">115</div>
+                </div>
+        </div>*@
 
     <!-- Cart -->
     <div class="cart">
         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
             <div class="cart_icon">
                 <img src="/Content/OneTech/images/cart.png" alt="">
-                @if (ViewBag.Uye != null)
-                {
-                    <div class="cart_count"><span>@ViewBag.SepetSayi</span></div>
-                }
+                <div class="cart_count">
+                        <span>@ViewBag.SepetSayi</span>
+                </div>
 
                 </div>
             <div class="cart_content">
-                @if (ViewBag.Uye != null)
-                {
-                    <div class="cart_text"><a href="/alisverissepeti">Sepet</a></div>
+                <div class="cart_text">
+                    @if (ViewBag.Uye != null)
+                    {
+                        <a href="/alisverissepeti">Sepet</a>
 
-                }
-                else
-                {
-            <div class="cart_text"><a href="#" class="Sepet">Sepet</a></div>
 
+                    }
+                    else
+                    {
+                        <a href="#" class="Sepet">Sepet</a>
+
+                    }
+                </div>
+                <div class="cart_price">
+                    @{
+                        decimal? toplam = 0;
+                        foreach (var item in ViewBag.Sepet)
+                        {
+                            toplam += item.Kurs.Fiyat;
                         }
-                <div class="cart_price">$85</div>
+                    }@toplam ₺
+                </div>
             </div>
         </div>
     </div>

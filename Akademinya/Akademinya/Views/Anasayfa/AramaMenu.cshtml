@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+
+}
+<div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+    <div class="header_search">
+        <div class="header_search_content">
+            <div class="header_search_form_container">
+
+                @*@using (Html.BeginForm("AramaMenu", "Anasayfa", FormMethod.Post))
+                {*@
+                    <form asp-controller="Anasayfa" asp-action="AramaMenu" method="get" class="header_search_form clearfix">
+
+                            <input type="text" id="Ad" name="Ad" required="required" class="header_search_input" placeholder="Kurs arayın..">
+                            <!--Alt tara display none yaptın bozulmaması için son'a kadar-->
+                            <div class="custom_dropdown" style="display:none">
+                                <div class="custom_dropdown_list">
+                                    <span class="custom_dropdown_placeholder clc">ara</span>
+
+                                    <ul class="custom_list clc"></ul>
+                                </div>
+                            </div>
+                            <!--son-->
+
+                            <button type="submit" class="header_search_button trans_300" id="aramaBtn"><img src="/Content/OneTech/images/search.png" alt=""></button>
+                        </form>
+                @*}*@
+                </div>
+        </div>
+    </div>
+</div>
+<script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    $("#aramaBtn").on("click",function () {
+        var ad = $("#Ad").val().replace(/\ /g, "_"); //aranan içindeki boşlukların altçizgi yapıyor çünkü controller a boşluklar gitmiyor. Burdan çizgi gidip controllerda çizgiler tekrar boşluğa dönüştürülüyor
+        if (ad == null || ad == "") {
+            ad = null;
+        }
+        window.location = "../Kurslarr2/" + ad;
+        return false;
+    });
+</script>

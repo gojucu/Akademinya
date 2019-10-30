@@ -28,11 +28,24 @@ namespace Akademinya.Controllers
         [Route("IstekSepet")]
         public ActionResult IstekSepet()
         {
-            ViewBag.Uye = Session["Uye"];
+            var CookieGuid = Genel.guidKontrol();
 
-            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID).Count();
+            ViewBag.Uye = Session["Uye"];
+            ViewBag.Sepet = db.AlisverisSepeti.ToList().Where(x =>x.Guid == CookieGuid);
+            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.Guid == CookieGuid).Count();
 
             return View();
+        }
+        [Route("AramaMenu")]
+        public ActionResult AramaMenu()
+        {
+            return View();
+        }
+        [Route("AramaMenu")]
+        [HttpPost]
+        public ActionResult AramaMenu(string Ad)
+        {
+            return RedirectToAction("Kurslar2",new { Ad });
         }
 
         [Route("Kurslar/KursDetay/{id}")]
@@ -61,6 +74,23 @@ namespace Akademinya.Controllers
             return View("KursListe", kurslar);
         }
         //Kategoriye göre listeleme son
+        //Aramaya göre listeleme başlangıç
+        [Route("Kurslarr2/{Ad}")]
+        public ActionResult Kurslar2(string Ad)
+        {
+            return View();
+        }
+
+        [Route("Kurslar2/{Ad}")]
+        public ActionResult AramaKurs(string Ad)
+        {
+
+            var kurslar = db.Kurs.ToList().Where(x => x.Ad.Contains(Ad)||x.Icerik.Contains(Ad)||x.Acikklama.Contains(Ad));
+
+
+            return View("KursListe", kurslar);
+        }
+        //Aramaya göre listeleme son
 
 
         [Route("AlisverisSepeti")]
@@ -70,7 +100,7 @@ namespace Akademinya.Controllers
 
             ViewBag.Uye = Session["Uye"];
             ViewBag.UyeID = Session["UyeXID"];
-            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID).Count();
+            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID && x.Guid == CookieGuid).Count();
 
             return View(db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID&&x.Guid==CookieGuid));
         }
@@ -83,7 +113,7 @@ namespace Akademinya.Controllers
             ViewBag.Uye = Session["Uye"];
             ViewBag.UyeID = Session["UyeXID"];
             ViewBag.Sepet = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID && x.Guid == CookieGuid);
-            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID).Count();
+            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID && x.Guid == CookieGuid).Count();
             return View();
         }
         [Route("Odeme")]
@@ -159,6 +189,18 @@ namespace Akademinya.Controllers
                 return View();
             }
 
+        }
+
+        [Route("Kurslarim")]
+        public ActionResult Kurslarim()
+        {
+            ViewBag.Uye = Session["Uye"];
+            var uyeId = new Guid(Session["UyeXID"].ToString());
+
+            Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyeId);
+
+            var kurslarim = uye.Kurs1;
+            return View(kurslarim);
         }
     }
 }
