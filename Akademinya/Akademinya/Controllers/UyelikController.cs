@@ -45,7 +45,7 @@ namespace Akademinya.Controllers
 
                     FormsAuthentication.RedirectFromLoginPage(uye.KullaniciAdi, true);
                     Session["Uye"] = uye;
-
+                    Session["UyeXID"] = uye.Id;
                     return RedirectToAction("Index", "Anasayfa");
                 }
                 catch

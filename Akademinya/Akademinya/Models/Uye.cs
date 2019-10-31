@@ -29,6 +29,10 @@ namespace Akademinya.Models
         [StringLength(50)]
         public string Mail { get; set; }
 
+        [Required]
+        [StringLength(20)]
+        public string TelefonNo { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AlisverisSepeti> AlisverisSepeti { get; set; }
 

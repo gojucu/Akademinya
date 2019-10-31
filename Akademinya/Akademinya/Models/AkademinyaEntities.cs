@@ -8,7 +8,7 @@ namespace Akademinya.Models
     public partial class AkademinyaEntities : DbContext
     {
         public AkademinyaEntities()
-            : base("name=AkademinyaEntities9")
+            : base("name=AkademinyaEntities13")
         {
         }
 

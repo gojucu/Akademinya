@@ -42,6 +42,8 @@ namespace Akademinya.Models
 
         public string Resim { get; set; }
 
+        public bool? Ücretsiz { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AlisverisSepeti> AlisverisSepeti { get; set; }
 

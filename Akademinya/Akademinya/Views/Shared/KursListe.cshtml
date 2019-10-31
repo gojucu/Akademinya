@@ -1,42 +1,122 @@
-﻿
+﻿@model IEnumerable<Akademinya.Models.Kurs>
+@using Akademinya.Models
 @{
     Layout = null;
+    AkademinyaEntities db = new AkademinyaEntities();
+    var guid = Akademinya.Controllers.Genel.guidKontrol();
+    var sepet = db.AlisverisSepeti.ToList().Where(x => x.Guid == guid);
+    Uye uye = new Uye();
+    if (Session["Uye"] != null)
+    {
+        var uyeId = new Guid(Session["UyeXID"].ToString());
+        uye = db.Uye.FirstOrDefault(x => x.Id == uyeId);
+
+    }
+
 }
-@model IEnumerable<Akademinya.Models.Kurs>
+
 <div class="container" style="background-color:white">
     <div class="row">
-        <div class="col-md-12" style="margin:auto" >
-            @foreach (var item in Model)
+        <div class="col-md-12" style="margin:auto">
+            @if (Model == null || Model.Count() <= 0)
             {
-                <a href="../Kurslar/KursDetay/@item.Id">
-                    <div class="katKurs-Liste row" >
-                        <div class="img-responsive col-sm-3" style="float:left">
-                            <img src="~/Content/SampleImages/pc.jpg" style="width:100%;height:100%" />
-                        </div>
-                        <div class="col-sm-9">
-                           <div class="col-md-12">
-                               <ul>
-                                   <li>
-                                       <h3 class="float-left">@item.Ad</h3> <h4 class="float-right">@item.Fiyat ₺</h4> <br /><br />
-                                   </li>
-                                   <li>
-                                       <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
-                                       <h4 class="float-right">**** 4 puan</h4>
-                                   </li>
-                                   <li>
-                                       @item.Icerik
-                                   </li>
-                               </ul>
-                               </div>
+                <div style="text-align:center">
+                    <p>Aradığınız kriterlere uygun kurs bulunamadı. </p>
 
-                        </div>
-
-
-                    </div>
-                </a>
-                <hr />
+                </div>
             }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    if (uye.Kurs1.FirstOrDefault(x=>x.Id==item.Id)==null)
+                    {
+                        <div class="katKurs-Liste row">
+                            <div class="img-responsive col-sm-3" style="float:left">
+                                <a href="../Kurslar/KursDetay/@item.Id"> <img src="~/Content/SampleImages/pc.jpg" style="width:100%;height:100%" /></a>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li>
+                                            <a href="../Kurslar/KursDetay/@item.Id">
+                                                <h3 class="float-left">@item.Ad</h3>
+                                                @if (item.Ücretsiz == true)
+                                                {
+                                                    <h4 class="float-right" style="color:#15101f">ÜCRETSİZ</h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4 class="float-right">@item.Fiyat ₺</h4>
+                                                }
 
+                                            </a> <br /><br />
+                                        </li>
+                                        <li>
+                                            <a href="../Kurslar/KursDetay/@item.Id">
+                                                <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
+                                                <h4 class="float-right">**** 4 puan</h4>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
+                                                @if (item.Ücretsiz == true)
+                                                {
+                                                    if (uye == null)
+                                                    {
+                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
+                                                    }
+                                                    else
+                                                    { <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return HemenKaydol(@item.Id);" value="Hemen kaydol" style="cursor: pointer;" /> }
+
+                                                }
+                                                else
+                                                {
+                                                    if (sepet.Any(x => x.KursID == item.Id))
+                                                    {
+                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteGit(@item.Id);" value="sepete git" style="cursor: pointer;" />
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteEkle(@item.Id);" value="sepete ekle" style="cursor: pointer;" />
+                                                    }
+                                                }
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+             
+                    }
+                }
+            }
         </div>
     </div>
 </div>
+<script>
+    function HemenKaydol(Id) {
+        window.location = '/UcretsizKursKayit/'+Id;
+    }
+    function SepeteGit(Id) {
+        window.location = '/AlisverisSepeti/';
+    }
+
+    function SepeteEkle(Id) {
+        $.ajax({
+            url: "/SepeteEkle/" + Id,
+            async: false,
+            type: "post",
+
+            success: function (sonuc) {
+                window.location.reload();
+                //$(".sepetbuton").val("Sepete Eklendi")
+
+            }
+        })
+        //return false;
+    }
+
+</script>

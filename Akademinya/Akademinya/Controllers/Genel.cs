@@ -12,8 +12,7 @@ namespace Akademinya.Controllers
         {
             string token = Guid.NewGuid().ToString();
             HttpContext.Current.Response.Cookies["userGuid"].Value = token;
-            //HttpContext.Current.Response.Cookies["userGuid"].Expires = DateTime.Now.AddDays(7);
-            HttpContext.Current.Response.Cookies["userGuid"].Expires = DateTime.Now.AddMinutes(5);
+            HttpContext.Current.Response.Cookies["userGuid"].Expires = DateTime.Now.AddDays(7);
             return token;
         }
 

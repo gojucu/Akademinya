@@ -100,9 +100,9 @@ namespace Akademinya.Controllers
 
             ViewBag.Uye = Session["Uye"];
             ViewBag.UyeID = Session["UyeXID"];
-            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID && x.Guid == CookieGuid).Count();
+            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x=>x.Guid == CookieGuid).Count();
 
-            return View(db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID&&x.Guid==CookieGuid));
+            return View(db.AlisverisSepeti.ToList().Where(x=>x.Guid==CookieGuid));
         }
 
         [Route("Odeme")]
@@ -112,8 +112,8 @@ namespace Akademinya.Controllers
 
             ViewBag.Uye = Session["Uye"];
             ViewBag.UyeID = Session["UyeXID"];
-            ViewBag.Sepet = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID && x.Guid == CookieGuid);
-            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID && x.Guid == CookieGuid).Count();
+            ViewBag.Sepet = db.AlisverisSepeti.ToList().Where( x=>x.Guid == CookieGuid);
+            ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x=>x.Guid == CookieGuid).Count();
             return View();
         }
         [Route("Odeme")]
@@ -147,7 +147,10 @@ namespace Akademinya.Controllers
                     islem.IslemTarihi = DateTime.Now;
                     islem.UyeID = ViewBag.UyeID;
                     islem.KursID = sepetEleman.Kurs.Id;
-                    islem.KartID = kart.Id;
+                    if (kaydet == true)
+                    {
+                        islem.KartID = kart.Id;
+                    }
                     db.Islemler.Add(islem);
 
                     uye.Kurs1.Add(kurs);
@@ -165,30 +168,58 @@ namespace Akademinya.Controllers
             }
 
         }
+
+        [Route("UcretsizKursKayit/{Id}")]
+        public ActionResult UcretsizKursKayit(int Id)
+        {
+            ViewBag.Uye = Session["Uye"];
+            ViewBag.UyeID = Session["UyeXID"];
+            var uyee = new Guid(Session["UyeXID"].ToString());
+            Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyee);
+
+            Islemler islem = new Islemler();
+            Kurs kurs = db.Kurs.FirstOrDefault(x => x.Id == Id);
+
+            islem.IslemTarihi = DateTime.Now;
+            islem.UyeID = ViewBag.UyeID;
+            islem.KursID = kurs.Id;
+            db.Islemler.Add(islem);
+
+            uye.Kurs1.Add(kurs);
+            db.SaveChanges();
+            return RedirectToAction("KursDetay", new { Id });
+        }
         
 
         [Route("SepeteEkle/{id}")]
-        public ActionResult SepeteEkle(int id)
+        public JsonResult SepeteEkle(int id)
         {
             var CookieGuid =Genel.guidKontrol();
-            if (Session["Uye"] != null)
-            {
+
                 var kurs = db.Kurs.FirstOrDefault(x => x.Id==id);
-                ViewBag.Uye = Session["Uye"];
-                
-                AlisverisSepeti sepet = new AlisverisSepeti();
-                sepet.KursID = id;
-                sepet.UyeID = ViewBag.Uye.Id;
-                sepet.Guid = CookieGuid;
+                //ViewBag.Uye = Session["Uye"];
+
+                AlisverisSepeti sepet = new AlisverisSepeti
+                {
+                    KursID = id,
+                    //UyeID = ViewBag.Uye.Id,
+                    Guid = CookieGuid
+                };
                 db.AlisverisSepeti.Add(sepet);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
-            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+            
+        }
 
+        [Route("SepettenCikar/{id}")]
+        public JsonResult SepettenCikar(int id)
+        {
+            var CookieGuid = Genel.guidKontrol();
+            AlisverisSepeti sepet = db.AlisverisSepeti.FirstOrDefault(x => x.Id == id);
+            db.AlisverisSepeti.Remove(sepet);
+            db.SaveChanges();
+
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         [Route("Kurslarim")]
@@ -201,6 +232,23 @@ namespace Akademinya.Controllers
 
             var kurslarim = uye.Kurs1;
             return View(kurslarim);
+        }
+
+        [Route("Profil")]
+        public ActionResult Profil()
+        {
+            ViewBag.Uye = Session["Uye"];
+
+            return View();
+        }
+
+        [Route("Profil/SatinAlmaGecmisi")]
+        public ActionResult SatinAlmaGecmisi()
+        {
+            var UyeID = new Guid(Session["UyeXID"].ToString());
+            Uye uye = db.Uye.FirstOrDefault(x => x.Id == UyeID);
+            var islemler = db.Islemler.OrderByDescending(x=>x.IslemTarihi).ToList().Where(x => x.UyeID == uye.Id);
+            return View(islemler);
         }
     }
 }

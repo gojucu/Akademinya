@@ -23,21 +23,21 @@
                                     <i class="fa fa-cc-discover" style="color:orange;"></i>
                                 </div>
                                 <label for="cname">KayıtAdı</label>
-                                <input type="text" id="KayitAdi" name="cardname" placeholder="A kartı">
+                                <input type="text" id="KayitAdi" required name="cardname" placeholder="A kartı">
                                 <label for="cname">Kart üzerindeki isim</label>
-                                <input type="text" id="KartUstundekiIsım" name="cardname" placeholder="John More Doe">
+                                <input type="text" id="KartUstundekiIsım" required name="cardname" placeholder="John More Doe">
                                 <label for="ccnum">Kart numarası</label>
-                                <input type="text" id="Kartno" name="cardnumber" placeholder="1111-2222-3333-4444">
+                                <input type="text" id="Kartno" class="OnlyNumber" name="cardnumber" required placeholder="1111-2222-3333-4444"minlength="16" maxlength="16">
                                 <label for="expmonth">Son kullanma ay</label>
-                                <input type="text" id="Ay" name="expmonth" placeholder="September">
+                                <input type="text" id="Ay" class="OnlyNumber" name="expmonth" placeholder="September" minlength="2" maxlength="2" required>
                                 <div class="row">
                                     <div class="col-50">
                                         <label for="expyear">Son kullanma yıl</label>
-                                        <input type="text" id="Yil" name="expyear" placeholder="2019">
+                                        <input type="text" id="Yil" class="OnlyNumber" name="expyear" placeholder="2019" minlength="4" maxlength="4" required>
                                     </div>
                                     <div class="col-50">
                                         <label for="cvv">CVV</label>
-                                        <input type="text" id="Cvc" name="cvv" placeholder="352">
+                                        <input type="text" class="OnlyNumber" id="Cvc" name="cvv" placeholder="352"minlength="3" maxlength="3" required>
                                     </div>
                                 </div>
                             </div>
@@ -89,5 +89,22 @@
             islemler.OdemeYap();
             return false;
         });
+
+
+        //called when key is pressed in textbox
+        $('.OnlyNumber').on('paste', function (event) {
+            if (event.originalEvent.clipboardData.getData('Text').match(/[^\d]/)) {
+                event.preventDefault();
+            }
+        });
+        $(".OnlyNumber").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Rakam giriniz").show().fadeOut("slow");
+                return false;
+            }
+        });
+       
     })
 </script>

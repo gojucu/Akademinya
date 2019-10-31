@@ -21,7 +21,7 @@
                 @if (Model == null||Model.Count()==0)
                 {
                     <p>Alışveriş sepetiniz boş, kurs eklemek için tıklayınız.</p>
-                    <a href="" class="btn btn-outline-info btn-sm">Alışverişe devam et</a>
+                    <a href="/" class="btn btn-outline-info btn-sm">Alışverişe devam et</a>
                 }
                 else
                 {
@@ -44,7 +44,7 @@
                                 <div class="col-4 col-sm-4 col-md-4">
                                 </div>
                                 <div class="col-2 col-sm-2 col-md-2 text-right" style=" margin:auto">
-                                    <button type="button" class="btn btn-outline-danger btn-xs" style="width:unset;">
+                                    <button type="button" class="btn btn-outline-danger btn-xs" onclick="return SepettenCikar(@item.Id)" style="width:unset;">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -101,3 +101,19 @@
 </div>
 
 
+<script>
+    function SepettenCikar(Id) {
+        $.ajax({
+            url: "/SepettenCikar/" + Id,
+            async: false,
+            type: "post",
+
+            success: function (sonuc) {
+                window.location.reload();
+                //$(".sepetbuton").val("Sepete Eklendi")
+
+            }
+        })
+        //return false;
+    }
+</script>

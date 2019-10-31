@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Akademinya.Models.Islemler>
+
+@{
+    ViewBag.Title = "SatinAlmaGecmisi";
+}
+<div class="container" style="background-color:white">
+
+
+    <h2>SatinAlmaGecmisi</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Kurs.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kurs.Fiyat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IslemTarihi)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kurs.Ad)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kurs.Fiyat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IslemTarihi)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

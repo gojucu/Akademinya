@@ -7757,6 +7757,8 @@
     <Content Include="Views\Anasayfa\Kurslarim.cshtml" />
     <Content Include="Views\Anasayfa\Kurslar2.cshtml" />
     <Content Include="Views\Anasayfa\AramaMenu.cshtml" />
+    <Content Include="Views\Anasayfa\Profil.cshtml" />
+    <Content Include="Views\Anasayfa\SatinAlmaGecmisi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
