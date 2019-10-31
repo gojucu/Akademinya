@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "SifremiUnuttum";
+}
+
+
+@{
+    ViewBag.Title = "UyeGirisi";
+}
+<div class="shop">
+    <div class="container" style="text-align: -webkit-center;">
+
+        <div class="f-signup">
+            @*<h4 style="color:red">@ViewBag.Hata</h4>*@
+            @using (Html.BeginForm())
+            {
+                <h2>Şifre yenileme</h2>
+                <p style="font-size:.85rem;text-align: justify;">Şifrenizi sıfırlamak için kayıtlı email adresinizi giriniz</p>
+                <p>
+
+                    <label for="Mail" class="floatLabel">Email adresi</label>
+                    <input id="Mail" name="Mail" type="email" required>
+                </p>
+                <p style="color:#980000;font-size:.8rem">
+                    @ViewBag.Uyari
+                </p>
+
+                <p>
+                    <input type="submit" value="Giriş yap" id="submit">
+                </p>
+                <hr />
+
+            }
+        </div>
+       
+    </div>
+</div>
+
+@*<script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
+<script>
+    //Problem: Hints are shown even when form is valid
+    //Solution: Hide and show them at appropriate times
+    var $password = $("#password");
+    //Hide hints
+    $("form span").hide();
+
+    function isPasswordValid() {
+        return $password.val().length >= 6;
+    }
+
+    function canSubmit() {
+        return isPasswordValid() && arePasswordsMatching();
+    }
+
+    function passwordEvent() {
+        //Find out if password is valid
+        if (isPasswordValid()) {
+            //Hide hint if valid
+            $password.next().hide();
+        } else {
+            //else show hint
+            $password.next().show();
+        }
+    }
+
+
+    function enableSubmitEvent() {
+        $("#submit").prop("disabled", !canSubmit());
+    }
+
+    //When event happens on password input
+    $password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+    enableSubmitEvent();
+</script>*@
+

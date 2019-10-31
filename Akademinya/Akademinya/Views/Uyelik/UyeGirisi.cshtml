@@ -6,10 +6,12 @@
     <div class="container" style="text-align: -webkit-center;">
 
         <div class="f-signup">
-            <h4 style="color:red">@ViewBag.Hata</h4>
             @using (Html.BeginForm())
             {
                 <h2>Giriş yap</h2>
+                <div style="text-align:justify">
+                    <p style="color:#980000;font-size:.8rem">@ViewBag.Uyari</p>
+                </div>
                 <p>
                     <label for="KullaniciAdi" class="floatLabel">Kullanıcı adı</label>
                     <input id="KullaniciAdi" name="KullaniciAdi" type="text" required>
@@ -23,7 +25,7 @@
                 <p>
                     <input type="submit" value="Giriş yap" id="submit">
                 </p>
-                <a href="#" style="float:right">Şifrenizi mi unuttunuz?</a> <br />
+                <a href="/SifremiUnuttum" style="float:right;font-size: 15px;">Şifrenizi mi unuttunuz?</a> <br />
                 <hr />
                 <p>
                     <a href="/UyeOl" class="btn btn-lg btn-outline-success btn-block text-uppercase">Üye Ol</a>

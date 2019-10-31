@@ -7064,6 +7064,18 @@
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\SampleImages\12slayt.jpg" />
     <Content Include="Content\SampleImages\adam.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\androidKurs.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\SeleniumKurs.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\sqlKurs.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\UnityKurs.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\WebAspkurs.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\webKursu.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\yemek-kurs-gordon_ramsay.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\yemek-şef-1.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\YemekSef3.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\YemekSef4.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\yemekSef5.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\yemek_şef2.jpg" />
     <Content Include="Content\SampleImages\amo3.jpg" />
     <Content Include="Content\SampleImages\cofe.jpg" />
     <Content Include="Content\SampleImages\face123.jpg" />
@@ -7759,6 +7771,7 @@
     <Content Include="Views\Anasayfa\AramaMenu.cshtml" />
     <Content Include="Views\Anasayfa\Profil.cshtml" />
     <Content Include="Views\Anasayfa\SatinAlmaGecmisi.cshtml" />
+    <Content Include="Views\Uyelik\SifremiUnuttum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

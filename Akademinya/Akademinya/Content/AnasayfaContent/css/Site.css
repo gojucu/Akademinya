@@ -19,8 +19,8 @@
     border: none;
     outline: 0;
     padding: 12px;
-    color: white;
-    background-color: #000;
+    color: #091b32;
+    background-color: #91ddbd;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -423,7 +423,7 @@ body {
             margin: 0;
         }
 
-            .f-signup form input[type="text"], .f-signup form input[type="password"] {
+            .f-signup form input[type="email"], .f-signup form input[type="text"], .f-signup form input[type="password"] {
                 background: #fff;
                 border: 1px solid #dbdbdb;
                 font-size: 1.6em;
@@ -431,7 +431,7 @@ body {
                 border-radius: 2px;
             }
 
-                .f-signup form input[type="text"]:focus, .f-signup form input[type="password"]:focus {
+                .f-signup form input[type="email"], .f-signup form input[type="text"]:focus, .f-signup form input[type="password"]:focus {
                     background: #fff;
                 }
 
