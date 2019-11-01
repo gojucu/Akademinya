@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Akademinya.Controllers
 {
@@ -29,8 +30,7 @@ namespace Akademinya.Controllers
         public ActionResult IstekSepet()
         {
             var CookieGuid = Genel.guidKontrol();
-
-            ViewBag.Uye = Session["Uye"];
+            
             ViewBag.Sepet = db.AlisverisSepeti.ToList().Where(x =>x.Guid == CookieGuid);
             ViewBag.SepetSayi = db.AlisverisSepeti.ToList().Where(x => x.Guid == CookieGuid).Count();
 
@@ -121,73 +121,78 @@ namespace Akademinya.Controllers
         [ValidateInput(false)]
         public ActionResult Odeme(Kartlar kart, bool kaydet,int[] sepet)
         {
-            var CookieGuid = Genel.guidKontrol();
-            try
-            {
-                ViewBag.Uye = Session["Uye"];
-                ViewBag.UyeID = Session["UyeXID"];
-                var uyee = new Guid(Session["UyeXID"].ToString());
-                //ViewBag.Sepet = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID&&x.Guid==CookieGuid);
-                Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyee);
+            //var CookieGuid = Genel.guidKontrol();
+            //try
+            //{
+            //    ViewBag.Uye = Session["Uye"];
+            //    ViewBag.UyeID = Session["UyeXID"];
+            //    var uyee = new Guid(Session["UyeXID"].ToString());
+            //    //ViewBag.Sepet = db.AlisverisSepeti.ToList().Where(x => x.UyeID == ViewBag.UyeID&&x.Guid==CookieGuid);
+            //    Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyee);
 
-                if (kaydet == true)
-                {
-                    kart.Silindi = false;
-                    kart.UyeID = uyee;
-                    db.Kartlar.Add(kart);
-                    db.SaveChanges();
+            //    if (kaydet == true)
+            //    {
+            //        kart.Silindi = false;
+            //        kart.UyeID = uyee;
+            //        db.Kartlar.Add(kart);
+            //        db.SaveChanges();
 
-                }
-                foreach (var item in sepet)
-                {
-                    AlisverisSepeti sepetEleman = db.AlisverisSepeti.FirstOrDefault(x => x.Id == item);
+            //    }
+            //    foreach (var item in sepet)
+            //    {
+            //        AlisverisSepeti sepetEleman = db.AlisverisSepeti.FirstOrDefault(x => x.Id == item);
 
-                    Islemler islem = new Islemler();
-                    Kurs kurs = sepetEleman.Kurs;
-                    islem.IslemTarihi = DateTime.Now;
-                    islem.UyeID = ViewBag.UyeID;
-                    islem.KursID = sepetEleman.Kurs.Id;
-                    if (kaydet == true)
-                    {
-                        islem.KartID = kart.Id;
-                    }
-                    db.Islemler.Add(islem);
+            //        Islemler islem = new Islemler();
+            //        Kurs kurs = sepetEleman.Kurs;
+            //        UyeKurs uyeKurs = new UyeKurs();
+            //        islem.IslemTarihi = DateTime.Now;
+            //        islem.UyeID = ViewBag.UyeID;
+            //        islem.KursID = sepetEleman.Kurs.Id;
+            //        if (kaydet == true)
+            //        {
+            //            islem.KartID = kart.Id;
+            //        }
+            //        db.Islemler.Add(islem);
 
-                    uye.Kurs1.Add(kurs);
-                    db.SaveChanges();
+            //        uyeKurs.Aktif = true;
+            //        uyeKurs.UyeID=
 
-                    db.AlisverisSepeti.Remove(sepetEleman);//silinmesi gerekiyor mu ?
-                    db.SaveChanges();
+            //        uye.UyeKurs.Add(kurs);
+            //        db.SaveChanges();
 
-                }
-                return RedirectToAction("Odeme");
-            }
-            catch
-            {
-                return RedirectToAction("Odeme");
-            }
+            //        db.AlisverisSepeti.Remove(sepetEleman);//silinmesi gerekiyor mu ?
+            //        db.SaveChanges();
 
+            //    }
+            //    return RedirectToAction("Odeme");
+            //}
+            //catch
+            //{
+            //    return RedirectToAction("Odeme");
+            //}
+            return View();
         }
 
         [Route("UcretsizKursKayit/{Id}")]
         public ActionResult UcretsizKursKayit(int Id)
         {
-            ViewBag.Uye = Session["Uye"];
-            ViewBag.UyeID = Session["UyeXID"];
-            var uyee = new Guid(Session["UyeXID"].ToString());
-            Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyee);
+            //ViewBag.Uye = Session["Uye"];
+            //ViewBag.UyeID = Session["UyeXID"];
+            //var uyee = new Guid(Session["UyeXID"].ToString());
+            //Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyee);
 
-            Islemler islem = new Islemler();
-            Kurs kurs = db.Kurs.FirstOrDefault(x => x.Id == Id);
+            //Islemler islem = new Islemler();
+            //Kurs kurs = db.Kurs.FirstOrDefault(x => x.Id == Id);
 
-            islem.IslemTarihi = DateTime.Now;
-            islem.UyeID = ViewBag.UyeID;
-            islem.KursID = kurs.Id;
-            db.Islemler.Add(islem);
+            //islem.IslemTarihi = DateTime.Now;
+            //islem.UyeID = ViewBag.UyeID;
+            //islem.KursID = kurs.Id;
+            //db.Islemler.Add(islem);
 
-            uye.Kurs1.Add(kurs);
-            db.SaveChanges();
-            return RedirectToAction("KursDetay", new { Id });
+            //uye.Kurs1.Add(kurs);
+            //db.SaveChanges();
+            //return RedirectToAction("KursDetay", new { Id });
+            return View();
         }
         
 
@@ -225,16 +230,17 @@ namespace Akademinya.Controllers
         [Route("Kurslarim")]
         public ActionResult Kurslarim()
         {
-            ViewBag.Uye = Session["Uye"];
-            var uyeId = new Guid(Session["UyeXID"].ToString());
+            //ViewBag.Uye = Session["Uye"];
+            //var uyeId = new Guid(Session["UyeXID"].ToString());
 
-            Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyeId);
+            //Uye uye = db.Uye.FirstOrDefault(x => x.Id == uyeId);
 
-            var kurslarim = uye.Kurs1;
-            return View(kurslarim);
+            //var kurslarim = uye.Kurs1;
+            //return View(kurslarim);
+            return View();
         }
 
-        [Route("Profil")]
+        [Route("Profil")]//Şifre Değiştirme burada daha sonra uyelik kontroller'a taşı
         public ActionResult Profil()
         {
             ViewBag.Uye = Session["Uye"];
@@ -242,13 +248,32 @@ namespace Akademinya.Controllers
             return View();
         }
 
+        [Route("Profil")]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Profil(string Sifre)
+        {
+
+
+            //MembershipUser mu = Membership.GetUser(uye.KullaniciAdi);
+            //mu.ChangePassword(mu.ResetPassword(), password);
+            return View();
+        }
+
         [Route("Profil/SatinAlmaGecmisi")]
         public ActionResult SatinAlmaGecmisi()
         {
-            var UyeID = new Guid(Session["UyeXID"].ToString());
-            Uye uye = db.Uye.FirstOrDefault(x => x.Id == UyeID);
-            var islemler = db.Islemler.OrderByDescending(x=>x.IslemTarihi).ToList().Where(x => x.UyeID == uye.Id);
-            return View(islemler);
+            //var UyeID = new Guid(Session["UyeXID"].ToString());
+            //Uye uye = db.Uye.FirstOrDefault(x => x.Id == UyeID);
+            //var islemler = db.Islemler.OrderByDescending(x=>x.IslemTarihi).ToList().Where(x => x.UyeID == uye.Id);
+            //return View(islemler);
+            return View();
+        }
+
+        [Route("KursIzlemeSayfasi/{Ad}/{id}")]
+        public ActionResult KursIzlemeSayfasi(string Ad, int id)
+        {
+            return View();
         }
     }
 }

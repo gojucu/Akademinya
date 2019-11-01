@@ -62,7 +62,7 @@
                                             <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
                                                 @if (item.Ücretsiz == true)
                                                 {
-                                                    if (uye == null)
+                                                    if (uye.aspnet_Membership == null)
                                                     {
                                                         <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
                                                     }

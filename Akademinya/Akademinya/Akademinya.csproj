@@ -143,24 +143,51 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AkademinyaEntities.cs" />
-    <Compile Include="Models\AlisverisSepeti.cs" />
-    <Compile Include="Models\aspnet_Applications.cs" />
-    <Compile Include="Models\aspnet_Membership.cs" />
-    <Compile Include="Models\aspnet_Paths.cs" />
-    <Compile Include="Models\aspnet_PersonalizationAllUsers.cs" />
-    <Compile Include="Models\aspnet_PersonalizationPerUser.cs" />
-    <Compile Include="Models\aspnet_Profile.cs" />
-    <Compile Include="Models\aspnet_Roles.cs" />
-    <Compile Include="Models\aspnet_SchemaVersions.cs" />
-    <Compile Include="Models\aspnet_Users.cs" />
-    <Compile Include="Models\aspnet_WebEvent_Events.cs" />
-    <Compile Include="Models\Islemler.cs" />
-    <Compile Include="Models\Kartlar.cs" />
-    <Compile Include="Models\Kategori.cs" />
-    <Compile Include="Models\Kurs.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
-    <Compile Include="Models\Uye.cs" />
+    <Compile Include="Models\AkademinyaEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AkademinyaEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AkademinyaEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AkademinyaEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AkademinyaEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AlisverisSepeti.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Islemler.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kartlar.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kategori.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kurs.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\users.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usersKurslar.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Uye.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UyeKurs.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -7103,6 +7130,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\AnasayfaContent\css\Site.css" />
+    <Content Include="Models\AkademinyaEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AkademinyaEntities.edmx</DependentUpon>
+      <LastGenOutput>AkademinyaEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AkademinyaEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AkademinyaEntities.edmx</DependentUpon>
+      <LastGenOutput>AkademinyaEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -7730,6 +7767,13 @@
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.min.map" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.slim.min.map" />
+    <EntityDeploy Include="Models\AkademinyaEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AkademinyaEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AkademinyaEntities.edmx.diagram">
+      <DependentUpon>AkademinyaEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

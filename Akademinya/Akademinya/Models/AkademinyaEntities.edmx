@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AkademinyaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AlisverisSepeti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KursID" Type="int" />
+          <Property Name="Guid" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Islemler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeID" Type="int" Nullable="false" />
+          <Property Name="KursID" Type="int" Nullable="false" />
+          <Property Name="KartID" Type="int" />
+          <Property Name="IslemTarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kartlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeID" Type="int" />
+          <Property Name="KayitAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KartNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KartUstundekiIsım" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ay" Type="int" Nullable="false" />
+          <Property Name="Yil" Type="int" Nullable="false" />
+          <Property Name="Cvc" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UstId" Type="int" Nullable="false" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Acikklama" Type="nvarchar(max)" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SonGuncellemeTarih" Type="smalldatetime" />
+          <Property Name="KategoriID" Type="int" />
+          <Property Name="UstKategoriID" Type="int" />
+          <Property Name="Resim" Type="nvarchar(max)" />
+          <Property Name="Ücretsiz" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="us" Type="nvarchar(max)" />
+          <Property Name="ps" Type="nvarchar(max)" />
+          <Property Name="ad" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="usersKurslar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="kursid" Type="int" />
+          <Property Name="aktif" Type="bit" />
+        </EntityType>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TelefonNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CookieGuid" Type="nvarchar(max)" />
+          <Property Name="Sifre" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UyeKurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KursID" Type="int" Nullable="false" />
+          <Property Name="UyeID" Type="int" Nullable="false" />
+          <Property Name="Aktif" Type="bit" />
+        </EntityType>
+        <Association Name="FK_AlisverisSepeti_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="0..1" />
+          <End Role="AlisverisSepeti" Type="Self.AlisverisSepeti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlisverisSepeti">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Islemler_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="1" />
+          <End Role="Islemler" Type="Self.Islemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Islemler">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Islemler_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="Islemler" Type="Self.Islemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Islemler">
+              <PropertyRef Name="UyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kartlar_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="0..1" />
+          <End Role="Kartlar" Type="Self.Kartlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kartlar">
+              <PropertyRef Name="UyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kurs_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kurs">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UyeKurs_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="1" />
+          <End Role="UyeKurs" Type="Self.UyeKurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UyeKurs">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UyeKurs_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="UyeKurs" Type="Self.UyeKurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UyeKurs">
+              <PropertyRef Name="UyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AkademinyaModelStoreContainer">
+          <EntitySet Name="AlisverisSepeti" EntityType="Self.AlisverisSepeti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Islemler" EntityType="Self.Islemler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kartlar" EntityType="Self.Kartlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kurs" EntityType="Self.Kurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usersKurslar" EntityType="Self.usersKurslar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uye" EntityType="Self.Uye" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UyeKurs" EntityType="Self.UyeKurs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AlisverisSepeti_Kurs" Association="Self.FK_AlisverisSepeti_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="AlisverisSepeti" EntitySet="AlisverisSepeti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Islemler_Kurs" Association="Self.FK_Islemler_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="Islemler" EntitySet="Islemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Islemler_Uye" Association="Self.FK_Islemler_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Islemler" EntitySet="Islemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kartlar_Uye" Association="Self.FK_Kartlar_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Kartlar" EntitySet="Kartlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kurs_Kategori" Association="Self.FK_Kurs_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Kurs" EntitySet="Kurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UyeKurs_Kurs" Association="Self.FK_UyeKurs_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="UyeKurs" EntitySet="UyeKurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UyeKurs_Uye" Association="Self.FK_UyeKurs_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="UyeKurs" EntitySet="UyeKurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AkademinyaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AlisverisSepeti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursID" Type="Int32" />
+          <Property Name="Guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kurs" Relationship="Self.FK_AlisverisSepeti_Kurs" FromRole="AlisverisSepeti" ToRole="Kurs" />
+        </EntityType>
+        <EntityType Name="Islemler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeID" Type="Int32" Nullable="false" />
+          <Property Name="KursID" Type="Int32" Nullable="false" />
+          <Property Name="KartID" Type="Int32" />
+          <Property Name="IslemTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Kurs" Relationship="Self.FK_Islemler_Kurs" FromRole="Islemler" ToRole="Kurs" />
+          <NavigationProperty Name="Uye" Relationship="Self.FK_Islemler_Uye" FromRole="Islemler" ToRole="Uye" />
+        </EntityType>
+        <EntityType Name="Kartlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeID" Type="Int32" />
+          <Property Name="KayitAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KartNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KartUstundekiIsım" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ay" Type="Int32" Nullable="false" />
+          <Property Name="Yil" Type="Int32" Nullable="false" />
+          <Property Name="Cvc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Uye" Relationship="Self.FK_Kartlar_Uye" FromRole="Kartlar" ToRole="Uye" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UstId" Type="Int32" Nullable="false" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Kurs" Relationship="Self.FK_Kurs_Kategori" FromRole="Kategori" ToRole="Kurs" />
+        </EntityType>
+        <EntityType Name="Kurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Acikklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SonGuncellemeTarih" Type="DateTime" Precision="0" />
+          <Property Name="KategoriID" Type="Int32" />
+          <Property Name="UstKategoriID" Type="Int32" />
+          <Property Name="Resim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ücretsiz" Type="Boolean" />
+          <NavigationProperty Name="AlisverisSepeti" Relationship="Self.FK_AlisverisSepeti_Kurs" FromRole="Kurs" ToRole="AlisverisSepeti" />
+          <NavigationProperty Name="Islemler" Relationship="Self.FK_Islemler_Kurs" FromRole="Kurs" ToRole="Islemler" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Kurs_Kategori" FromRole="Kurs" ToRole="Kategori" />
+          <NavigationProperty Name="UyeKurs" Relationship="Self.FK_UyeKurs_Kurs" FromRole="Kurs" ToRole="UyeKurs" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="us" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ps" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="usersKurslar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="kursid" Type="Int32" />
+          <Property Name="aktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TelefonNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CookieGuid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Islemler" Relationship="Self.FK_Islemler_Uye" FromRole="Uye" ToRole="Islemler" />
+          <NavigationProperty Name="Kartlar" Relationship="Self.FK_Kartlar_Uye" FromRole="Uye" ToRole="Kartlar" />
+          <NavigationProperty Name="UyeKurs" Relationship="Self.FK_UyeKurs_Uye" FromRole="Uye" ToRole="UyeKurs" />
+        </EntityType>
+        <EntityType Name="UyeKurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursID" Type="Int32" Nullable="false" />
+          <Property Name="UyeID" Type="Int32" Nullable="false" />
+          <Property Name="Aktif" Type="Boolean" />
+          <NavigationProperty Name="Kurs" Relationship="Self.FK_UyeKurs_Kurs" FromRole="UyeKurs" ToRole="Kurs" />
+          <NavigationProperty Name="Uye" Relationship="Self.FK_UyeKurs_Uye" FromRole="UyeKurs" ToRole="Uye" />
+        </EntityType>
+        <Association Name="FK_AlisverisSepeti_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="0..1" />
+          <End Role="AlisverisSepeti" Type="Self.AlisverisSepeti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlisverisSepeti">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Islemler_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="1" />
+          <End Role="Islemler" Type="Self.Islemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Islemler">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Islemler_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="Islemler" Type="Self.Islemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Islemler">
+              <PropertyRef Name="UyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kartlar_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="0..1" />
+          <End Role="Kartlar" Type="Self.Kartlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kartlar">
+              <PropertyRef Name="UyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kurs_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kurs">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UyeKurs_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="1" />
+          <End Role="UyeKurs" Type="Self.UyeKurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UyeKurs">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UyeKurs_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="UyeKurs" Type="Self.UyeKurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UyeKurs">
+              <PropertyRef Name="UyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AkademinyaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlisverisSepeti" EntityType="Self.AlisverisSepeti" />
+          <EntitySet Name="Islemler" EntityType="Self.Islemler" />
+          <EntitySet Name="Kartlar" EntityType="Self.Kartlar" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Kurs" EntityType="Self.Kurs" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="usersKurslar" EntityType="Self.usersKurslar" />
+          <EntitySet Name="Uye" EntityType="Self.Uye" />
+          <EntitySet Name="UyeKurs" EntityType="Self.UyeKurs" />
+          <AssociationSet Name="FK_AlisverisSepeti_Kurs" Association="Self.FK_AlisverisSepeti_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="AlisverisSepeti" EntitySet="AlisverisSepeti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Islemler_Kurs" Association="Self.FK_Islemler_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="Islemler" EntitySet="Islemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Islemler_Uye" Association="Self.FK_Islemler_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Islemler" EntitySet="Islemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kartlar_Uye" Association="Self.FK_Kartlar_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Kartlar" EntitySet="Kartlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kurs_Kategori" Association="Self.FK_Kurs_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Kurs" EntitySet="Kurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UyeKurs_Kurs" Association="Self.FK_UyeKurs_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="UyeKurs" EntitySet="UyeKurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UyeKurs_Uye" Association="Self.FK_UyeKurs_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="UyeKurs" EntitySet="UyeKurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AkademinyaModelStoreContainer" CdmEntityContainer="AkademinyaEntities">
+          <EntitySetMapping Name="AlisverisSepeti">
+            <EntityTypeMapping TypeName="AkademinyaModel.AlisverisSepeti">
+              <MappingFragment StoreEntitySet="AlisverisSepeti">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Islemler">
+            <EntityTypeMapping TypeName="AkademinyaModel.Islemler">
+              <MappingFragment StoreEntitySet="Islemler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UyeID" ColumnName="UyeID" />
+                <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="KartID" ColumnName="KartID" />
+                <ScalarProperty Name="IslemTarihi" ColumnName="IslemTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kartlar">
+            <EntityTypeMapping TypeName="AkademinyaModel.Kartlar">
+              <MappingFragment StoreEntitySet="Kartlar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UyeID" ColumnName="UyeID" />
+                <ScalarProperty Name="KayitAdi" ColumnName="KayitAdi" />
+                <ScalarProperty Name="KartNo" ColumnName="KartNo" />
+                <ScalarProperty Name="KartUstundekiIsım" ColumnName="KartUstundekiIsım" />
+                <ScalarProperty Name="Ay" ColumnName="Ay" />
+                <ScalarProperty Name="Yil" ColumnName="Yil" />
+                <ScalarProperty Name="Cvc" ColumnName="Cvc" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="AkademinyaModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="UstId" ColumnName="UstId" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kurs">
+            <EntityTypeMapping TypeName="AkademinyaModel.Kurs">
+              <MappingFragment StoreEntitySet="Kurs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Acikklama" ColumnName="Acikklama" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="SonGuncellemeTarih" ColumnName="SonGuncellemeTarih" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="UstKategoriID" ColumnName="UstKategoriID" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Ücretsiz" ColumnName="Ücretsiz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AkademinyaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="AkademinyaModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="us" ColumnName="us" />
+                <ScalarProperty Name="ps" ColumnName="ps" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usersKurslar">
+            <EntityTypeMapping TypeName="AkademinyaModel.usersKurslar">
+              <MappingFragment StoreEntitySet="usersKurslar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="kursid" ColumnName="kursid" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uye">
+            <EntityTypeMapping TypeName="AkademinyaModel.Uye">
+              <MappingFragment StoreEntitySet="Uye">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="TelefonNo" ColumnName="TelefonNo" />
+                <ScalarProperty Name="CookieGuid" ColumnName="CookieGuid" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UyeKurs">
+            <EntityTypeMapping TypeName="AkademinyaModel.UyeKurs">
+              <MappingFragment StoreEntitySet="UyeKurs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="UyeID" ColumnName="UyeID" />
+                <ScalarProperty Name="Aktif" ColumnName="Aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

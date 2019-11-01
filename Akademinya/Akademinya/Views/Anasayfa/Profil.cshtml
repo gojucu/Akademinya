@@ -3,17 +3,99 @@
     ViewBag.Title = "Profil";
 }
 
-<div class="container" style="background-color:white">
-    <div class="row">
 
-        <div class="col-md-10" style="margin:auto">
-            <p>profil</p>
-            <hr />
-        </div>
-        <div class="col-md-10" style="margin:auto">
-            <p>cart curt</p>
-            <hr />
+<style>
+</style>
+
+
+
+
+<div class="shop">
+    <div class="container" style="text-align: -webkit-center;">
+
+        <div class="f-signup">
+            <h4 style="color:red">@ViewBag.Hata</h4>
+            @using (Html.BeginForm("KayitOl", "Uyelik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <h2>Şifre Değiştir</h2>
+
+
+                <p>
+                    <label for="password" class="floatLabel">Eski şifre</label>
+                    <input id="password" name="Sifre" type="password" required>
+                    <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
+                </p>
+                <p>
+                    <label for="password" class="floatLabel">Yeni Şifre</label>
+                    <input id="password" name="Sifre" type="password" required>
+                    <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
+                </p>
+                <p>
+                    <label for="confirm_password" class="floatLabel">Şifre Tekrarı</label>
+                    <input id="confirm_password" name="confirm_password" type="password" required>
+                    <span>Şifreleriniz eşleşmiyor</span>
+                </p>
+                <p>
+                    <input type="submit" value="Şifreyi değiştir" id="submit">
+                </p>
+            }
         </div>
     </div>
 </div>
 
+<script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
+<script>
+    //Problem: Hints are shown even when form is valid
+    //Solution: Hide and show them at appropriate times
+    var $password = $("#password");
+    var $confirmPassword = $("#confirm_password");
+
+    //Hide hints
+    $("form span").hide();
+
+    function isPasswordValid() {
+        return $password.val().length >= 6;
+    }
+
+    function arePasswordsMatching() {
+        return $password.val() === $confirmPassword.val();
+    }
+
+    function canSubmit() {
+        return isPasswordValid() && arePasswordsMatching();
+    }
+
+    function passwordEvent() {
+        //Find out if password is valid
+        if (isPasswordValid()) {
+            //Hide hint if valid
+            $password.next().hide();
+        } else {
+            //else show hint
+            $password.next().show();
+        }
+    }
+
+    function confirmPasswordEvent() {
+        //Find out if password and confirmation match
+        if (arePasswordsMatching()) {
+            //Hide hint if match
+            $confirmPassword.next().hide();
+        } else {
+            //else show hint
+            $confirmPassword.next().show();
+        }
+    }
+
+    function enableSubmitEvent() {
+        $("#submit").prop("disabled", !canSubmit());
+    }
+
+    //When event happens on password input
+    $password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+    //When event happens on confirmation input
+    $confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+    enableSubmitEvent();
+</script>

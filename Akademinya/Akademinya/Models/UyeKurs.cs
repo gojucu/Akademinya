@@ -12,12 +12,14 @@ namespace Akademinya.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class UyeKurs
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public int KursID { get; set; }
+        public int UyeID { get; set; }
+        public Nullable<bool> Aktif { get; set; }
+    
+        public virtual Kurs Kurs { get; set; }
+        public virtual Uye Uye { get; set; }
     }
 }

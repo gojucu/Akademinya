@@ -10,9 +10,13 @@
     margin-top:14px;
 }
 
-.price {
+.card-price {
     color: grey;
     font-size: 22px;
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
 }
 
 .card button {

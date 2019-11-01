@@ -65,53 +65,61 @@ namespace Akademinya.Controllers
         [Route("UyeGirisi")]
         public ActionResult UyeGirisi()
         {
-            if (Session["Uye"] == null)
-            {
-                ViewBag.Kullanici = Session["Uye"];
-                return View();
+            if(Response.Cookies["userGuid"]!= null){
+                if (Request.Cookies["userGuid"].Value == "")
+                 {
+                     return View();
+                 }
+                 else
+                 {
+                     return RedirectToAction("Index", "Anasayfa");
+                 }
             }
             else
             {
-                return RedirectToAction("Index", "Anasayfa");
+                return View();
+                //return RedirectToAction("Index", "Anasayfa");
             }
 
-        }
+
+        } //Ajax kısmını ekle
 
         [HttpPost]
         [Route("UyeGirisi")]
         [ValidateInput(false)]
         public ActionResult UyeGirisi(string kullaniciAdi, string Sifre)
         {
-            if (Session["Uye"] == null)
+            try
             {
-                if (Membership.ValidateUser(kullaniciAdi, Sifre))
-                {
-                    FormsAuthentication.RedirectFromLoginPage(kullaniciAdi, true);
-                    Uye uye = db.Uye.FirstOrDefault(x => x.KullaniciAdi == kullaniciAdi);
-                    Session["Uye"] = uye;
-                    Session["UyeXID"] = uye.Id;
 
-                    //string gor = uye.Id.ToString();
 
-                    return RedirectToAction("Index", "Anasayfa");
-                }
-                else
-                {
-                    ViewBag.Uyari = "Kullanıcı adı veya parolası yanlış. Lütfen kontrol edip tekrar deneyiniz!";
-                    return View();
-                }
+                Uye uye = db.Uye.FirstOrDefault(x => x.KullaniciAdi == kullaniciAdi && x.Sifre == Sifre);
+                    if (uye.Id > 0)
+                    {
+                        var uyeGuid = Genel.userguidOlustur();
+                        uye.CookieGuid = uyeGuid;
+                        //Response.Cookies["userid"].Value = uyeGuid.ToString();
+                        db.SaveChanges();
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(false, JsonRequestBehavior.AllowGet);
+                    }
+
             }
-            else
+            catch
             {
-                return RedirectToAction("Index", "Anasayfa");
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
+
         }
 
         [Route("UyeCikis")]
         public ActionResult UyeCikis()
         {
 
-            Session["Uye"] = null;
+            Response.Cookies["userGuid"].Value = null;
             return RedirectToAction("Index", "Anasayfa");
         }
 
@@ -144,7 +152,7 @@ namespace Akademinya.Controllers
                     stringChars[i] = chars[random.Next(chars.Length)];
                 }
 
-                
+
                 var password = new String(stringChars);
                 MembershipUser mu = Membership.GetUser(uye.KullaniciAdi);
                 mu.ChangePassword(mu.ResetPassword(), password);
