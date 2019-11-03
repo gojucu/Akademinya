@@ -78,16 +78,83 @@ namespace Akademinya.Controllers
         [Route("Kurslar/{Ad}")]
         public ActionResult KategoriKurs(string Ad, int? Page)
         {
-            var kategori = db.Kategori.FirstOrDefault(x => x.Ad == Ad);
-            var kurslar = db.Kurs.ToList().Where(x => x.Kategori == kategori);
+            Uye uye = null;
             ViewBag.Ad = Ad;
-            if (kategori.UstId == 0)
+
+            if (Request.Cookies["userGuid"] != null)
             {
-                kurslar = db.Kurs.ToList().Where(x=>x.UstKategoriID==kategori.Id);
+                if (Request.Cookies["userGuid"].Value != "")
+                {
+                    var userGuid = Request.Cookies["userGuid"].Value;
+                    uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+                }
             }
-            var kurslist= kurslar.ToList().ToPagedList(Page ?? 1, 2); ;
-            
-            return View("KursListe", kurslist);
+
+
+            if (uye != null)
+            {
+                //var kurslarim = from uyekurs in db.UyeKurs
+                //                join kursBilgi in db.Kurs on uyekurs.KursID equals kursBilgi.Id into ps
+                //                from m in ps.DefaultIfEmpty()
+                //                where uyekurs.UyeID != uye.Id && m.Silindi == false && uyekurs.Aktif == true
+                //                select new
+                //                    model_kurs_liste
+                //                {
+                //                    Id = m.Id,
+                //                    Ad = m.Ad,
+                //                    Fiyat = m.Fiyat,
+                //                    Acikklama = m.Acikklama,
+                //                    Icerik = m.Icerik,
+                //                    Resim = m.Resim,
+                //                    Ücretsiz = m.Ücretsiz,
+                //                    SonGuncellemeTarih = m.SonGuncellemeTarih,
+                //                    KategoriID = m.KategoriID,
+                //                    UstKategoriID = m.UstKategoriID,
+                //                    Aktif = uyekurs.Aktif,
+                //                    KursID=m.Id,
+                //                    UyeID=uye.Id,
+                //                    uyekursID=uyekurs.Id
+                //                };
+                var uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == 0);
+
+                if (uye != null)
+                {
+                    uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == uye.Id);
+                }
+                var kurss = db.Kurs.ToList();
+                var list = new List<Kurs>();
+                foreach(var item in kurss)
+                {
+                    if(uyekurs.FirstOrDefault(x => x.KursID == item.Id) == null)
+                    {
+                        list.Add(item);
+                    }
+                  
+                }
+                var kategori = db.Kategori.FirstOrDefault(x => x.Ad == Ad);
+                var kurslar = list.ToList().Where(x => x.KategoriID == kategori.Id);
+                if (kategori.UstId == 0)
+                {
+                    kurslar = list.ToList().Where(x => x.UstKategoriID == kategori.Id);
+                }
+
+                var kurslist = kurslar.ToList().ToPagedList(Page ?? 1, 2); ;
+                return View("KursListe", kurslist);
+            }
+            else
+            {
+                var kategori = db.Kategori.FirstOrDefault(x => x.Ad == Ad);
+            var kurslar = db.Kurs.ToList().Where(x => x.Kategori == kategori);
+
+                if (kategori.UstId == 0)
+                {
+                    kurslar = db.Kurs.ToList().Where(x => x.UstKategoriID == kategori.Id);
+                }
+
+                var kurslist = kurslar.ToList().ToPagedList(Page ?? 1, 2); ;
+
+                return View("KursListe", kurslist);
+            }
         }
         //Kategoriye göre listeleme son
         //Aramaya göre listeleme başlangıç
@@ -334,19 +401,6 @@ namespace Akademinya.Controllers
         public ActionResult KursIzlemeSayfasi(string Ad, int id)
         {
             return View();
-        }
-
-        [Route("dlayout")]
-        public ActionResult dlayout()
-        {
-            return View();
-        }
-        [Route("dliste/{Ad}")]
-        public ActionResult dliste(string Ad, int? page)
-        {
-            ViewBag.Ad = Ad;
-            var kutu2 = db.Kurs.ToList().ToPagedList(page ?? 1, 2);
-            return View("dListe2", kutu2);
         }
     }
 }
