@@ -395,7 +395,7 @@ body {
     font-size: 10px;
 }
 
-    .f-signup form {
+    .f-signup #uyeGirisForm {
         background: #fff;
         padding: 4em 4em 2em;
         max-width: 400px;
@@ -404,7 +404,7 @@ body {
         border-radius: 2px;
     }
 
-        .f-signup form h2 {
+        .f-signup #uyeGirisForm h2 {
             margin: 0 0 50px 0;
             padding: 10px;
             text-align: center;
@@ -413,13 +413,13 @@ body {
             border-bottom: solid 1px #e5e5e5;
         }
 
-        .f-signup form p {
+        .f-signup #uyeGirisForm p {
             margin: 0 0 3em 0;
             position: relative;
-            font-size:10px;
+            font-size: 10px;
         }
 
-        .f-signup form input {
+        .f-signup #uyeGirisForm input {
             display: block;
             box-sizing: border-box;
             width: 100%;
@@ -427,7 +427,7 @@ body {
             margin: 0;
         }
 
-            .f-signup form input[type="email"], .f-signup form input[type="text"], .f-signup form input[type="password"] {
+            .f-signup #uyeGirisForm input[type="email"], .f-signup #uyeGirisForm input[type="text"], .f-signup #uyeGirisForm input[type="password"] {
                 background: #fff;
                 border: 1px solid #dbdbdb;
                 font-size: 1.6em;
@@ -435,18 +435,18 @@ body {
                 border-radius: 2px;
             }
 
-                .f-signup form input[type="email"], .f-signup form input[type="text"]:focus, .f-signup form input[type="password"]:focus {
+                .f-signup #uyeGirisForm input[type="email"], .f-signup #uyeGirisForm input[type="text"]:focus, .f-signup #uyeGirisForm input[type="password"]:focus {
                     background: #fff;
                 }
 
-        .f-signup form span {
+        .f-signup #uyeGirisForm span {
             display: block;
             background: #f9a5a5;
             padding: 2px 5px;
             color: #666;
         }
 
-        .f-signup form input[type="submit"] {
+        .f-signup #uyeGirisForm input[type="submit"] {
             background: rgba(148, 186, 101, 0.7);
             box-shadow: 0 3px 0 0 rgba(123, 163, 73, 0.7);
             border-radius: 2px;
@@ -462,12 +462,12 @@ body {
             text-shadow: 0 1px #68b25b;
         }
 
-            .f-signup form input[type="submit"]:hover {
+            .f-signup #uyeGirisForm input[type="submit"]:hover {
                 background: rgba(148, 175, 101, 1);
                 text-shadow: 0 1px 3px rgba(70, 93, 41, 0.7);
             }
 
-        .f-signup form label {
+        .f-signup #uyeGirisForm label {
             position: absolute;
             left: 8px;
             top: 12px;
@@ -479,10 +479,53 @@ body {
             background-color: rgba(255, 255, 255, 0);
         }
 
-            .f-signup form label.floatLabel {
+            .f-signup #uyeGirisForm label.floatLabel {
                 top: -11px;
                 background-color: rgba(255, 255, 255, 0.8);
                 font-size: 14px;
             }
  
 /*uye ol son*/
+
+/*kurs detay accordion baş*/
+.kd{
+    margin:15px;
+}
+.kd .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    margin-bottom:3px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.kd .active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.kd .accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.kd .active:after {
+    content: "\2212";
+}
+
+.kd .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+/*kurs detay accordion baş*/

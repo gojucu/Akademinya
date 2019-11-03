@@ -54,6 +54,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -6947,6 +6953,7 @@
     <Content Include="Content\OneTech\styles\responsive.css" />
     <Content Include="Content\OneTech\styles\shop_responsive.css" />
     <Content Include="Content\OneTech\styles\shop_styles.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\plugins\bootstrap-slider\slider.css" />
     <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -7780,6 +7787,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -7816,6 +7825,10 @@
     <Content Include="Views\Anasayfa\Profil.cshtml" />
     <Content Include="Views\Anasayfa\SatinAlmaGecmisi.cshtml" />
     <Content Include="Views\Uyelik\SifremiUnuttum.cshtml" />
+    <Content Include="Views\Anasayfa\dliste.cshtml" />
+    <Content Include="Views\Shared\_dLayout.cshtml" />
+    <Content Include="Views\Anasayfa\dlayout.cshtml" />
+    <Content Include="Views\Shared\dListe2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

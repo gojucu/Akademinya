@@ -6,8 +6,7 @@
     <div class="container" style="text-align: -webkit-center;">
 
         <div class="f-signup">
-            @using (Html.BeginForm())
-            {
+            <form id="uyeGirisForm">
                 <h2>Giriş yap</h2>
                 <div style="text-align:justify">
                     <p style="color:#980000;font-size:.8rem">@ViewBag.Uyari</p>
@@ -30,47 +29,18 @@
                 <p>
                     <a href="/UyeOl" class="btn btn-lg btn-outline-success btn-block text-uppercase">Üye Ol</a>
                 </p>
-            }
+            </form>
         </div>
-        @*@using (Html.BeginForm())
-        {
-            <table align="center">
-                <tr>
-                    <td colspan="2">
-                        @ViewBag.Mesaj
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kullanıcı Adı</td>
-                    <td><input class="form-control" type="text" name="KullaniciAdi" value="" required /></td>
-                </tr>
-                <tr>
-                    <td>Parola</td>
-                    <td><input class="form-control" type="password" name="Sifre" value="" required /></td>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td>
-                        <input class="form-control" type="submit" name="btnKayit01" value="Giriş Yap" />
-                    </td>
-                </tr>
-
-            </table>
-        }
-        @if (ViewBag.Kullanici != null)
-        {
-            <a class="btn btn-bitbucket" href="/UyeCikis" title="UyeCikis" itemprop="name">Çıkış Yap</a>
-        }
-        else
-        {
-            <a class="btn btn-bitbucket" href="/UyeOl" title="UyeOl" itemprop="name">Üye Ol</a>
-        }*@
     </div>
 </div>
 
 <script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
 <script>
+
+    $('#uyeGirisForm').submit(function () {
+        islemler.UyeGirisi();
+        return false;
+    });
     //Problem: Hints are shown even when form is valid
     //Solution: Hide and show them at appropriate times
     var $password = $("#password");
@@ -82,7 +52,7 @@
     }
     
     function canSubmit() {
-        return isPasswordValid() && arePasswordsMatching();
+        return isPasswordValid();
     }
 
     function passwordEvent() {
@@ -102,7 +72,7 @@
     }
 
     //When event happens on password input
-    $password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+    $password.focus(passwordEvent).keyup(passwordEvent).keyup(enableSubmitEvent);
     
     enableSubmitEvent();
 </script>

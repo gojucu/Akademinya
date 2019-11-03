@@ -15,79 +15,49 @@
 
         <div class="f-signup">
             <h4 style="color:red">@ViewBag.Hata</h4>
-            @using (Html.BeginForm("KayitOl", "Uyelik", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <h2>Kayıt ol</h2>
-                <p>
-                    <label for="KullaniciAdi" class="floatLabel">Kullanıcı adı</label>
-                    <input id="KullaniciAdi" name="KullaniciAdi" type="text" required>
-                </p>
-                <p>
-                    <label for="Email" class="floatLabel">Email</label>
-                    <input id="Email" name="Mail" type="text" required>
-                </p>
-                <p>
-                    <label for="TelNo" class="floatLabel">Telefon No</label>
-                    <input id="TelNo" name="TelefonNo" type="text" required>
-                </p>
-                <p>
-                    <label for="password" class="floatLabel">Şifre</label>
-                    <input id="password" name="Sifre" type="password" required>
-                    <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
-                </p>
-                <p>
-                    <label for="confirm_password" class="floatLabel">Şifre Tekrarı</label>
-                    <input id="confirm_password" name="confirm_password" type="password" required>
-                    <span>Şifreleriniz eşleşmiyor</span>
-                </p>
-                <p>
-                    <input type="submit" value="Hesabımı oluştur" id="submit">
-                </p>
-            }
-        </div>
-        @*<h2>KayitOl</h2>
-        <h4 style="color:red">@ViewBag.Hata</h4>
-        @using (Html.BeginForm("KayitOl", "Uyelik", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <table align="center">
-                <tr><td>Kullanıcı Adı</td></tr>
-                <tr>
-
-                    <td><input class="form-control" type="text" name="KullaniciAdi" value="" required /></td>
-                </tr>
-                <tr><td>Email</td></tr>
-                <tr>
-
-                    <td><input class="form-control" type="email" name="Mail" value="" required /></td>
-                </tr>
-                <tr><td>Telefon no</td></tr>
-                <tr>
-                    <td><input class="form-control" type="text" name="TelefonNo" value="" required /></td>
-                </tr>
-                <tr><td>Parola</td></tr>
-                <tr>
-
-                    <td><input class="form-control" type="password" name="Sifre" minlength="6" value="" required /></td>
-                </tr>
-                <tr>
-                        <td>Parola Tekrar</td>
-                        <td><input class="form-control" type="password" name="ParolaTekrar" value="" required /></td>
-                    </tr>
-
-                <tr><td> </td></tr>
-                <tr>
-
-                    <td>
-                        <input class="form-control btn btn-outline-dark" type="submit" name="btnKayit01" value="Kayıt Ol" />
-                    </td>
-                </tr>
-            </table>
-        }*@
+            @*@using (Html.BeginForm("KayitOl", "Uyelik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {*@
+                <form id="uyeGirisForm">
+                    <h2>Kayıt ol</h2>
+                    <p>
+                        <label for="KullaniciAdi" class="floatLabel">Kullanıcı adı</label>
+                        <input id="KullaniciAdi" name="KullaniciAdi" type="text" required>
+                    </p>
+                    <p>
+                        <label for="Email" class="floatLabel">Email</label>
+                        <input id="Email" name="Mail" type="email" required>
+                    </p>
+                    <p>
+                        <label for="TelNo" class="floatLabel">Telefon No</label>
+                        <input id="TelNo" name="TelefonNo" type="text" required>
+                    </p>
+                    <p>
+                        <label for="password" class="floatLabel">Şifre</label>
+                        <input id="password" name="Sifre" type="password" required>
+                        <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
+                    </p>
+                    <p>
+                        <label for="confirm_password" class="floatLabel">Şifre Tekrarı</label>
+                        <input id="confirm_password" name="confirm_password" type="password" required>
+                        <span>Şifreleriniz eşleşmiyor</span>
+                    </p>
+                    <p>
+                        <input type="submit" value="Hesabımı oluştur" id="submit">
+                    </p>
+                    </form>
+                    @*}*@
+         </div>
     </div>
 </div>
 
 <script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
 <script>
+
+
+    $('#uyeGirisForm').submit(function () {
+        islemler.UyeOl();
+        return false;
+    });
     //Problem: Hints are shown even when form is valid
     //Solution: Hide and show them at appropriate times
     var $password = $("#password");

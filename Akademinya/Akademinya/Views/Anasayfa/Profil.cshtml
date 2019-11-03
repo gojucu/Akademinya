@@ -15,19 +15,18 @@
 
         <div class="f-signup">
             <h4 style="color:red">@ViewBag.Hata</h4>
-            @using (Html.BeginForm("KayitOl", "Uyelik", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
+            <form id="uyeGirisForm">
                 <h2>Şifre Değiştir</h2>
 
 
                 <p>
                     <label for="password" class="floatLabel">Eski şifre</label>
-                    <input id="password" name="Sifre" type="password" required>
-                    <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
+                    <input id="password1" name="EskiSifre" type="password" required minlength:6>
+                    @*<span >Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>*@
                 </p>
                 <p>
                     <label for="password" class="floatLabel">Yeni Şifre</label>
-                    <input id="password" name="Sifre" type="password" required>
+                    <input id="password" name="YeniSifre" type="password" required>
                     <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
                 </p>
                 <p>
@@ -38,16 +37,21 @@
                 <p>
                     <input type="submit" value="Şifreyi değiştir" id="submit">
                 </p>
-            }
-        </div>
+                </form>
+</div>
     </div>
 </div>
 
 <script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
 <script>
+    $('#uyeGirisForm').submit(function () {
+        islemler.SifreDegistir();
+        return false;
+    });
     //Problem: Hints are shown even when form is valid
     //Solution: Hide and show them at appropriate times
     var $password = $("#password");
+
     var $confirmPassword = $("#confirm_password");
 
     //Hide hints
@@ -56,6 +60,7 @@
     function isPasswordValid() {
         return $password.val().length >= 6;
     }
+
 
     function arePasswordsMatching() {
         return $password.val() === $confirmPassword.val();
@@ -75,6 +80,7 @@
             $password.next().show();
         }
     }
+
 
     function confirmPasswordEvent() {
         //Find out if password and confirmation match

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Akademinya.Models.Kurs>
+
+@{
+    ViewBag.Title = "dliste";
+}
+
+<h2>dliste</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Silindi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acikklama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Icerik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SonGuncellemeTarih)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UstKategoriID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ücretsiz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategori.Ad)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Silindi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acikklama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Icerik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fiyat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SonGuncellemeTarih)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UstKategoriID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ücretsiz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategori.Ad)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -16,6 +16,90 @@ var islemler = {
     GirisYap: function () {
             uyariVer("Lütfen <a href='/UyeGirisi'> Üye Girişi </a> yapınız. <br> yada  <a href='/UyeOl'> Yeni üyelik </a> oluşturunuz ", true)
     },
+    UyeGirisi: function () {
+
+        //$("#katil").prop('disabled', true);
+
+        var kullaniciAdi = $("#KullaniciAdi").val();
+        var Sifre = $("#password").val();
+        
+        $.ajax({
+            url: "UyeGirisi",
+            async: false,
+            data: { kullaniciAdi, Sifre },
+            type: "post",
+            success: function (sonuc){
+                if (sonuc) {
+                    window.location.href="";
+                }
+                else {
+                    bootbox.alert({
+                        message: "Kullanıcı adı yada şifre  Hatalı"
+                    });
+                    //$('#katil').removeAttr("disabled");
+                }
+            }
+        })
+    },
+    UyeOl: function () {
+
+        //$("#katil").prop('disabled', true);
+
+        var kullaniciAdi = $("#KullaniciAdi").val();
+        var mail = $("#Email").val();
+        var telefonNo = $("#TelNo").val();
+        var Sifre = $("#password").val();
+        var uye = {
+            kullaniciAdi: kullaniciAdi,
+            mail: mail,
+            telefonNo: telefonNo,
+            Sifre: Sifre,
+        }
+
+        $.ajax({
+            url: "UyeOl",
+            async: false,
+            data: uye,
+            type: "post",
+            success: function (sonuc) {
+                if (sonuc) {
+                    window.location.href = "";
+                }
+                else {
+                    bootbox.alert({
+                        message: "Bu bilgilere ait kayıtlı kullanıcı bulunmakta. Lütfen tekrar deneyiniz!"
+                    });
+                    //$('#katil').removeAttr("disabled");
+                }
+            }
+        })
+    },
+    SifreDegistir: function () {
+
+
+
+        var EskiSifre = $("#password1").val();
+        var YeniSifre = $("#password").val();
+
+
+        $.ajax({
+            url: "Profil",
+            async: false,
+            data: {EskiSifre ,YeniSifre},
+            type: "post",
+            success: function (sonuc) {
+                if (sonuc) {
+                    window.location.href = "";
+                }
+                else {
+                    bootbox.alert({
+                        message: "Eski şifreniz hatalı. Tekrar deneyiniz."
+                    });
+                    //$('#katil').removeAttr("disabled");
+                }
+            }
+        })
+    },
     OdemeYap: function () {
 
         //$("#katil").prop('disabled', true);
@@ -65,5 +149,4 @@ var islemler = {
 
         })
     },
-
 }

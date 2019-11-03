@@ -4,12 +4,15 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     AkademinyaEntities db = new AkademinyaEntities();
-    Uye uye = new Uye();
-    if (Session["Uye"] != null)
+    Uye uye = null;
+    if (Request.Cookies["userGuid"] != null)
     {
-        var uyeId = new Guid(Session["UyeXID"].ToString());
-        uye = db.Uye.FirstOrDefault(x => x.Id == uyeId);
+        if (Request.Cookies["userGuid"].Value != "")
+        {
+            var userGuid = Request.Cookies["userGuid"].Value;
+            uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
 
+        }
     }
 }
 
@@ -98,7 +101,7 @@
                                 <p style="position: absolute;bottom: 0;left: 0%; width: 100%;padding: inherit;">
                                     @if (item.Ücretsiz == true)
                                     {
-                                        if (uye.aspnet_Membership == null)
+                                        if (uye == null)
                                         {
                                             <button onclick="return islemler.GirisYap()">Hemen kaydol</button>
 

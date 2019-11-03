@@ -1,6 +1,28 @@
 ﻿@model Akademinya.Models.Kurs
+@using Akademinya.Models
 @{
     ViewBag.Title = "KursDetay";
+
+    AkademinyaEntities db = new AkademinyaEntities();
+    Uye uye = null;
+    var guid = Akademinya.Controllers.Genel.guidKontrol();
+    var sepet = db.AlisverisSepeti.ToList().Where(x => x.Guid == guid);
+
+    if (Request.Cookies["userGuid"] != null)
+    {
+        if (Request.Cookies["userGuid"].Value != "")
+        {
+            var userGuid = Request.Cookies["userGuid"].Value;
+            uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+        }
+    }
+
+    var uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == 0);
+
+    if (uye != null)
+    {
+        uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == uye.Id);
+    }
 }
 
 <div class="container" style="background-color:white">
@@ -9,6 +31,7 @@
         <div class="col-lg-8">
             <!-- Title -->
             <h1 class="mt-4">@Model.Ad</h1>
+            <h5>***** 5 puan. 1500 öğrenci</h5>
             <!-- Author -->
             <p class="lead">
                 by
@@ -25,21 +48,40 @@
             </div>
 
             <hr>
+            <div>
+                <h4>Kurs içerikleri</h4>
+                <div class="kd">
+                    <button class="accordion">1. Bölüm</button>
+                    <div class="panel">
+                        <p>1.video</p><hr />
+                        <p>2.video</p><hr />
+                        <p>3.video</p><hr />
+                        <p>4.video</p><hr />
+                    </div>
+                    <button class="accordion">2. Bölüm</button>
+                    <div class="panel">
+                        <p>5.video</p><hr />
+                        <p>6.video</p><hr />
+                        <p>7.video</p><hr />
+                        <p>8.video</p><hr />
+                    </div>
+                </div>
+            </div>
             <!-- Post Content -->
             <h4>Açıklama</h4>
             <p class="lead">@Model.Acikklama</p>
             @*<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-        <blockquote class="blockquote">
-            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">
-                Someone famous in
-                <cite title="Source Title">Source Title</cite>
-            </footer>
-        </blockquote>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>*@
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
+                <blockquote class="blockquote">
+                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">
+                        Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                    </footer>
+                </blockquote>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>*@
             <hr>
             <!-- Comments Form -->
             <div class="card my-4" style="max-width: unset;">
@@ -90,46 +132,59 @@
 
             <!-- Categories Widget -->
             <div class="card my-4">
-                <h5 class="card-header">Konular</h5>
+                <h5 class="card-header">İçerik</h5>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Web Design</a>
-                                </li>
-                                <li>
-                                    <a href="#">HTML</a>
-                                </li>
-                                <li>
-                                    <a href="#">Freebies</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">JavaScript</a>
-                                </li>
-                                <li>
-                                    <a href="#">CSS</a>
-                                </li>
-                                <li>
-                                    <a href="#">Tutorials</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    @Model.Icerik
+                    @*<div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">Web Design</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">HTML</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Freebies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">JavaScript</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">CSS</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Tutorials</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>*@
                 </div>
             </div>
             <!-- Side Widget -->
             <div class="card my-4">
-                <h5 class="card-header">Fiyat/Satın Al</h5>
+                <h5 class="card-header">@Model.Fiyat ₺</h5>
                 <div class="card-body">
-                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!<br />
-                    30 $
+                    @if (uyekurs.Any(x => x.KursID == Model.Id && x.UyeID == uye.Id))
+                    {
+                        <button type="button" onclick="return SepeteEkle(@Model.Id)">Kursa git</button>
+                    }
+                    else
+                    {
+                        if (sepet.Any(x => x.KursID == Model.Id))
+                        {
+                            <button type="button" onclick="return SepeteGit(@Model.Id)">Sepete Git</button>
+                        }
+                        else
+                        {
+                            <button type="button" onclick="return SepeteEkle(@Model.Id)">Sepete Ekle</button>
+                        }
+                    }
 
-                    <button type="button" onclick="return SepeteEkle(@Model.Id)">Sepete Ekle</button>
                 </div>
             </div>
         </div>
@@ -138,8 +193,29 @@
 </div>
 
 <script>
+
+    //accordion baş
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+    //accordion son
+
     function SepeteEkle(Id) {
         window.location = '/SepeteEkle/' + Id;
-                }
-    
+    }
+    function SepeteGit(Id) {
+        window.location = '/AlisverisSepeti/';
+    }
+
 </script>

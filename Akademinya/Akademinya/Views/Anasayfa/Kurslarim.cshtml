@@ -1,26 +1,60 @@
-﻿@model IEnumerable<Akademinya.Models.Kurs>
-
+﻿@model Akademinya.Models.Uye
+@using Akademinya.Models
 @{
     ViewBag.Title = "Kurslarim";
+    AkademinyaEntities db = new AkademinyaEntities();
+
+    var kurslarim = from uyekurs in db.UyeKurs
+                    join kursBilgi in db.Kurs on uyekurs.KursID equals kursBilgi.Id into ps
+                    from m in ps.DefaultIfEmpty()
+                    where uyekurs.UyeID == Model.Id && m.Silindi == false && uyekurs.Aktif == true
+                    select new
+                    {
+                        kursId = m.Id,
+                        kursAdi = m.Ad,
+                        kursFiyat = m.Fiyat,
+                        kursAciklama = m.Acikklama,
+                        kursIcerik = m.Icerik,
+                        kursResim = m.Resim,
+                        kursUcretsiz = m.Ücretsiz,
+                        kursGuncellemeTarih = m.SonGuncellemeTarih
+
+                    };
 }
 
 <div class="shop">
     <div class="container">
         <div style="margin-top:20px">
             <div class="row">
-                @foreach (var item in Model)
+                @if (kurslarim.Count() == 0)
                 {
-                    <div class="card h-100 col-lg-3 col-md-4">
-                        <div class="img-responsive" style="height:145px">
-                            <img src="~/Content/SampleImages/pc.jpg" alt="Denim Jeans" style="width:100%;height:100%">
-                        </div>
+                <div style="text-align:center;margin:auto">
+                    <p style="font-size:1.1rem;">Kursunuz bulunmamakta. Hemen aradığınız kursları bulun. </p>
+                    <a href="/" class="btn btn-outline-info btn-sm">Alışverişe başla</a>
 
-                        <h4>@item.Ad</h4>
-                        <p class="price">@item.Fiyat ₺</p>
-                        @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
-                        <p><button onclick="window.location.href='../Kurslar/KursDetay/@item.Id'">Kursunuza gidin</button></p>
+                </div>
+                }
+                else
+                {
+                    foreach (var item in kurslarim)
+                    {
+                        <div class="card col-lg-3 col-md-4" style="height:350px">
+                            <div class="img-responsive" style="height:145px">
+                                <img src="@item.kursResim" alt="Denim Jeans" style="width:100%;height:100%">
+                            </div>
 
-                    </div>
+                            <h4>@item.kursAdi</h4>
+                            @if (item.kursUcretsiz == true)
+                            {
+                                <p class="card-price">Ücretsiz</p>
+                            }
+                            else
+                            {
+                                <p class="card-price">@item.kursFiyat ₺</p>
+                            }
+                            @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
+                            <p style="position: absolute;bottom: 0;left: 0%; width: 100%;padding: inherit;"><button onclick="window.location.href='../Kurslar/KursDetay/@item.kursId'">Kursunuza gidin</button></p>
+                        </div>}
                 }
             </div>
         </div>
