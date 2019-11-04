@@ -18,6 +18,9 @@ namespace Akademinya.Models
         public int KursID { get; set; }
         public int UyeID { get; set; }
         public Nullable<bool> Aktif { get; set; }
+        public string KursYorum { get; set; }
+        public Nullable<int> KursPuan { get; set; }
+        public Nullable<bool> PuanVerdi { get; set; }
     
         public virtual Kurs Kurs { get; set; }
         public virtual Uye Uye { get; set; }

@@ -23,7 +23,5 @@ namespace Akademinya.Models
         public int Yil { get; set; }
         public string Cvc { get; set; }
         public bool Silindi { get; set; }
-    
-        public virtual Uye Uye { get; set; }
     }
 }

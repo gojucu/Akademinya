@@ -203,7 +203,6 @@
     <Compile Include="Models\UyeKurs.cs">
       <DependentUpon>AkademinyaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ValuesController1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -7126,6 +7125,8 @@
     <Content Include="Content\SampleImages\face3.png" />
     <Content Include="Content\SampleImages\pc.jpg" />
     <Content Include="Content\SampleImages\pc2.jpg" />
+    <Content Include="Content\SampleImages\Stars\StarFade.gif" />
+    <Content Include="Content\SampleImages\Stars\StarGlow.gif" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\css\blog-post.css" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\gulpfile.js" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\index.html" />
@@ -7835,8 +7836,9 @@
     <Content Include="Views\Anasayfa\Profil.cshtml" />
     <Content Include="Views\Anasayfa\SatinAlmaGecmisi.cshtml" />
     <Content Include="Views\Uyelik\SifremiUnuttum.cshtml" />
-    <Content Include="Views\Anasayfa\dliste.cshtml" />
-    <Content Include="Views\Anasayfa\dlayout.cshtml" />
+    <Content Include="Views\Anasayfa\KursIzlemeSayfasi.cshtml" />
+    <Content Include="Views\Anasayfa\ModalPartial\PuanVer.cshtml" />
+    <Content Include="Views\Shared\_CommentBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

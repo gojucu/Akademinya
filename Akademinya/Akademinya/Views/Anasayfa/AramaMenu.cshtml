@@ -36,8 +36,11 @@
         var ad = $("#Ad").val().replace(/\ /g, "_"); //aranan içindeki boşlukların altçizgi yapıyor çünkü controller a boşluklar gitmiyor. Burdan çizgi gidip controllerda çizgiler tekrar boşluğa dönüştürülüyor
         if (ad == null || ad == "") {
             ad = null;
+            window.location.reload;
+        } else {
+            window.location = "../Kurslarr2/" + ad;
         }
-        window.location = "../Kurslarr2/" + ad;
+
         return false;
     });
 </script>

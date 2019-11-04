@@ -24,6 +24,19 @@
         uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == uye.Id);
     }
 }
+@{//Yıldız rating için gerekli yerler
+    var kayitliOgrenciSayisi = db.UyeKurs.Where(x => x.KursID == Model.Id).ToList().Count();
+    var comments = (IEnumerable<Akademinya.Models.UyeKurs>)ViewBag.Comments;
+    var ratingSum = ViewBag.RatingSum;
+    var ratingCount = ViewBag.RatingCount;
+
+    decimal rating = 0;
+    if (ratingCount > 0)
+    {
+        rating = (ratingSum / ratingCount);
+    }
+    var totalRating = decimal.Parse(rating.ToString());
+}
 
 <div class="container" style="background-color:white">
     <div class="row">
@@ -31,7 +44,12 @@
         <div class="col-lg-8">
             <!-- Title -->
             <h1 class="mt-4">@Model.Ad</h1>
-            <h5>***** 5 puan. 1500 öğrenci</h5>
+            <div class="starClass" style="display:inline-block">
+                <div>
+                    <span class="starFadeN" id="sRate1"></span><span class="starFadeN" id="sRate2"></span><span class="starFadeN" id="sRate3"></span><span class="starFadeN" id="sRate4"></span><span class="starFadeN" id="sRate5"></span>
+                </div>
+            </div>
+            <h5 style="display: inline-block;vertical-align: text-bottom;"> @kayitliOgrenciSayisi Kayıtlı öğrenci</h5>
             <!-- Author -->
             <p class="lead">
                 by
@@ -71,17 +89,17 @@
             <h4>Açıklama</h4>
             <p class="lead">@Model.Acikklama</p>
             @*<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                <blockquote class="blockquote">
-                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    <footer class="blockquote-footer">
-                        Someone famous in
-                        <cite title="Source Title">Source Title</cite>
-                    </footer>
-                </blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>*@
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
+        <blockquote class="blockquote">
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer class="blockquote-footer">
+                Someone famous in
+                <cite title="Source Title">Source Title</cite>
+            </footer>
+        </blockquote>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>*@
             <hr>
             <!-- Comments Form -->
             <div class="card my-4" style="max-width: unset;">
@@ -217,5 +235,16 @@
     function SepeteGit(Id) {
         window.location = '/AlisverisSepeti/';
     }
+    //yıldız baş
+    function SCRate() {
+
+        for (var i = 1; i <= @totalRating; i++) {
+            $("#sRate" + i).attr('class', 'starGlowN');
+        }
+    }
+    $(function () {
+        SCRate();
+    });
+    //yıldız son
 
 </script>

@@ -64,6 +64,24 @@ namespace Akademinya.Controllers
         [Route("Kurslar/KursDetay/{id}")]
         public ActionResult KursDetay(int id)
         {
+
+            var ratings = db.UyeKurs.Where(d => d.KursID.Equals(id)&&d.PuanVerdi==true).ToList();
+            if (ratings.Count() > 0)
+            {
+                var ratingToplam = ratings.Sum(d => d.KursPuan.Value);
+                ViewBag.RatingSum = ratingToplam;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
+
+            var comments = db.UyeKurs.Where(x => x.KursID == id&&x.PuanVerdi==true&&x.KursYorum!=null).ToList();
+            ViewBag.Comments = comments;
+
             return View(db.Kurs.FirstOrDefault(x=>x.Id==id));
         }
 
@@ -93,28 +111,7 @@ namespace Akademinya.Controllers
 
             if (uye != null)
             {
-                //var kurslarim = from uyekurs in db.UyeKurs
-                //                join kursBilgi in db.Kurs on uyekurs.KursID equals kursBilgi.Id into ps
-                //                from m in ps.DefaultIfEmpty()
-                //                where uyekurs.UyeID != uye.Id && m.Silindi == false && uyekurs.Aktif == true
-                //                select new
-                //                    model_kurs_liste
-                //                {
-                //                    Id = m.Id,
-                //                    Ad = m.Ad,
-                //                    Fiyat = m.Fiyat,
-                //                    Acikklama = m.Acikklama,
-                //                    Icerik = m.Icerik,
-                //                    Resim = m.Resim,
-                //                    Ücretsiz = m.Ücretsiz,
-                //                    SonGuncellemeTarih = m.SonGuncellemeTarih,
-                //                    KategoriID = m.KategoriID,
-                //                    UstKategoriID = m.UstKategoriID,
-                //                    Aktif = uyekurs.Aktif,
-                //                    KursID=m.Id,
-                //                    UyeID=uye.Id,
-                //                    uyekursID=uyekurs.Id
-                //                };
+
                 var uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == 0);
 
                 if (uye != null)
@@ -161,18 +158,61 @@ namespace Akademinya.Controllers
         [Route("Kurslarr2/{Ad}")]
         public ActionResult Kurslar2(string Ad)
         {
-            ViewBag.Baslik = Ad + " için arama sonuçları.";
+            ViewBag.kontrol = "Arama";
+            var Ad2 = Ad.Replace("_", " ");
+            ViewBag.Ad = Ad;
+            ViewBag.Baslik = Ad2 + " için arama sonuçları.";
             return View();
         }
 
         [Route("Kurslar2/{Ad}")]
-        public ActionResult AramaKurs(string Ad)
+        public ActionResult AramaKurs(string Ad, int? Page)
         {
+            Uye uye = null;
+            ViewBag.Ad = Ad;
+            ViewBag.kontrol = "Arama";
+            var Ad2 = Ad.Replace("_", " ");
 
-            var kurslar = db.Kurs.ToList().Where(x => x.Ad.Contains(Ad)||x.Icerik.Contains(Ad)||x.Acikklama.Contains(Ad));
+            if (Request.Cookies["userGuid"] != null)
+            {
+                if (Request.Cookies["userGuid"].Value != "")
+                {
+                    var userGuid = Request.Cookies["userGuid"].Value;
+                    uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+                }
+            }
+
+            if (uye != null)
+            {
+
+                var uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == 0);
+
+                if (uye != null)
+                {
+                    uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == uye.Id);
+                }
+                var kurss = db.Kurs.ToList();
+                var list = new List<Kurs>();
+                foreach (var item in kurss)
+                {
+                    if (uyekurs.FirstOrDefault(x => x.KursID == item.Id) == null)
+                    {
+                        list.Add(item);
+                    }
+
+                }
+                var kurslar = list.ToList().Where(x => x.Ad.Contains(Ad2) || x.Icerik.Contains(Ad2) || x.Acikklama.Contains(Ad2));
 
 
-            return View("KursListe", kurslar);
+                var kurslist = kurslar.ToList().ToPagedList(Page ?? 1, 2); 
+                return View("KursListe", kurslist);
+            }
+            else
+            {
+                var kurslar = db.Kurs.ToList().Where(x => x.Ad.Contains(Ad2) ||x.Icerik.Contains(Ad2) ||x.Acikklama.Contains(Ad2));
+                var kurslist= kurslar.ToList().ToPagedList(Page ?? 1, 2);
+                return View("KursListe", kurslist);
+            }
         }
         //Aramaya göre listeleme son
 
@@ -400,7 +440,55 @@ namespace Akademinya.Controllers
         [Route("KursIzlemeSayfasi/{Ad}/{id}")]
         public ActionResult KursIzlemeSayfasi(string Ad, int id)
         {
-            return View();
+
+
+            return View(db.Kurs.FirstOrDefault(x=>x.Id==id));
         }
+
+        [Route("PuanVer/{id}")]
+        public ActionResult PuanVer(int id)
+        {
+            Uye uye = null;
+
+            if (Request.Cookies["userGuid"] != null)
+            {
+                if (Request.Cookies["userGuid"].Value != "")
+                {
+                    var userGuid = Request.Cookies["userGuid"].Value;
+                    uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+
+
+                    ViewBag.UyeKursID = db.UyeKurs.FirstOrDefault(x => x.KursID == id && x.UyeID == uye.Id).Id;
+                    return PartialView("/Views/Anasayfa/ModalPartial/PuanVer.cshtml");
+                }
+                return RedirectToAction("Index", "Anasayfa");
+            }
+            return RedirectToAction("Index", "Anasayfa");
+
+        }
+
+        [Route("PuanVerPost")]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult PuanVerPost(int uyeKursID,int puan,string yorum)
+        {
+            try
+            {
+                UyeKurs uyekurs = db.UyeKurs.FirstOrDefault(x => x.Id == uyeKursID);
+                uyekurs.KursPuan = puan;
+                uyekurs.KursYorum = yorum;
+                uyekurs.PuanVerdi = true;
+                db.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+
+            }
+            catch
+            {
+                return View();
+            }
+           
+            
+        }
+        
     }
 }

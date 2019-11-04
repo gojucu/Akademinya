@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Kurslar2";
 }
-@{
-    Html.RenderAction("AramaKurs");
-}
-
+<div id="unobstructed">
+    @{
+        Html.RenderAction("AramaKurs", new { Ad = ViewBag.Ad });
+    }
+    </div>

@@ -21,6 +21,5 @@ namespace Akademinya.Models
         public System.DateTime IslemTarihi { get; set; }
     
         public virtual Kurs Kurs { get; set; }
-        public virtual Uye Uye { get; set; }
     }
 }

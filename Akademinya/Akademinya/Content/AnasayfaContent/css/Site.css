@@ -529,3 +529,55 @@ body {
     transition: max-height 0.2s ease-out;
 }
 /*kurs detay accordion baş*/
+
+/*Star rating baş*/
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+.starClass input,
+.starClass select,
+.starClass textarea {
+    max-width: 280px;
+}
+
+
+.starClass .commentBox {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.starClass .starFade {
+    background-image: url('/Content/SampleImages/Stars/StarFade.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starClass .starFadeN {
+    background-image: url('/Content/SampleImages/Stars/StarFade.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+
+.starClass .starGlow {
+    background-image: url('/Content/SampleImages/Stars/starglow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starClass .starGlowN {
+    background-image: url('/Content/SampleImages/Stars/starglow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+/*star rating son*/

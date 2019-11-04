@@ -41,141 +41,147 @@
             else
             {
                 @*if (uye != null)
+            {
+                foreach (var item in Model)
                 {
-                    foreach (var item in Model)
+                    if (uyekurs.FirstOrDefault(x => x.KursID == item.Id) == null)
                     {
-                        if (uyekurs.FirstOrDefault(x => x.KursID == item.Id) == null)
-                        {
-                            <div class="katKurs-Liste row">
-                                <div class="img-responsive col-sm-3" style="float:left">
-                                    <a href="../Kurslar/KursDetay/@item.Id"> <img src="@item.Resim" style="width:100%;height:100%" /></a>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="col-md-12">
-                                        <ul>
-                                            <li>
-                                                <a href="../Kurslar/KursDetay/@item.Id">
-                                                    <h3 class="float-left">@item.Ad</h3>
-                                                    @if (item.Ücretsiz == true)
+                        <div class="katKurs-Liste row">
+                            <div class="img-responsive col-sm-3" style="float:left">
+                                <a href="../Kurslar/KursDetay/@item.Id"> <img src="@item.Resim" style="width:100%;height:100%" /></a>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li>
+                                            <a href="../Kurslar/KursDetay/@item.Id">
+                                                <h3 class="float-left">@item.Ad</h3>
+                                                @if (item.Ücretsiz == true)
+                                                {
+                                                    <h4 class="float-right" style="color:#15101f">ÜCRETSİZ</h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4 class="float-right">@item.Fiyat ₺</h4>
+                                                }
+
+                                            </a> <br /><br />
+                                        </li>
+                                        <li>
+                                            <a href="../Kurslar/KursDetay/@item.Id">
+                                                <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
+                                                <h4 class="float-right">**** 4 puan</h4>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
+                                                @if (item.Ücretsiz == true)
+                                                {
+                                                    if (uye == null)
                                                     {
-                                                        <h4 class="float-right" style="color:#15101f">ÜCRETSİZ</h4>
+                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
+                                                    }
+                                                    else
+                                                    { <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return HemenKaydol(@item.Id);" value="Hemen kaydol" style="cursor: pointer;" /> }
+
+                                                }
+                                                else
+                                                {
+                                                    if (sepet.Any(x => x.KursID == item.Id))
+                                                    {
+                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteGit(@item.Id);" value="sepete git" style="cursor: pointer;" />
+
                                                     }
                                                     else
                                                     {
-                                                        <h4 class="float-right">@item.Fiyat ₺</h4>
+                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteEkle(@item.Id);" value="sepete ekle" style="cursor: pointer;" />
                                                     }
-
-                                                </a> <br /><br />
-                                            </li>
-                                            <li>
-                                                <a href="../Kurslar/KursDetay/@item.Id">
-                                                    <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
-                                                    <h4 class="float-right">**** 4 puan</h4>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
-                                                    @if (item.Ücretsiz == true)
-                                                    {
-                                                        if (uye == null)
-                                                        {
-                                                            <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
-                                                        }
-                                                        else
-                                                        { <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return HemenKaydol(@item.Id);" value="Hemen kaydol" style="cursor: pointer;" /> }
-
-                                                    }
-                                                    else
-                                                    {
-                                                        if (sepet.Any(x => x.KursID == item.Id))
-                                                        {
-                                                            <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteGit(@item.Id);" value="sepete git" style="cursor: pointer;" />
-
-                                                        }
-                                                        else
-                                                        {
-                                                            <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteEkle(@item.Id);" value="sepete ekle" style="cursor: pointer;" />
-                                                        }
-                                                    }
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                }
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <hr />
+                        </div>
+                        <hr />
 
-                        }
                     }
                 }
-                else*@
+            }
+            else*@
                 //{
                 foreach (var item in Model)
                 {
 
-                            <div class="katKurs-Liste row">
-                                <div class="img-responsive col-sm-3" style="float:left">
-                                    <a href="../Kurslar/KursDetay/@item.Id"> <img src="@item.Resim" style="width:100%;height:100%" /></a>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="col-md-12">
-                                        <ul>
-                                            <li>
-                                                <a href="../Kurslar/KursDetay/@item.Id">
-                                                    <h3 class="float-left">@item.Ad</h3>
-                                                    @if (item.Ücretsiz == true)
-                                                    {
-                                                        <h4 class="float-right" style="color:#15101f">ÜCRETSİZ</h4>
-                                                    }
-                                                    else
-                                                    {
-                                                        <h4 class="float-right">@item.Fiyat ₺</h4>
-                                                    }
+                    <div class="katKurs-Liste row">
+                        <div class="img-responsive col-sm-3" style="float:left">
+                            <a href="../Kurslar/KursDetay/@item.Id"> <img src="@item.Resim" style="width:100%;height:100%" /></a>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li>
+                                        <a href="../Kurslar/KursDetay/@item.Id">
+                                            <h3 class="float-left">@item.Ad</h3>
+                                            @if (item.Ücretsiz == true)
+                                            {
+                                                <h4 class="float-right" style="color:#15101f">ÜCRETSİZ</h4>
+                                            }
+                                            else
+                                            {
+                                                <h4 class="float-right">@item.Fiyat ₺</h4>
+                                            }
 
-                                                </a> <br /><br />
-                                            </li>
-                                            <li>
-                                                <a href="../Kurslar/KursDetay/@item.Id">
-                                                    <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
-                                                    <h4 class="float-right">**** 4 puan</h4>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
-                                                    @if (item.Ücretsiz == true)
-                                                    {
-                                                        if (uye == null)
-                                                        {
-                                                            <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
-                                                        }
-                                                        else
-                                                        { <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return HemenKaydol(@item.Id);" value="Hemen kaydol" style="cursor: pointer;" /> }
+                                        </a> <br /><br />
+                                    </li>
+                                    <li>
+                                        <a href="../Kurslar/KursDetay/@item.Id">
+                                            <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
+                                            <h4 class="float-right">**** 4 puan</h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
+                                            @if (item.Ücretsiz == true)
+                                            {
+                                                if (uye == null)
+                                                {
+                                                    <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
+                                                }
+                                                else
+                                                { <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return HemenKaydol(@item.Id);" value="Hemen kaydol" style="cursor: pointer;" /> }
 
-                                                    }
-                                                    else
-                                                    {
-                                                        if (sepet.Any(x => x.KursID == item.Id))
-                                                        {
-                                                            <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteGit(@item.Id);" value="sepete git" style="cursor: pointer;" />
+                                            }
+                                            else
+                                            {
+                                                if (sepet.Any(x => x.KursID == item.Id))
+                                                {
+                                                    <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteGit(@item.Id);" value="sepete git" style="cursor: pointer;" />
 
-                                                        }
-                                                        else
-                                                        {
-                                                            <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteEkle(@item.Id);" value="sepete ekle" style="cursor: pointer;" />
-                                                        }
-                                                    }
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                                }
+                                                else
+                                                {
+                                                    <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteEkle(@item.Id);" value="sepete ekle" style="cursor: pointer;" />
+                                                }
+                                            }
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-                            <hr />
+                        </div>
+                    </div>
+                    <hr />
 
                 }
                 //}
-
-                @Html.PagedListPager((IPagedList)Model, Page => Url.Action("KategoriKurs", "Anasayfa", new { Ad = ViewBag.Ad, Page = Page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "unobstructed" }))
+                if (ViewBag.kontrol == "Arama")
+                {
+                    @Html.PagedListPager((IPagedList)Model, Page => Url.Action("AramaKurs", "Anasayfa", new { Ad = ViewBag.Ad, Page = Page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "unobstructed" }))
+                }
+                else
+                {
+                    @Html.PagedListPager((IPagedList)Model, Page => Url.Action("KategoriKurs", "Anasayfa", new { Ad = ViewBag.Ad, Page = Page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "unobstructed" }))
+                }
             }
         </div>
     </div>

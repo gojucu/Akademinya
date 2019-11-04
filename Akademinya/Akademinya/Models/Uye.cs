@@ -17,8 +17,6 @@ namespace Akademinya.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Uye()
         {
-            this.Islemler = new HashSet<Islemler>();
-            this.Kartlar = new HashSet<Kartlar>();
             this.UyeKurs = new HashSet<UyeKurs>();
         }
     
@@ -29,10 +27,6 @@ namespace Akademinya.Models
         public string CookieGuid { get; set; }
         public string Sifre { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Islemler> Islemler { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kartlar> Kartlar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UyeKurs> UyeKurs { get; set; }
     }
