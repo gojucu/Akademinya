@@ -111,6 +111,7 @@
           <Property Name="Aktif" Type="bit" />
           <Property Name="KursYorum" Type="nvarchar" MaxLength="500" />
           <Property Name="KursPuan" Type="int" />
+          <Property Name="DegerlendirmeTarihi" Type="smalldatetime" Nullable="false" />
           <Property Name="PuanVerdi" Type="bit" />
         </EntityType>
         <Association Name="FK_AlisverisSepeti_Kurs">
@@ -391,6 +392,7 @@
           <Property Name="Aktif" Type="Boolean" />
           <Property Name="KursYorum" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="KursPuan" Type="Int32" />
+          <Property Name="DegerlendirmeTarihi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PuanVerdi" Type="Boolean" />
           <NavigationProperty Name="Kurs" Relationship="AkademinyaModel.FK_UyeKurs_Kurs" FromRole="UyeKurs" ToRole="Kurs" />
           <NavigationProperty Name="Uye" Relationship="AkademinyaModel.FK_UyeKurs_Uye" FromRole="UyeKurs" ToRole="Uye" />
@@ -534,6 +536,7 @@
             <EntityTypeMapping TypeName="AkademinyaModel.UyeKurs">
               <MappingFragment StoreEntitySet="UyeKurs">
                 <ScalarProperty Name="PuanVerdi" ColumnName="PuanVerdi" />
+                <ScalarProperty Name="DegerlendirmeTarihi" ColumnName="DegerlendirmeTarihi" />
                 <ScalarProperty Name="KursPuan" ColumnName="KursPuan" />
                 <ScalarProperty Name="KursYorum" ColumnName="KursYorum" />
                 <ScalarProperty Name="Aktif" ColumnName="Aktif" />

@@ -317,6 +317,7 @@ namespace Akademinya.Controllers
             uyeKurs.KursID = kurs.Id;
             uyeKurs.UyeID = uye.Id;
             uyeKurs.Aktif = true;
+            uyeKurs.DegerlendirmeTarihi = DateTime.Now;
             db.UyeKurs.Add(uyeKurs);
 
             db.SaveChanges();
@@ -478,6 +479,7 @@ namespace Akademinya.Controllers
                 uyekurs.KursPuan = puan;
                 uyekurs.KursYorum = yorum;
                 uyekurs.PuanVerdi = true;
+                uyekurs.DegerlendirmeTarihi = DateTime.Now;
                 db.SaveChanges();
                 return Json(true, JsonRequestBehavior.AllowGet);
 

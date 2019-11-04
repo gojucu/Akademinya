@@ -17,7 +17,7 @@
         <AssociationConnector Association="AkademinyaModel.FK_AlisverisSepeti_Kurs" />
         <AssociationConnector Association="AkademinyaModel.FK_Islemler_Kurs" />
         <AssociationConnector Association="AkademinyaModel.FK_Kurs_Kategori" />
-        <EntityTypeShape EntityType="AkademinyaModel.UyeKurs" Width="1.5" PointX="5.25" PointY="2.75" />
+        <EntityTypeShape EntityType="AkademinyaModel.UyeKurs" Width="1.5" PointX="5.25" PointY="2.625" />
         <AssociationConnector Association="AkademinyaModel.FK_UyeKurs_Kurs" />
         <AssociationConnector Association="AkademinyaModel.FK_UyeKurs_Uye" />
         </Diagram>

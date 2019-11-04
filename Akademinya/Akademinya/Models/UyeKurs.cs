@@ -20,6 +20,7 @@ namespace Akademinya.Models
         public Nullable<bool> Aktif { get; set; }
         public string KursYorum { get; set; }
         public Nullable<int> KursPuan { get; set; }
+        public System.DateTime DegerlendirmeTarihi { get; set; }
         public Nullable<bool> PuanVerdi { get; set; }
     
         public virtual Kurs Kurs { get; set; }
