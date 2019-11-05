@@ -20,6 +20,26 @@ namespace Akademinya.Controllers
             return View(db.Kurs.ToList());
         }
 
+        [Route("Hakkimizda")]
+        public ActionResult Hakkimizda()
+        {
+            return View();
+        }
+        [Route("Destek")]
+        public ActionResult Destek()
+        {
+            return View();
+        }
+        [Route("Destek")]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Destek(Destek destek)
+        {
+            db.Destek.Add(destek);
+            db.SaveChanges();
+            return View();
+        }
+
         [Route("MenuList")]
         public ActionResult MenuList()
         {
@@ -90,6 +110,7 @@ namespace Akademinya.Controllers
         public ActionResult Kurslar(string Ad)
         {
             ViewBag.Ad = Ad;
+            ViewBag.Baslik = Ad + " kategorisindeki kurslar";
             return View();
         }
         
@@ -283,6 +304,7 @@ namespace Akademinya.Controllers
                     uyeKurs.Aktif = true;
                     uyeKurs.UyeID = uye.Id;
                     uyeKurs.KursID = kurs.Id;
+                    uyeKurs.DegerlendirmeTarihi = DateTime.Now;
                     db.UyeKurs.Add(uyeKurs);
                     db.SaveChanges();
 
@@ -364,7 +386,8 @@ namespace Akademinya.Controllers
                 {
                     var userGuid = Request.Cookies["userGuid"].Value;
                     Uye uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
-                    
+
+                    ViewBag.Baslik = "Kurslarım";
 
                     return View(uye);
                 }
@@ -438,12 +461,24 @@ namespace Akademinya.Controllers
             //return View();
         }
 
-        [Route("KursIzlemeSayfasi/{Ad}/{id}")]
-        public ActionResult KursIzlemeSayfasi(string Ad, int id)
+        [Route("KursIzlemeSayfasi/{id}")]
+        public ActionResult KursIzlemeSayfasi( int id)
         {
-
-
-            return View(db.Kurs.FirstOrDefault(x=>x.Id==id));
+            if (Request.Cookies["userGuid"] != null)
+            {
+                if (Request.Cookies["userGuid"].Value != "")
+                {
+                    var userGuid = Request.Cookies["userGuid"].Value;
+                    Uye uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+                    if (uye.UyeKurs.FirstOrDefault(x => x.KursID == id) != null)
+                    {
+                        return View(db.Kurs.FirstOrDefault(x => x.Id == id));
+                    }
+                    return RedirectToAction("KursDetay","Anasayfa", new { id });
+                }
+                return RedirectToAction("KursDetay", "Anasayfa", new { id });
+            }
+            return RedirectToAction("KursDetay", "Anasayfa", new { id });
         }
 
         [Route("PuanVer/{id}")]

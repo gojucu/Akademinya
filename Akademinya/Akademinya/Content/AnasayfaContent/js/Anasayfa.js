@@ -116,7 +116,6 @@ var islemler = {
 
         $(".sepetID").each(function (index, value) {
             sepet.push($(this).val());
-            alert(sepet)
         });
 
         var kart = {

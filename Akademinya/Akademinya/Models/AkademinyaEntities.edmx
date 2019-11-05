@@ -13,6 +13,15 @@
           <Property Name="KursID" Type="int" />
           <Property Name="Guid" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Destek">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mesaj" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Islemler">
           <Key>
             <PropertyRef Name="Id" />
@@ -176,6 +185,7 @@
         </Association>
         <EntityContainer Name="AkademinyaModelStoreContainer">
           <EntitySet Name="AlisverisSepeti" EntityType="Self.AlisverisSepeti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Destek" EntityType="Self.Destek" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Islemler" EntityType="Self.Islemler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kartlar" EntityType="Self.Kartlar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
@@ -241,6 +251,7 @@
             <End Role="Uye" EntitySet="Uye" />
             <End Role="UyeKurs" EntitySet="UyeKurs" />
           </AssociationSet>
+          <EntitySet Name="Destek" EntityType="AkademinyaModel.Destek" />
           </EntityContainer>
         <EntityType Name="AlisverisSepeti">
           <Key>
@@ -421,6 +432,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Destek">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -542,6 +562,16 @@
                 <ScalarProperty Name="Aktif" ColumnName="Aktif" />
                 <ScalarProperty Name="UyeID" ColumnName="UyeID" />
                 <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Destek">
+            <EntityTypeMapping TypeName="AkademinyaModel.Destek">
+              <MappingFragment StoreEntitySet="Destek">
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

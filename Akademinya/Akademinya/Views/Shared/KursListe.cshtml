@@ -40,78 +40,33 @@
             }
             else
             {
-                @*if (uye != null)
-            {
                 foreach (var item in Model)
                 {
-                    if (uyekurs.FirstOrDefault(x => x.KursID == item.Id) == null)
+                    var ratings = db.UyeKurs.Where(d => d.KursID.Equals(item.Id) && d.PuanVerdi == true).ToList();
+                    if (ratings.Count() > 0)
                     {
-                        <div class="katKurs-Liste row">
-                            <div class="img-responsive col-sm-3" style="float:left">
-                                <a href="../Kurslar/KursDetay/@item.Id"> <img src="@item.Resim" style="width:100%;height:100%" /></a>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="col-md-12">
-                                    <ul>
-                                        <li>
-                                            <a href="../Kurslar/KursDetay/@item.Id">
-                                                <h3 class="float-left">@item.Ad</h3>
-                                                @if (item.Ücretsiz == true)
-                                                {
-                                                    <h4 class="float-right" style="color:#15101f">ÜCRETSİZ</h4>
-                                                }
-                                                else
-                                                {
-                                                    <h4 class="float-right">@item.Fiyat ₺</h4>
-                                                }
-
-                                            </a> <br /><br />
-                                        </li>
-                                        <li>
-                                            <a href="../Kurslar/KursDetay/@item.Id">
-                                                <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
-                                                <h4 class="float-right">**** 4 puan</h4>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
-                                                @if (item.Ücretsiz == true)
-                                                {
-                                                    if (uye == null)
-                                                    {
-                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return islemler.GirisYap()" value="Hemen kaydol" style="cursor: pointer;" />
-                                                    }
-                                                    else
-                                                    { <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return HemenKaydol(@item.Id);" value="Hemen kaydol" style="cursor: pointer;" /> }
-
-                                                }
-                                                else
-                                                {
-                                                    if (sepet.Any(x => x.KursID == item.Id))
-                                                    {
-                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteGit(@item.Id);" value="sepete git" style="cursor: pointer;" />
-
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="button" class="btn btn-outline-dark sepetbuton" onclick="return SepeteEkle(@item.Id);" value="sepete ekle" style="cursor: pointer;" />
-                                                    }
-                                                }
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-
+                        var ratingToplam = ratings.Sum(d => d.KursPuan.Value);
+                        ViewBag.RatingSum = ratingToplam;
+                        var ratingCount = ratings.Count();
+                        ViewBag.RatingCount = ratingCount;
                     }
-                }
-            }
-            else*@
-                //{
-                foreach (var item in Model)
-                {
+                    else
+                    {
+                        ViewBag.RatingSum = 0;
+                        ViewBag.RatingCount = 0;
+                    }
+                    {//Yıldız rating için gerekli yerler
+                        ViewBag.kayitliOgrenciSayisi = db.UyeKurs.Where(x => x.KursID == item.Id).ToList().Count();
+                        var ratingSum = ViewBag.RatingSum;
+                        var ratingCount = ViewBag.RatingCount;
+
+                        decimal rating = 0;
+                        if (ratingCount > 0)
+                        {
+                            rating = (ratingSum / ratingCount);
+                        }
+                        ViewBag.totalRating = decimal.Parse(rating.ToString());
+                    }
 
                     <div class="katKurs-Liste row">
                         <div class="img-responsive col-sm-3" style="float:left">
@@ -136,8 +91,17 @@
                                     </li>
                                     <li>
                                         <a href="../Kurslar/KursDetay/@item.Id">
-                                            <p style="display:inline-block">katılan sayısı/ 1.527 öğrenci | süre/10 saat | Kurs Sahibi</p>
-                                            <h4 class="float-right">**** 4 puan</h4>
+                                            <p style="display:inline-block">@ViewBag.kayitliOgrenciSayisi öğrenci | süre/10 saat | Kurs Sahibi</p>
+                                            <div class="starClass" style="display:inline-block;margin-left:20px;float:right">
+                                                @for (var i = 1; i <= ViewBag.totalRating; i++)
+                                                {
+                                                    <span class="starGlowN"></span>
+                                                }
+                                                @for (var i = (ViewBag.totalRating + 1); i <= 5; i++)
+                                                {
+                                                    <span class="starFadeN"></span>
+                                                }
+                                            </div>
                                         </a>
                                     </li>
                                     <li>

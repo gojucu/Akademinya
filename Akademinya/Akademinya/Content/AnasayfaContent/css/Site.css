@@ -593,3 +593,16 @@ body {
     width: 20px;
 }
 /*star rating son*/
+
+/*Layout fontlar renkler baş*/
+.UstYaziArkaPlan {
+    background: linear-gradient(225deg,#00d1d1 0%,#1d1f28 100%);
+    opacity: 0.95;
+}
+.UstYaziBaslik {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: white;
+}
+
+/*Layout fontlar renkler son*/

@@ -176,6 +176,9 @@
     <Compile Include="Models\AlisverisSepeti.cs">
       <DependentUpon>AkademinyaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Destek.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Islemler.cs">
       <DependentUpon>AkademinyaEntities.tt</DependentUpon>
     </Compile>
@@ -215,8 +218,10 @@
     <Content Include="Content\AnasayfaContent\css\owl.theme.default.min.css" />
     <Content Include="Content\AnasayfaContent\js\Anasayfa.js" />
     <Content Include="Content\AnasayfaContent\owl.carousel.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css" />
@@ -7108,6 +7113,18 @@
     <Content Include="Content\SampleImages\12slayt.jpg" />
     <Content Include="Content\SampleImages\adam.jpg" />
     <Content Include="Content\SampleImages\Akademinya_Resimler\androidKurs.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\foto-1.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\foto-2.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\foto-3.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\foto-4.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\foto-5.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\foto-6.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\işletme-1.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\işletme-2.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\işletme-4.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\işletme-5.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\işletme-6.jpg" />
+    <Content Include="Content\SampleImages\Akademinya_Resimler\işletme3.jpg" />
     <Content Include="Content\SampleImages\Akademinya_Resimler\SeleniumKurs.jpg" />
     <Content Include="Content\SampleImages\Akademinya_Resimler\sqlKurs.jpg" />
     <Content Include="Content\SampleImages\Akademinya_Resimler\UnityKurs.jpg" />
@@ -7145,7 +7162,6 @@
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.slim.min.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\AnasayfaContent\css\Site.css" />
     <Content Include="Models\AkademinyaEntities.Context.tt">
@@ -7160,8 +7176,6 @@
     </Content>
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="Content\bower_components\bootstrap-colorpicker\bower.json" />
     <Content Include="Content\bower_components\bootstrap-colorpicker\CONTRIBUTING.md" />
@@ -7792,6 +7806,28 @@
     <Content Include="Models\AkademinyaEntities.edmx.diagram">
       <DependentUpon>AkademinyaEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7805,7 +7841,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -7839,26 +7882,30 @@
     <Content Include="Views\Anasayfa\KursIzlemeSayfasi.cshtml" />
     <Content Include="Views\Anasayfa\ModalPartial\PuanVer.cshtml" />
     <Content Include="Views\Shared\_CommentBox.cshtml" />
+    <Content Include="Views\Anasayfa\Hakkimizda.cshtml" />
+    <Content Include="Views\Anasayfa\Destek.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Genel\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\bower_components\moment\moment.d.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

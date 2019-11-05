@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="AkademinyaModel.UyeKurs" Width="1.5" PointX="5.25" PointY="2.625" />
         <AssociationConnector Association="AkademinyaModel.FK_UyeKurs_Kurs" />
         <AssociationConnector Association="AkademinyaModel.FK_UyeKurs_Uye" />
+        <EntityTypeShape EntityType="AkademinyaModel.Destek" Width="1.5" PointX="7.375" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

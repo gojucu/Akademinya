@@ -35,5 +35,6 @@ namespace Akademinya.Models
         public virtual DbSet<usersKurslar> usersKurslar { get; set; }
         public virtual DbSet<Uye> Uye { get; set; }
         public virtual DbSet<UyeKurs> UyeKurs { get; set; }
+        public virtual DbSet<Destek> Destek { get; set; }
     }
 }

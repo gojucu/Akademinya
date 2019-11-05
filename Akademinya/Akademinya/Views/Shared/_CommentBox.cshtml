@@ -44,7 +44,9 @@
 <script>
     function SubmitComment() {
         if ($("#Rating").val() == "0") {
-            alert("Değerlendirme yapabilmeniz için en az 1 puan vermiş olmanız gerekli");
+            bootbox.alert({
+                message: "Değerlendirme yapabilmeniz için en az 1 puan vermiş olmanız gerekli"
+            });
             return false;
         }
         else {

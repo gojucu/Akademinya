@@ -1,7 +1,18 @@
 ﻿@model IEnumerable<Akademinya.Models.AlisverisSepeti>
-
+@using Akademinya.Models
 @{
     ViewBag.Title = "AlisverisSepeti";
+    AkademinyaEntities db = new AkademinyaEntities();
+    Uye uye = null;
+    if (Request.Cookies["userGuid"] != null)
+    {
+        if (Request.Cookies["userGuid"].Value != "")
+        {
+            var userGuid = Request.Cookies["userGuid"].Value;
+            uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+
+        }
+    }
 }
 
 <!-- Cart -->
@@ -18,7 +29,7 @@
             </div>
             <div class="card-body">
                 <!-- PRODUCT -->
-                @if (Model == null||Model.Count()==0)
+                @if (Model == null || Model.Count() == 0)
                 {
                     <p>Alışveriş sepetiniz boş, kurs eklemek için tıklayınız.</p>
                     <a href="/" class="btn btn-outline-info btn-sm">Alışverişe devam et</a>
@@ -56,24 +67,23 @@
 
 
                 <!-- END PRODUCT -->
-
                 @*<div class="pull-right">
-                    <a href="" class="btn btn-outline-secondary pull-right">
-                        Update shopping cart
-                    </a>
-                </div>*@
+                        <a href="" class="btn btn-outline-secondary pull-right">
+                            Update shopping cart
+                        </a>
+                    </div>*@
             </div>
             <div class="card-footer">
                 @*<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="cupone code">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" class="form-control" placeholder="cupone code">
+                            </div>
+                            <div class="col-6">
+                                <input type="submit" class="btn btn-default" value="Use cupone">
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input type="submit" class="btn btn-default" value="Use cupone">
-                        </div>
-                    </div>
-                </div>*@
+                    </div>*@
                 @{
                     decimal? toplam = 0;
                     foreach (var item in Model)
@@ -84,7 +94,15 @@
                 <div class="pull-right" style="margin: 10px">
                     @if (ViewBag.SepetSayi >= 1)
                     {
-                        <a href="/Odeme" class="btn btn-success pull-right">Öde</a>
+                        if (uye == null)
+                        {
+                            <a href="#" onclick="return islemler.GirisYap()" class="btn btn-success pull-right">Öde</a>
+                        }
+                        else
+                        {
+                            <a href="/Odeme" class="btn btn-success pull-right">Öde</a>
+                        }
+
                         <div class="pull-right" style="margin: 5px">
                             Toplam tutar: <b>@toplam ₺</b>
                         </div>
