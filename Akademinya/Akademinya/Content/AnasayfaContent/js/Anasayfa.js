@@ -20,13 +20,13 @@ var islemler = {
 
         //$("#katil").prop('disabled', true);
 
-        var kullaniciAdi = $("#KullaniciAdi").val();
+        var Mail = $("#KullaniciAdi").val();
         var Sifre = $("#password").val();
 
         $.ajax({
             url: "UyeGirisi",
             async: false,
-            data: { kullaniciAdi, Sifre },
+            data: { Mail, Sifre },
             type: "post",
             success: function (sonuc) {
                 if (sonuc) {
@@ -34,7 +34,7 @@ var islemler = {
                 }
                 else {
                     bootbox.alert({
-                        message: "Kullanıcı adı yada şifre  Hatalı"
+                        message: "Mail adresi yada şifre  Hatalı"
                     });
                     //$('#katil').removeAttr("disabled");
                 }
@@ -45,12 +45,20 @@ var islemler = {
 
         //$("#katil").prop('disabled', true);
 
-        var kullaniciAdi = $("#KullaniciAdi").val();
+        //var kullaniciAdi = $("#KullaniciAdi").val();
         var mail = $("#Email").val();
         var telefonNo = $("#TelNo").val();
         var Sifre = $("#password").val();
+        //var TekrarSifre = $("#confirm_password").val();
+
+        //if (Sifre != TekrarSifre) {
+        //    bootbox.alert({
+        //        message:"Yeni şifre ile şifre tekrarı uyumsuz!"
+        //    });
+        //    return false
+        //}
         var uye = {
-            kullaniciAdi: kullaniciAdi,
+            //kullaniciAdi: kullaniciAdi,
             mail: mail,
             telefonNo: telefonNo,
             Sifre: Sifre,
@@ -94,6 +102,33 @@ var islemler = {
                 else {
                     bootbox.alert({
                         message: "Eski şifreniz hatalı. Tekrar deneyiniz."
+                    });
+                    //$('#katil').removeAttr("disabled");
+                }
+            }
+        })
+    },
+    SifremiUnuttum: function () {
+
+        var Mail = $("#Mail").val();
+        $.ajax({
+            url: "SifremiUnuttum",
+            async: false,
+            data: { Mail },
+            type: "post",
+            success: function (sonuc) {
+                if (sonuc.Result) {
+                    bootbox.alert("Yeni şifreniz mail adresinize yollanmıştır", function () {
+                        window.location.reload();
+                    });
+                } else if (sonuc.hata == "hata") {
+                    bootbox.alert({
+                        message: "Bir sıkıntı oluştu lütfen daha sonra tekrar deneyiniz"
+                    });
+                }
+                else {
+                    bootbox.alert({
+                        message: "Bu mail adresine kayıtlı hesap bulunamadı"
                     });
                     //$('#katil').removeAttr("disabled");
                 }

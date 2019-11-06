@@ -23,12 +23,11 @@ namespace Akademinya.Controllers
                 {
                     return View();
                 }
-                return View();
-                //return RedirectToAction("Index", "Anasayfa");
+                return RedirectToAction("Index", "Anasayfa");
             }
             else
             {
-                return View();
+                return RedirectToAction("Index", "Anasayfa");
             }
 
         }
@@ -39,7 +38,7 @@ namespace Akademinya.Controllers
         {
             try
             {
-                if (db.Uye.ToList().Where(x => x.Mail.Contains(uye.Mail)||x.KullaniciAdi.Contains(uye.KullaniciAdi)).Count()==0)
+                if (db.Uye.ToList().Where(x => x.Mail.Contains(uye.Mail)).Count()==0)
                 {
                         Uye uyee = new Uye();
                         db.Uye.Add(uye);
@@ -90,11 +89,11 @@ namespace Akademinya.Controllers
         [HttpPost]
         [Route("UyeGirisi")]
         [ValidateInput(false)]
-        public JsonResult UyeGirisi(string kullaniciAdi, string Sifre)
+        public JsonResult UyeGirisi(string Mail, string Sifre)
         {
             try
             {
-                Uye uye = db.Uye.FirstOrDefault(x => x.KullaniciAdi == kullaniciAdi && x.Sifre == Sifre);
+                Uye uye = db.Uye.FirstOrDefault(x => x.Mail == Mail && x.Sifre == Sifre);
                 if (uye.Id > 0)
                 {
                     var uyeGuid = Genel.userguidOlustur();
@@ -127,13 +126,9 @@ namespace Akademinya.Controllers
         [Route("SifremiUnuttum")]
         public ActionResult SifremiUnuttum()
         {
-            if (Request.Cookies["userGuid"] != null)
+            if (Request.Cookies["userGuid"] == null||Request.Cookies["userGuid"].Value == "")
             {
-                if (Request.Cookies["userGuid"].Value != "")
-                {
                     return View();
-                }
-                return RedirectToAction("Index", "Anasayfa");
             }
             return RedirectToAction("Index", "Anasayfa");
         }
@@ -143,32 +138,41 @@ namespace Akademinya.Controllers
         [ValidateInput(false)]
         public ActionResult SifremiUnuttum(String Mail)
         {
-            var uyeMailler = db.Uye.ToList().Where(x => x.Mail.Contains(Mail)).Count();
-            if (uyeMailler < 1)
+            try
             {
-                ViewBag.Uyari = "Girdiğiniz mail adresine ait mail bulunamadı!";
-            }
-            else if (uyeMailler == 1)
-            {
-                Uye uye = db.Uye.FirstOrDefault(x => x.Mail == Mail);
-
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                var stringChars = new char[6];
-                var random = new Random();
-                for (int i = 0; i < stringChars.Length; i++)
+                var uyeMailler = db.Uye.ToList().Where(x => x.Mail.Contains(Mail)).Count();
+                if (uyeMailler < 1)
                 {
-                    stringChars[i] = chars[random.Next(chars.Length)];
+                    return Json(false, JsonRequestBehavior.AllowGet);
                 }
+                else if (uyeMailler == 1)
+                {
+                    Uye uye = db.Uye.FirstOrDefault(x => x.Mail == Mail);
+
+                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    var stringChars = new char[6];
+                    var random = new Random();
+                    for (int i = 0; i < stringChars.Length; i++)
+                    {
+                        stringChars[i] = chars[random.Next(chars.Length)];
+                    }
 
 
-                var password = new String(stringChars);
-                uye.Sifre = password;
+                    var password = new String(stringChars);
+                    uye.Sifre = password;
 
-                ViewBag.Uyari = "Yeni şifreniz mail adresinize yollanmıştır.";
-                Genel.MailSender(Mail, password);
-                db.SaveChanges();
+                    //ViewBag.Uyari = "Yeni şifreniz mail adresinize yollanmıştır.";
+                    Genel.MailSender(Mail, password);
+                    db.SaveChanges();
+                }
+                return Json(true,JsonRequestBehavior.AllowGet);
             }
-            return View();
+            catch
+            {
+                var result = new { Result = false, hata = "hata" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }

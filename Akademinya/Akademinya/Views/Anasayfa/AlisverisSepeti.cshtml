@@ -39,9 +39,11 @@
                     foreach (var item in Model)
                     {
                         <div class="row">
-                            <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="@item.Kurs.Resim" alt="prewiew" width="120" height="80">
-                            </div>
+                            <a href="../Kurslar/KursDetay/@item.KursID">
+                                <div class="col-12 col-sm-12 col-md-2 text-center">
+                                    <img class="img-responsive" src="@item.Kurs.Resim" alt="prewiew" width="120" height="80">
+                                </div>
+                            </a>
                             <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                                 <h4 class="product-name"><strong>@item.Kurs.Ad</strong></h4>
                                 <h4>
@@ -65,25 +67,8 @@
                     }
                 }
 
-
-                <!-- END PRODUCT -->
-                @*<div class="pull-right">
-                        <a href="" class="btn btn-outline-secondary pull-right">
-                            Update shopping cart
-                        </a>
-                    </div>*@
             </div>
             <div class="card-footer">
-                @*<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="cupone code">
-                            </div>
-                            <div class="col-6">
-                                <input type="submit" class="btn btn-default" value="Use cupone">
-                            </div>
-                        </div>
-                    </div>*@
                 @{
                     decimal? toplam = 0;
                     foreach (var item in Model)
@@ -120,18 +105,61 @@
 
 
 <script>
-    function SepettenCikar(Id) {
-        $.ajax({
-            url: "/SepettenCikar/" + Id,
-            async: false,
-            type: "post",
 
-            success: function (sonuc) {
-                window.location.reload();
-                //$(".sepetbuton").val("Sepete Eklendi")
-
+    function KartSil(Id) {
+        bootbox.confirm({
+            message: "Silmek istediğinize emin misiniz?",
+            buttons: {
+                confirm: {
+                    label: 'Sil',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Iptal',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    var dataObject = {
+                        Id: $("#Id").val()
+                    };
+                    var form_data = new FormData();
+                    form_data.append('Id', dataObject);
+                    window.location = '/KartSil/' + Id;
+                }
             }
-        })
-        //return false;
+        });
+    }
+    function SepettenCikar(Id) {
+        bootbox.confirm({
+            message: "Sepetten çıkarmak istediğinize emin misiniz?",
+            buttons: {
+                confirm: {
+                    label: 'Sil',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Iptal',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/SepettenCikar/" + Id,
+                        async: false,
+                        type: "post",
+
+                        success: function (sonuc) {
+                            window.location.reload();
+                            //$(".sepetbuton").val("Sepete Eklendi")
+
+                        }
+                    })
+                }
+            }
+            //return false;
+        });
     }
 </script>

@@ -3,40 +3,72 @@
 @{
     ViewBag.Title = "SatinAlmaGecmisi";
 }
-<div class="container" style="background-color:white">
+<div class="shop">
+    <div class="container" style="background-color:white;">
 
+        <div class="table-responsive col-md-12">
+            @*<h3>Satın alma geçmişi</h3>*@
+            <hr />
+            <table id="example" class="table table-striped table-bordered nowrap" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Kurs adı
+                        </th>
+                        <th>
+                            Kurs fiyatı
+                        </th>
+                        <th>
+                            Satın alma tarihi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <h2>SatinAlmaGecmisi</h2>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Kurs.Ad)
+                            </td>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Kurs.Ad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kurs.Fiyat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IslemTarihi)
-            </th>
-        </tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Kurs.Fiyat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IslemTarihi)
+                            </td>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kurs.Ad)
-                </td>
+                        </tr>
+                    }
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kurs.Fiyat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IslemTarihi)
-                </td>
-
-            </tr>
-        }
-
-    </table>
+            </table>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "order": [[2, "desc"]],
+            "columnDefs": [
+                { "type": "date-de", "targets": 2 } //sıralanıcak sütunun tarih olduğunu belirttik
+            ],
+            "language": {
+                "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                "zeroRecords": "Kayıtlı bilgi bulunamadı",
+                "info": "_TOTAL_ Kayıttan _START_-_END_ gösteriliyor",
+                "infoEmpty": "Kayıt bulunamadı",
+                "infoFiltered": "(_MAX_ Sonuç arasından filtrelendi)",
+                "search": "Ara",
+                "paginate": {
+                    "previous": "Önceki", // This is the link to the previous page
+                    "next": "Sonraki"
+                }
+
+            }
+        });
+    });
+
+
+
+</script>

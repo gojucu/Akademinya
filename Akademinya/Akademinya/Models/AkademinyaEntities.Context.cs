@@ -26,6 +26,7 @@ namespace Akademinya.Models
         }
     
         public virtual DbSet<AlisverisSepeti> AlisverisSepeti { get; set; }
+        public virtual DbSet<Destek> Destek { get; set; }
         public virtual DbSet<Islemler> Islemler { get; set; }
         public virtual DbSet<Kartlar> Kartlar { get; set; }
         public virtual DbSet<Kategori> Kategori { get; set; }
@@ -35,6 +36,6 @@ namespace Akademinya.Models
         public virtual DbSet<usersKurslar> usersKurslar { get; set; }
         public virtual DbSet<Uye> Uye { get; set; }
         public virtual DbSet<UyeKurs> UyeKurs { get; set; }
-        public virtual DbSet<Destek> Destek { get; set; }
+        public virtual DbSet<AdminUye> AdminUye { get; set; }
     }
 }

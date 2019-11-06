@@ -158,6 +158,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUye.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AkademinyaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

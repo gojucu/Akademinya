@@ -12,21 +12,11 @@ namespace Akademinya.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Uye
+    public partial class AdminUye
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Uye()
-        {
-            this.UyeKurs = new HashSet<UyeKurs>();
-        }
-    
         public int Id { get; set; }
         public string Mail { get; set; }
-        public string TelefonNo { get; set; }
-        public string CookieGuid { get; set; }
         public string Sifre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UyeKurs> UyeKurs { get; set; }
+        public string AdminCookie { get; set; }
     }
 }

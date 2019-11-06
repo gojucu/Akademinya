@@ -95,37 +95,37 @@
 
                 @foreach (var c in comments)
                 {
-                <div class="row">
-                    <div class="col-md-2">
-                        <a href="#" class="pull-left">
-                            <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
-                        </a>
-                    </div>
-                    <div class="col-md-10" style="background-color:#eeeeee">
-                        <div class="media-body">
-                            <span class="text-muted pull-right">
-                                <small class="text-muted">@c.DegerlendirmeTarihi.ToShortDateString()</small>
-                            </span>
-                            <strong class="text-success">@c.Uye.KullaniciAdi</strong>
-                            <div class="starClass" style="display:inline-block;margin-left:20px">
-                                @for (var i = 1; i <= c.KursPuan; i++)
-                                {
-                                    <span class="starGlowN"></span>
-                                }
-                                @for (var i = (c.KursPuan + 1); i <= 5; i++)
-                                {
-                                    <span class="starFadeN"></span>
-                                }
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
+                            </a>
+                        </div>
+                        <div class="col-md-10" style="background-color:#eeeeee">
+                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">@c.DegerlendirmeTarihi.ToShortDateString()</small>
+                                </span>
+                                <strong class="text-success">@c.Uye.Mail</strong>
+                                <div class="starClass" style="display:inline-block;margin-left:20px">
+                                    @for (var i = 1; i <= c.KursPuan; i++)
+                                    {
+                                        <span class="starGlowN"></span>
+                                    }
+                                    @for (var i = (c.KursPuan + 1); i <= 5; i++)
+                                    {
+                                        <span class="starFadeN"></span>
+                                    }
+                                </div>
+                                <p>
+                                    @c.KursYorum
+                                </p>
                             </div>
-                            <p>
-                                @c.KursYorum
-                            </p>
+
                         </div>
 
                     </div>
-
-                </div>
-                <hr />
+                    <hr />
                 }
             </div>
         </div>
@@ -141,7 +141,16 @@
             </div>
             <!-- Side Widget -->
             <div class="card my-4">
-                <h5 class="card-header">@Model.Fiyat ₺</h5>
+
+                @if (Model.Ücretsiz == true)
+                {
+                    <h5 class="card-header"> Ücretsiz</h5>
+                }
+                else
+                {
+                    <h5 class="card-header">@Model.Fiyat ₺</h5>
+                }
+
                 <div class="card-body">
                     @if (uyekurs.Any(x => x.KursID == Model.Id && x.UyeID == uye.Id))
                     {
@@ -157,7 +166,15 @@
                         {
                             if (Model.Ücretsiz == true)
                             {
-                                <button type="button" onclick="window.location.href='../../UcretsizKursKayit/@Model.Id'">Hemen Kaydol</button>
+                                if (uye == null)
+                                {
+                                    <button type="button" onclick="return islemler.GirisYap()">Hemen Kaydol</button>
+                                }
+                                else
+                                {
+                                    <button type="button" onclick="window.location.href='../../UcretsizKursKayit/@Model.Id'">Hemen Kaydol</button>
+                                }
+
                             }
                             else
                             {
@@ -194,7 +211,13 @@
     //accordion son
 
     function SepeteEkle(Id) {
-        window.location = '/SepeteEkle/' + Id;
+        //window.location = '/SepeteEkle/' + Id;
+        bootbox.alert({
+            message: "Sepete eklendi",
+            callback: function () {
+                    window.location = '/SepeteEkle/' + Id;
+            }
+        })
     }
     function SepeteGit(Id) {
         window.location = '/AlisverisSepeti/';

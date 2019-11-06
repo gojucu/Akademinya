@@ -324,11 +324,19 @@ namespace Akademinya.Controllers
         [Route("UcretsizKursKayit/{Id}")]
         public ActionResult UcretsizKursKayit(int Id)
         {
-            var userGuid = Request.Cookies["userGuid"].Value;
+            if (Request.Cookies["userGuid"] != null)
+            {
+                if (Request.Cookies["userGuid"].Value != "")
+                {
+                    var userGuid = Request.Cookies["userGuid"].Value;
             Uye uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
             
             Islemler islem = new Islemler();
             Kurs kurs = db.Kurs.FirstOrDefault(x => x.Id == Id);
+                    if (kurs.Ücretsiz == true)
+                    {
+
+                    
             UyeKurs uyeKurs = new UyeKurs();
 
             islem.IslemTarihi = DateTime.Now;
@@ -343,8 +351,12 @@ namespace Akademinya.Controllers
             db.UyeKurs.Add(uyeKurs);
 
             db.SaveChanges();
-            return RedirectToAction("KursDetay", new { Id });
-            //return View();
+            return RedirectToAction("KursIzlemeSayfasi", new { Id });
+                    }
+                }
+                return RedirectToAction("Index", "Anasayfa");
+            }
+            return RedirectToAction("Index", "Anasayfa");
         }
         
 
@@ -450,7 +462,7 @@ namespace Akademinya.Controllers
                 {
                     var userGuid = Request.Cookies["userGuid"].Value;
                     Uye uye = db.Uye.FirstOrDefault(x => x.CookieGuid==userGuid);
-
+                    ViewBag.Baslik = "Satın alma geçmişi";
 
                     var islemler = db.Islemler.OrderByDescending(x => x.IslemTarihi).ToList().Where(x => x.UyeID == uye.Id);
                     return View(islemler);

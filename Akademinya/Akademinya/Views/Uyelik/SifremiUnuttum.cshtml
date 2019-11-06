@@ -2,40 +2,40 @@
 @{
     ViewBag.Title = "SifremiUnuttum";
 }
-
-
-@{
-    ViewBag.Title = "UyeGirisi";
-}
 <div class="shop">
     <div class="container" style="text-align: -webkit-center;">
 
         <div class="f-signup">
             @*<h4 style="color:red">@ViewBag.Hata</h4>*@
-            @using (Html.BeginForm())
-            {
+
+            <form id="uyeGirisForm">
                 <h2>Şifre yenileme</h2>
                 <p style="font-size:.85rem;text-align: justify;">Şifrenizi sıfırlamak için kayıtlı email adresinizi giriniz</p>
                 <p>
-
                     <label for="Mail" class="floatLabel">Email adresi</label>
-                    <input id="Mail" name="Mail" type="email" required>
+                    <input id="Mail"  name="Mail"  type="email" required>
                 </p>
-                <p style="color:#980000;font-size:.8rem">
+                @*<p style="color:#980000;font-size:.8rem">
                     @ViewBag.Uyari
-                </p>
+                </p>*@
 
                 <p>
                     <input type="submit" value="Giriş yap" id="submit">
                 </p>
                 <hr />
+            </form>
 
-            }
         </div>
        
     </div>
 </div>
-
+<script>
+ 
+    $('#uyeGirisForm').submit(function () {
+        islemler.SifremiUnuttum();
+        return false;
+    });
+</script>
 @*<script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
 <script>
     //Problem: Hints are shown even when form is valid

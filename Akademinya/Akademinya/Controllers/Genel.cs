@@ -61,6 +61,16 @@ namespace Akademinya.Controllers
             return token;
         }
 
+
+        public static string adminguidOlustur()
+        {
+            string token = Guid.NewGuid().ToString();
+            HttpContext.Current.Response.Cookies["adminGuid"].Value = token;
+            HttpContext.Current.Response.Cookies["adminGuid"].Expires = DateTime.Now.AddDays(1);
+            return token;
+        }
+
+
         public static void MailSender(string body, string password)
         {
             body = "Şifre sıfırlama isteği yolladınız. Yeni şifreniz " + password + " olarak değiştirilmiştir. Yeni şifrenizle giriş yapıp şifrenizi düzenleyebilirsiniz.";

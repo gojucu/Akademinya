@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AkademinyaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminUye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdminCookie" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="AlisverisSepeti">
           <Key>
             <PropertyRef Name="Id" />
@@ -104,7 +113,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TelefonNo" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CookieGuid" Type="nvarchar(max)" />
@@ -184,6 +192,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AkademinyaModelStoreContainer">
+          <EntitySet Name="AdminUye" EntityType="Self.AdminUye" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlisverisSepeti" EntityType="Self.AlisverisSepeti" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Destek" EntityType="Self.Destek" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Islemler" EntityType="Self.Islemler" Schema="dbo" store:Type="Tables" />
@@ -222,6 +231,7 @@
       <Schema Namespace="AkademinyaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AkademinyaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AlisverisSepeti" EntityType="AkademinyaModel.AlisverisSepeti" />
+          <EntitySet Name="Destek" EntityType="AkademinyaModel.Destek" />
           <EntitySet Name="Islemler" EntityType="AkademinyaModel.Islemler" />
           <EntitySet Name="Kartlar" EntityType="AkademinyaModel.Kartlar" />
           <EntitySet Name="Kategori" EntityType="AkademinyaModel.Kategori" />
@@ -230,6 +240,7 @@
           <EntitySet Name="users" EntityType="AkademinyaModel.users" />
           <EntitySet Name="usersKurslar" EntityType="AkademinyaModel.usersKurslar" />
           <EntitySet Name="Uye" EntityType="AkademinyaModel.Uye" />
+          <EntitySet Name="UyeKurs" EntityType="AkademinyaModel.UyeKurs" />
           <AssociationSet Name="FK_AlisverisSepeti_Kurs" Association="AkademinyaModel.FK_AlisverisSepeti_Kurs">
             <End Role="Kurs" EntitySet="Kurs" />
             <End Role="AlisverisSepeti" EntitySet="AlisverisSepeti" />
@@ -242,7 +253,6 @@
             <End Role="Kategori" EntitySet="Kategori" />
             <End Role="Kurs" EntitySet="Kurs" />
           </AssociationSet>
-          <EntitySet Name="UyeKurs" EntityType="AkademinyaModel.UyeKurs" />
           <AssociationSet Name="FK_UyeKurs_Kurs" Association="AkademinyaModel.FK_UyeKurs_Kurs">
             <End Role="Kurs" EntitySet="Kurs" />
             <End Role="UyeKurs" EntitySet="UyeKurs" />
@@ -251,8 +261,8 @@
             <End Role="Uye" EntitySet="Uye" />
             <End Role="UyeKurs" EntitySet="UyeKurs" />
           </AssociationSet>
-          <EntitySet Name="Destek" EntityType="AkademinyaModel.Destek" />
-          </EntityContainer>
+          <EntitySet Name="AdminUye" EntityType="AkademinyaModel.AdminUye" />
+        </EntityContainer>
         <EntityType Name="AlisverisSepeti">
           <Key>
             <PropertyRef Name="Id" />
@@ -261,6 +271,15 @@
           <Property Name="KursID" Type="Int32" />
           <Property Name="Guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Kurs" Relationship="AkademinyaModel.FK_AlisverisSepeti_Kurs" FromRole="AlisverisSepeti" ToRole="Kurs" />
+        </EntityType>
+        <EntityType Name="Destek">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Islemler">
           <Key>
@@ -350,12 +369,26 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KullaniciAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TelefonNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CookieGuid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UyeKurs" Relationship="AkademinyaModel.FK_UyeKurs_Uye" FromRole="Uye" ToRole="UyeKurs" />
+        </EntityType>
+        <EntityType Name="UyeKurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursID" Type="Int32" Nullable="false" />
+          <Property Name="UyeID" Type="Int32" Nullable="false" />
+          <Property Name="Aktif" Type="Boolean" />
+          <Property Name="KursYorum" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KursPuan" Type="Int32" />
+          <Property Name="DegerlendirmeTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PuanVerdi" Type="Boolean" />
+          <NavigationProperty Name="Kurs" Relationship="AkademinyaModel.FK_UyeKurs_Kurs" FromRole="UyeKurs" ToRole="Kurs" />
+          <NavigationProperty Name="Uye" Relationship="AkademinyaModel.FK_UyeKurs_Uye" FromRole="UyeKurs" ToRole="Uye" />
         </EntityType>
         <Association Name="FK_AlisverisSepeti_Kurs">
           <End Type="AkademinyaModel.Kurs" Role="Kurs" Multiplicity="0..1" />
@@ -393,21 +426,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="UyeKurs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KursID" Type="Int32" Nullable="false" />
-          <Property Name="UyeID" Type="Int32" Nullable="false" />
-          <Property Name="Aktif" Type="Boolean" />
-          <Property Name="KursYorum" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="KursPuan" Type="Int32" />
-          <Property Name="DegerlendirmeTarihi" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PuanVerdi" Type="Boolean" />
-          <NavigationProperty Name="Kurs" Relationship="AkademinyaModel.FK_UyeKurs_Kurs" FromRole="UyeKurs" ToRole="Kurs" />
-          <NavigationProperty Name="Uye" Relationship="AkademinyaModel.FK_UyeKurs_Uye" FromRole="UyeKurs" ToRole="Uye" />
-        </EntityType>
         <Association Name="FK_UyeKurs_Kurs">
           <End Type="AkademinyaModel.Kurs" Role="Kurs" Multiplicity="1" />
           <End Type="AkademinyaModel.UyeKurs" Role="UyeKurs" Multiplicity="*" />
@@ -432,14 +450,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Destek">
+        <EntityType Name="AdminUye">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminCookie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -452,6 +470,16 @@
               <MappingFragment StoreEntitySet="AlisverisSepeti">
                 <ScalarProperty Name="Guid" ColumnName="Guid" />
                 <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Destek">
+            <EntityTypeMapping TypeName="AkademinyaModel.Destek">
+              <MappingFragment StoreEntitySet="Destek">
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -547,7 +575,6 @@
                 <ScalarProperty Name="CookieGuid" ColumnName="CookieGuid" />
                 <ScalarProperty Name="TelefonNo" ColumnName="TelefonNo" />
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -566,12 +593,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Destek">
-            <EntityTypeMapping TypeName="AkademinyaModel.Destek">
-              <MappingFragment StoreEntitySet="Destek">
-                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+          <EntitySetMapping Name="AdminUye">
+            <EntityTypeMapping TypeName="AkademinyaModel.AdminUye">
+              <MappingFragment StoreEntitySet="AdminUye">
+                <ScalarProperty Name="AdminCookie" ColumnName="AdminCookie" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
