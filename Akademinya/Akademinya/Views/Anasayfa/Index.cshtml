@@ -21,46 +21,46 @@
         <div style="margin-top:20px">
             <!-- Shop Content -->
 
-            <h3>Yazılım Kursları</h3>
-
+            <div class="cat-name">Yazılım Kursları</div>
+            <p>Yazılım kurslarımıza katılarak iş hayatına bir adım önde başlayın</p>
             <div class="main-content">
                 <div class="owl-carousel owl-theme">
                     @foreach (var item in Model.Where(x => x.UstKategoriID == 1))
                     {
-                        <div class="item card col-lg-3 col-md-4" style="height:350px">
-                            <a href="../Kurslar/KursDetay/@item.Id" style="height: 75%;">
-                                <div class="img-responsive" style="height:145px">
-                                    <img src="@item.Resim" alt="Denim Jeans" style="width:100%;height:100%">
-                                </div>
+                    <div class="item card col-lg-3 col-md-4" style="height:350px">
+                        <a href="../Kurslar/KursDetay/@item.Id" style="height: 75%;">
+                            <div class="img-responsive" style="height:145px">
+                                <img src="@item.Resim" alt="Denim Jeans" style="width:100%;height:100%">
+                            </div>
 
-                                <h4>@item.Ad</h4>
-                                @if (item.Ücretsiz == true)
+                            <h4>@item.Ad</h4>
+                            @if (item.Ücretsiz == true)
+                            {
+                                <p class="card-price">Ücretsiz</p>
+                            }
+                            else
+                            {
+                                <p class="card-price">@item.Fiyat ₺</p>
+                            }
+                        </a>
+                        @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
+                        <p style="position: absolute;bottom: 0;left: 0%; width: 100%;padding: inherit;">
+                            @if (item.Ücretsiz == true)
+                            {
+                                if (uye == null)
                                 {
-                                    <p class="card-price">Ücretsiz</p>
+                                    <button onclick="return islemler.GirisYap()">Hemen kaydol</button>
                                 }
                                 else
                                 {
-                                    <p class="card-price">@item.Fiyat ₺</p>
+                                    <button onclick="return HemenKaydol(@item.Id);">Hemen kaydol</button>
                                 }
-                            </a>
-                            @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
-                            <p style="position: absolute;bottom: 0;left: 0%; width: 100%;padding: inherit;">
-                                @if (item.Ücretsiz == true)
-                                {
-                                    if (uye == null)
-                                    {
-                                        <button onclick="return islemler.GirisYap()">Hemen kaydol</button>
-                                    }
-                                    else
-                                    {
-                                        <button onclick="return HemenKaydol(@item.Id);">Hemen kaydol</button>
-                                    }
-                                }
-                                else
-                                {<button onclick="window.location.href='../Kurslar/KursDetay/@item.Id'">Kursa git</button>
-                                }
-                            </p>
-                        </div>
+                            }
+                            else
+                            {<button onclick="window.location.href='../Kurslar/KursDetay/@item.Id'">Kursa git</button>
+                            }
+                        </p>
+                    </div>
                     }
 
                 </div>
@@ -75,8 +75,8 @@
         <div style="margin-top:20px">
             <!-- Shop Content -->
 
-            <h3>Yemek Kursları</h3>
-
+            <div class="cat-name">Yemek Kursları</div>
+            <p>Yemek kurslarına hemen katılarak en güzel şekilde yemek yapmayı öğrenin</p>
             <div class="main-content2">
                 <div id="owl-car" class="owl-carousel owl-theme">
                     @foreach (var item in Model.Where(x => x.UstKategoriID == 7))
@@ -134,9 +134,9 @@
         <div style="margin-top:20px">
             <!-- Shop Content -->
 
-            <h3>Finans Kursları</h3>
-
-            <div class="main-content2">
+            <div class="cat-name">Finans Kursları</div>
+            <p>Paranızı nasıl katlayacağınız, yöneteceğinizi öğrenin</p>
+            <div class="main-content3">
                 <div id="owl-car" class="owl-carousel owl-theme">
                     @foreach (var item in Model.Where(x => x.UstKategoriID == 4))
                     {
@@ -193,9 +193,9 @@
         <div style="margin-top:20px">
             <!-- Shop Content -->
 
-            <h3>Fotoğrafçılık Kursları</h3>
-
-            <div class="main-content2">
+            <div class="cat-name">Fotoğrafçılık Kursları</div>
+            <p>Fotoğrafçılık kurslarımızdan alarak en güzel fotoğrafları çekmeyi öğrenin</p>
+            <div class="main-content4">
                 <div id="owl-car" class="owl-carousel owl-theme">
                     @foreach (var item in Model.Where(x => x.UstKategoriID == 1011))
                     {
@@ -304,7 +304,50 @@
             }
         });
 
-
+        $('.main-content3 .owl-carousel').owlCarousel({
+            stagePadding: 50,
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: [
+                '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+            ],
+            navContainer: '.main-content3 .custom-nav',
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+        $('.main-content4 .owl-carousel').owlCarousel({
+            stagePadding: 50,
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: [
+                '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+            ],
+            navContainer: '.main-content4 .custom-nav',
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
 
     });
 

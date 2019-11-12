@@ -22,6 +22,11 @@
         <AssociationConnector Association="AkademinyaModel.FK_UyeKurs_Kurs" />
         <AssociationConnector Association="AkademinyaModel.FK_UyeKurs_Uye" />
         <EntityTypeShape EntityType="AkademinyaModel.AdminUye" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AkademinyaModel.UyeVideo" Width="1.5" PointX="11.25" PointY="8.25" />
+        <EntityTypeShape EntityType="AkademinyaModel.Video" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="AkademinyaModel.FK_Video_Kurs" />
+        <AssociationConnector Association="AkademinyaModel.FK_UyeVideo_Uye" />
+        <AssociationConnector Association="AkademinyaModel.FK_UyeVideo_Video" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

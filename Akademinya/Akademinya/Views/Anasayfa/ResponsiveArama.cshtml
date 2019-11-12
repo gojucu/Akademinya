@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+
+<div class="page_menu_search">
+        <form id="Resp-arama-form" asp-controller="Anasayfa" asp-action="ResponsiveArama" method="get">
+                 <input type="text" id="Ad" name="Ad" required="required" class="page_menu_search_input" placeholder="Kurs ara">
+        </form>
+</div>
+
+
+<script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    /**/
+//    $(document).on('submit', '#Resp-arama-form', function () {
+
+//        var ad = $("#Ad").val().replace(/\ /g, "_"); //aranan içindeki boşlukların altçizgi yapıyor çünkü controller a boşluklar gitmiyor. Burdan çizgi gidip controllerda çizgiler tekrar boşluğa dönüştürülüyor
+//        alert(ad)
+//        if (ad == null || ad == "") {
+//            ad = null;
+//            window.location.reload;
+//        } else {
+//            window.location = "../Kurslarr2/" + ad;
+//        }
+
+//        return false;
+//});
+    /**/
+    $("#Resp-arama-form").on('submit', function () {
+    var ad = $("#Ad").val().replace(/\ /g, "_"); //aranan içindeki boşlukların altçizgi yapıyor çünkü controller a boşluklar gitmiyor. Burdan çizgi gidip controllerda çizgiler tekrar boşluğa dönüştürülüyor
+    alert(ad)
+    if (ad == null || ad == "") {
+        ad = null;
+        window.location.reload;
+    } else {
+        window.location = "../Kurslarr2/" + ad;
+    }
+
+    return false;
+    });
+</script>

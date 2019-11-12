@@ -1,0 +1,28 @@
+﻿@using Akademinya.Models;
+
+@{
+    Layout = null;
+    AkademinyaEntities db = new AkademinyaEntities();
+    var kategoriler = db.Kategori.ToList();
+}
+<ul class="page_menu_nav">
+
+    @if (ViewBag.Uye != null)
+    {
+        <li class="page_menu_item">
+            <a href="/Kurslarim">Kurslarım<i class="fa fa-angle-down"></i></a>
+        </li>
+        <li class="page_menu_item"><a href="#">@ViewBag.Uye.Mail<i class="fas fa-chevron-down"></i></a></li>
+
+        <li class="page_menu_item"><a href="/Profil">Şifre değiştir<i class="fas fa-chevron-down"></i></a></li>
+
+        <li class="page_menu_item"><a href="/Profil/SatinAlmaGecmisi">Satın alma geçmişi<i class="fas fa-chevron-down"></i></a></li>
+
+        <li class="page_menu_item"><a href="/UyeCikis">Çıkış yap<i class="fas fa-chevron-down"></i></a></li>
+    }
+    else
+    {
+        <li class="page_menu_item"><a href="/UyeOl">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
+        <li class="page_menu_item"><a href="/UyeGirisi">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
+    }
+</ul>

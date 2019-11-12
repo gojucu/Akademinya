@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "AdminGiris";
+}
+
+<div class="shop">
+    <div class="container" style="text-align: -webkit-center;">
+
+        <div class="f-signup">
+            <form id="uyeGirisForm">
+                <h2>Giriş yap</h2>
+                <div style="text-align:justify">
+                    <p style="color:#980000;font-size:.8rem">@ViewBag.Uyari</p>
+                </div>
+                <p>
+                    <label for="KullaniciAdi" class="floatLabel">Mail adresi</label>
+                    <input id="KullaniciAdi" name="Mail" type="email">
+                </p>
+                <p>
+                    <label for="password" class="floatLabel">Şifre</label>
+                    <input id="password" name="Sifre" type="password">
+                    <span>Şifreniz en az 6 karakter uzunluğunda olmalıdır</span>
+                </p>
+
+                <p>
+                    <input type="submit" value="Giriş yap" id="submit">
+                </p>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
+<script>
+
+    $('#uyeGirisForm').submit(function () {
+        if (!canSubmit()) {
+            bootbox.alert({
+                message: "Mail adresi yada şifre  Hatalı"
+            });
+            return false;
+        } else {
+            islemler.AdminGiris();
+            return false;
+        }
+
+    });
+    //Problem: Hints are shown even when form is valid
+    //Solution: Hide and show them at appropriate times
+    var $password = $("#password");
+    //Hide hints
+    $("form span").hide();
+
+    function isPasswordValid() {
+        return $password.val().length >= 6;
+    }
+
+    function canSubmit() {
+        return isPasswordValid();
+    }
+
+    function passwordEvent() {
+        //Find out if password is valid
+        if (isPasswordValid()) {
+            //Hide hint if valid
+            $password.next().hide();
+        } else {
+            //else show hint
+            $password.next().show();
+        }
+    }
+
+
+
+    //When event happens on password input
+    $password.focus(passwordEvent).keyup(passwordEvent);
+
+</script>

@@ -1,0 +1,199 @@
+﻿@model Akademinya.Models.UyeVideo
+
+@using Akademinya.Models
+@{
+    ViewBag.Title = "KursVideoSayfasi";
+    AkademinyaEntities db = new AkademinyaEntities();
+
+    Uye uye = null;
+
+    if (Request.Cookies["userGuid"] != null)
+    {
+        if (Request.Cookies["userGuid"].Value != "")
+        {
+            var userGuid = Request.Cookies["userGuid"].Value;
+            uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+        }
+    }
+}
+
+<div class="container" style="background-color:white;padding-bottom:1%;padding-top:1%">
+
+    <div class="row">
+        <div class="col-md-9 col-video" style="background-color:#454242; display: inline-table;">
+            <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
+                   controls preload="none" poster='~/Content/Videos/foto-5.jpg'
+                   data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                <source src="@Model.Video.Link" type='video/mp4' />
+                <source src="@Model.Video.Link" type='video/webm' />
+            </video>
+        </div>
+        <div class="col-md-3" style="background-color:#454242">
+
+            <div class="kd">
+                <div class="kd-header">
+                    Kurs videoları
+                </div>
+                <button class="accordion">1. Bölüm</button>
+                <div class="panel">
+
+                    @{
+                        int i = 0;
+                        foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == 1&&x.UyeID==uye.Id))
+                        {
+                            i++;
+                            <a href="@item.Id">
+                                <div style="border-bottom-style: solid; padding: 10px;margin:10px 0 10px 0;">
+                                    @i.
+                                    @item.Video.VideoAdı
+                                    @if (item.Izlendi == true)
+                                    {
+                                        <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
+                                    }
+                                    else
+                                    {
+                                        if (item.Id == Model.Id)
+                                        {
+                                            <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
+                                        }
+                                        else
+                                        {
+                                            <p style="display:inline-block;float:right"><i class="far fa-circle" style="font-size: 1.5rem;"></i></p>
+                                        }
+
+                                    }
+                                </div>
+                            </a>
+                        }
+                    }
+
+                </div>
+                <button class="accordion">2. Bölüm</button>
+                <div class="panel">
+                    <p>5.video <hr />
+                    <p>6.video</p><hr />
+                    <p>7.video</p><hr />
+                    <p>8.video</p><hr />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<input type="hidden" id="deger" value="@Model.KalinanZaman" />
+<input type="hidden" id="id" value="@Model.Id" />
+@if (Model.Izlendi == true)
+{
+    <input type="checkbox" id="izlendi" style="display:none" checked />
+}
+else
+{
+    <input type="checkbox" id="izlendi" style="display:none" />
+}
+
+
+<style>
+    .vjs-brand-container {
+        max-width: 25px;
+    }
+
+        .vjs-brand-container img {
+            height: 100%;
+        }
+</style>
+<script src='~/Scripts/jquery-3.3.1.min.js'></script>
+<script>
+    //accordion baş
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+    //accordion son
+
+    //video
+    var vid = document.getElementById("my_video_1");
+    vid.currentTime = $("#deger").val();// burda videonun başlangıç süresi ayarlandı
+    //var izlendimi = $("#izlendi").val();
+    var izlendimi = $("#izlendi").is(":checked") ? true : false;
+    var x = setInterval(function () {
+        //$("#sure").text(vid.currentTime);
+        $("#deger").val(vid.currentTime);
+        izlendimi = $("#izlendi").is(":checked") ? true : false;
+
+        var kalanSure = vid.duration - vid.currentTime;
+        if (kalanSure <= 15 && izlendimi != true) {//15 saniyeye düştüğünde uygunmu *****?
+            $("#izlendi").prop('checked', true);//Burda izlendi durumunu 15 saniyenin altında ise true yapıyoruz
+            $(".bos-icon").remove();
+            $("#p-izlendi").append('<i class="far fa-check-circle" style="font-size:1.5rem;"></i>');
+            /* $("#p-izlendi").text("izlendi");*///Playlistte izlenmedi kısmını izlendiye çeviriyoruz
+            fonkfonk();
+        }
+    }, 5000);//5 sanyiede bir yenilenmesi uygun mu *****?
+
+    //heyeyeyeye
+    window.onbeforeunload = function () {
+
+        fonkfonk();
+        //return false;
+    };
+
+    function fonkfonk() {
+        var deger = $("#deger").val();
+        izlendimi = $("#izlendi").is(":checked") ? true : false;
+        var id = $("#id").val();
+
+        $.ajax({
+            url: "../../VideoSure",
+            async: false,
+            data: { deger, izlendimi, id },
+            type: "post",
+            success: function (sonuc) {
+                if (sonuc) {
+
+                }
+                else {
+
+                }
+            }
+        })
+    }
+    //yoyoyoyoyo
+
+    function getCurTime() { //bunlar butonla deneme yaptıklarım siliicek
+        alert(vid.currentTime);
+    }
+
+    function setCurTime() {
+        vid.currentTime = 65;
+    }
+</script>
+<script language="JavaScript">
+    //Video ya sağ tıklama kapalı
+    document.getElementById("my_video_1").addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+    }, false);
+</script>
+
+
+
+<script>
+    var player = videojs('my_video_1');
+    player.brand({
+        image: "https://pngriver.com/wp-content/uploads/2017/11/balloon-free-PNG-transparent-background-images-free-download-clipart-pics-PNGPIX-COM-Balloon-PNG-image-5.png",
+        title: "Logo Title",
+        destination: "http://www.google.com",
+        destinationTarget: "_top"
+    });
+</script>

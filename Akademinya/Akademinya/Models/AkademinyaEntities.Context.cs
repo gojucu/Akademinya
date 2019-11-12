@@ -37,5 +37,7 @@ namespace Akademinya.Models
         public virtual DbSet<Uye> Uye { get; set; }
         public virtual DbSet<UyeKurs> UyeKurs { get; set; }
         public virtual DbSet<AdminUye> AdminUye { get; set; }
+        public virtual DbSet<UyeVideo> UyeVideo { get; set; }
+        public virtual DbSet<Video> Video { get; set; }
     }
 }

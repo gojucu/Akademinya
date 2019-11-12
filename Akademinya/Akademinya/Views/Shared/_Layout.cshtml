@@ -13,6 +13,10 @@
 
     @*datatables*@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+    @*Videojs*@
+    <link href="https://vjs.zencdn.net/7.6.5/video-js.css" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
     @*<link rel="stylesheet" type="text/css" href="/Content/OneTech/styles/bootstrap4/bootstrap.min.css">*@
     <link href="/Content/OneTech/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
@@ -37,9 +41,10 @@
                     <div class="row">
 
                         <!-- Logo -->
-                        <div class="col-lg-3 col-sm-3 col-3 order-1">
+                        <div class="col-lg-3 col-sm-3 col-4 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="/" style="font-family: 'Monserrat', sans-serif;font-weight:900;color:#06d1d3">Akademinya</a></div>
+                                <div class="logo"><a href="/" class="L-renk" style="font-family: 'Monserrat', sans-serif;font-weight:900;background-color:white">
+                                    <img class="img-responsive" src="~/Content/SampleImages/Logo/Untitled.svg" style="height: 133px;max-height:-webkit-fill-available;" /></a></div>
                             </div>
                         </div>
 
@@ -48,7 +53,7 @@
 
 
                         <!-- Wishlist -->
-                        <div class="col-lg-3 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="col-lg-3 col-8 order-lg-3 order-2 text-lg-left text-right">
                             @{Html.RenderAction("IstekSepet", "Anasayfa");}
                         </div>
                     </div>
@@ -62,7 +67,7 @@
                     <div class="row">
                         <div class="col">
 
-                            <div class="main_nav_content d-flex flex-row">
+                            <div class="@*L-renk*@ main_nav_content d-flex flex-row">
 
                                 @{Html.RenderAction("MenuList", "Anasayfa");}
 
@@ -76,7 +81,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -90,79 +94,15 @@
                     <div class="row">
                         <div class="col">
 
-                            <div class="page_menu_content">
+                            <div class="L-renk page_menu_content">
+                                @{Html.RenderAction("ResponsiveArama", "Anasayfa");}
+                                @*<div class="page_menu_search">
+            <form action="#">
+                <input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
+            </form>
+        </div>*@
+                                @{Html.RenderAction("ResponisveMenuList", "Anasayfa");}
 
-                                <div class="page_menu_search">
-                                    <form action="#">
-                                        <input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
-                                    </form>
-                                </div>
-                                <ul class="page_menu_nav">
-                                    <li class="page_menu_item has-children">
-                                        <a href="#">Language<i class="fa fa-angle-down"></i></a>
-                                        <ul class="page_menu_selection">
-                                            <li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="page_menu_item has-children">
-                                        <a href="#">Currency<i class="fa fa-angle-down"></i></a>
-                                        <ul class="page_menu_selection">
-                                            <li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="page_menu_item">
-                                        <a href="#">Home<i class="fa fa-angle-down"></i></a>
-                                    </li>
-                                    <li class="page_menu_item has-children">
-                                        <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
-                                        <ul class="page_menu_selection">
-                                            <li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-                                            <li class="page_menu_item has-children">
-                                                <a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
-                                                <ul class="page_menu_selection">
-                                                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="page_menu_item has-children">
-                                        <a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
-                                        <ul class="page_menu_selection">
-                                            <li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="page_menu_item has-children">
-                                        <a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
-                                        <ul class="page_menu_selection">
-                                            <li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
-                                </ul>
-
-                                <div class="menu_contact">
-                                    <div class="menu_contact_item"><div class="menu_contact_icon"><img src="/Content/OneTech/images/phone_white.png" alt=""></div>+38 068 005 3570</div>
-                                    <div class="menu_contact_item"><div class="menu_contact_icon"><img src="/Content/OneTech/images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,6 +203,12 @@
             </div>
         </div>
     </div>
+    @*Videojs,& brand*@
+    <script src='https://vjs.zencdn.net/7.6.5/video.js'></script>
+
+    <script src='~/Content/AnasayfaContent/js/videojs-brand.min.js'></script>
+
+
 
     <script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/bower_components/datatables.net/js/jquery.datatables.min.js"></script>

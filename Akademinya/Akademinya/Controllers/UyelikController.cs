@@ -174,5 +174,56 @@ namespace Akademinya.Controllers
             }
 
         }
+
+
+        [Route("AdminGiris")]
+        public ActionResult AdminGiris()
+        {
+            ViewBag.Baslik = "Admin girişi";
+            if (Request.Cookies["adminGuid"] != null)
+            {
+                if (Request.Cookies["adminGuid"].Value == "")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Anasayfa");
+                }
+            }
+            else
+            {
+                return View();
+                //return RedirectToAction("Index", "Anasayfa");
+            }
+        }
+        [HttpPost]
+        [Route("AdminGiris")]
+        [ValidateInput(false)]
+        public JsonResult AdminGiris(string Mail, string Sifre)
+        {
+            try
+            {
+                AdminUye admin = db.AdminUye.FirstOrDefault(x => x.Mail == Mail && x.Sifre == Sifre);
+                if (admin.Id > 0)
+                {
+                    var admingGuid = Genel.adminguidOlustur();
+                    admin.AdminCookie = admingGuid;
+                    db.SaveChanges();
+
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+        }
     }
 }

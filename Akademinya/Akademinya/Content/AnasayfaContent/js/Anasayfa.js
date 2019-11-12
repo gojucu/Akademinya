@@ -16,6 +16,31 @@ var islemler = {
     GirisYap: function () {
         uyariVer("Lütfen <a href='/UyeGirisi'> Üye Girişi </a> yapınız. <br> yada  <a href='/UyeOl'> Yeni üyelik </a> oluşturunuz ", true)
     },
+    AdminGiris: function () {
+
+        //$("#katil").prop('disabled', true);
+
+        var Mail = $("#KullaniciAdi").val();
+        var Sifre = $("#password").val();
+        alert("hey")
+        $.ajax({
+            url: "AdminGiris",
+            async: false,
+            data: { Mail, Sifre },
+            type: "post",
+            success: function (sonuc) {
+                if (sonuc) {
+                    window.location.href = "Admin";
+                }
+                else {
+                    bootbox.alert({
+                        message: "Mail adresi yada şifre  Hatalı"
+                    });
+                    //$('#katil').removeAttr("disabled");
+                }
+            }
+        })
+    },
     UyeGirisi: function () {
 
         //$("#katil").prop('disabled', true);

@@ -209,6 +209,12 @@
     <Compile Include="Models\UyeKurs.cs">
       <DependentUpon>AkademinyaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UyeVideo.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Video.cs">
+      <DependentUpon>AkademinyaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +226,9 @@
     <Content Include="Content\AnasayfaContent\css\owl.carousel.css" />
     <Content Include="Content\AnasayfaContent\css\owl.theme.default.min.css" />
     <Content Include="Content\AnasayfaContent\js\Anasayfa.js" />
+    <Content Include="Content\AnasayfaContent\js\videojs-brand.css" />
+    <Content Include="Content\AnasayfaContent\js\videojs-brand.js" />
+    <Content Include="Content\AnasayfaContent\js\videojs-brand.min.js" />
     <Content Include="Content\AnasayfaContent\owl.carousel.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -7143,6 +7152,7 @@
     <Content Include="Content\SampleImages\cofe.jpg" />
     <Content Include="Content\SampleImages\face123.jpg" />
     <Content Include="Content\SampleImages\face3.png" />
+    <Content Include="Content\SampleImages\Logo\Untitled.svg" />
     <Content Include="Content\SampleImages\pc.jpg" />
     <Content Include="Content\SampleImages\pc2.jpg" />
     <Content Include="Content\SampleImages\Stars\StarFade.gif" />
@@ -7164,6 +7174,9 @@
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.min.js" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\startbootstrap-blog-post-gh-pages\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Videos\Awolnation-Sail.mp4" />
+    <Content Include="Content\Videos\foto-5.jpg" />
+    <Content Include="Content\Videos\logo-png-1.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\AnasayfaContent\css\Site.css" />
@@ -7896,6 +7909,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Anasayfa\KursVideoSayfasi.cshtml" />
+    <Content Include="Views\Anasayfa\ResponsiveArama.cshtml" />
+    <Content Include="Views\Anasayfa\ResponisveMenuList.cshtml" />
+    <Content Include="Views\Uyelik\AdminGiris.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

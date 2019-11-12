@@ -20,6 +20,7 @@ namespace Akademinya.Models
             this.AlisverisSepeti = new HashSet<AlisverisSepeti>();
             this.Islemler = new HashSet<Islemler>();
             this.UyeKurs = new HashSet<UyeKurs>();
+            this.Video = new HashSet<Video>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace Akademinya.Models
         public virtual Kategori Kategori { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UyeKurs> UyeKurs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Video> Video { get; set; }
     }
 }

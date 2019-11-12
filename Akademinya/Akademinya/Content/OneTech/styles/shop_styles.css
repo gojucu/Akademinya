@@ -547,7 +547,7 @@ section
 {
 	font-size: 36px;
 	font-weight: 500;
-	color: #0e8ce4;
+	/*color: #0e8ce4;*/
 }
 .header_search
 {
@@ -1019,13 +1019,12 @@ select option
 {
 	margin-right: 0px;
 }
-.main_nav_dropdown li a
-{
-	font-size: 18px;
-	font-weight: 400;
-	color: #a19a9a;
-	line-height: 60px;
-}
+    .main_nav_dropdown li a {
+        font-size: 18px;
+        font-weight: 400;
+        color: #5b5757;
+        line-height: 60px;
+    }
 .main_nav_dropdown li li
 {
 	padding-left: 15px;
@@ -1071,13 +1070,15 @@ select option
     -o-transition: all 500ms ease;
     transition: all 500ms ease;
 }
-.page_menu_content
-{
-	height: 0px;
-	background: #0e8ce4;
-	padding-left: 15px;
-	padding-right: 15px;
-	overflow: hidden;
+.page_menu_content {
+    height: 0px;
+    background: #0e8ce4;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+
+    border-top-color: white;
+    border-top-style: solid;
 }
 .page_menu_search
 {

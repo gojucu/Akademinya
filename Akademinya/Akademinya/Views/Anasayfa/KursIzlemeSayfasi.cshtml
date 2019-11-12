@@ -1,13 +1,108 @@
 ﻿@model Akademinya.Models.Kurs
+   
+    @using Akademinya.Models
 @{
     ViewBag.Title = "KursIzlemeSayfasi";
+    AkademinyaEntities db = new AkademinyaEntities();
 
+    Uye uye = null;
+
+    if (Request.Cookies["userGuid"] != null)
+    {
+        if (Request.Cookies["userGuid"].Value != "")
+        {
+            var userGuid = Request.Cookies["userGuid"].Value;
+            uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
+        }
+    }
 }
 
-<div class="container" style="background-color:white">
-    <h2>KursIzlemeSayfasi</h2>
-    <button type="button" onclick="return islemler.PuanVer(@Model.Id)" class="btn btn-warning float-right m-2">
-        Puan ver
-    </button>
-    <hr />
+<div class="container" style="background-color:white;padding-bottom:1%;padding-top:1%">
+
+    <div class="row">
+        <div class="col-md-9" style="display: inline-table;">
+            <h6>Açıklama</h6>
+            @Model.Acikklama<hr />
+            <h6>İçerik</h6>
+            @Model.Icerik
+        </div>
+        <div class="col-md-3" style="background-color:gainsboro">
+
+                <button type="button" onclick="return islemler.PuanVer(@Model.Id)" class="btn btn-warning float-right" style="width:100%; margin: 10px 0 10px 0;">
+                    Puan ver
+                </button>
+
+
+            <div class="kd" style="margin: 50px 0;">
+                <button class="accordion">1. Bölüm</button>
+                <div class="panel">
+                    @{
+                        int i = 0;
+                        foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == Model.Id&& x.UyeID==uye.Id))
+                        {
+                            i++;
+                            <a href="@item.Video.KursID/@item.Id">
+                                <div style="border-bottom-style: solid; padding: 10px;margin:10px 0 10px 0;">
+                                    @i.
+                                    @item.Video.VideoAdı
+
+                                    @if (item.Izlendi == true)
+                                    {
+                                        <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
+                                    }
+                                    else
+                                    {
+                                        <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
+                                    }
+                                </div>
+                            </a>
+
+                        }
+                    }
+                </div>
+                <button class="accordion">2. Bölüm</button>
+                <div class="panel">
+                    <p>5.video</p><hr />
+                    <p>6.video</p><hr />
+                    <p>7.video</p><hr />
+                    <p>8.video</p><hr />
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+
+
+
+<style>
+    .vjs-brand-container {
+        max-width: 25px;
+    }
+
+    .vjs-brand-container img {
+        height: 100%;
+    }
+</style>
+<script src='~/Scripts/jquery-3.3.1.min.js'></script>
+<script>
+    //accordion baş
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+    //accordion son
+    
+</script>
+

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -135,10 +135,9 @@
 	{
 		height: 125px;
 	}
-	.main_nav_content
-	{
-		background: #0e8ce4;
-	}
+    .main_nav_content {
+        background: #86358d;
+    }
 	.menu_trigger_container
 	{
 		display: block;

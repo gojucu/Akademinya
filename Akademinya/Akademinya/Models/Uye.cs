@@ -18,6 +18,7 @@ namespace Akademinya.Models
         public Uye()
         {
             this.UyeKurs = new HashSet<UyeKurs>();
+            this.UyeVideo = new HashSet<UyeVideo>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace Akademinya.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UyeKurs> UyeKurs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UyeVideo> UyeVideo { get; set; }
     }
 }
