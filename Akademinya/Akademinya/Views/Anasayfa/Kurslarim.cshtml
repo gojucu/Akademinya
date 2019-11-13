@@ -42,35 +42,42 @@
                     {
                         if (kurslarim.Any(x => x.kursUstKatId == item2.Id))
                         {
-                    <div class="cat-name" style="width:100%;border-bottom-style: solid;color: #4f004f;">@item2.Ad</div>  
+                            <div class="cat-name" style="width:100%;border-bottom-style: solid;color: #4f004f;">@item2.Ad</div>
                         }
-
-
-                        foreach (var item in kurslarim.ToList().Where(x=>x.kursUstKatId==item2.Id))
+                        foreach (var item3 in kat.ToList().Where(x => x.UstId == item2.Id))
                         {
-          
-                    <div class="card col-lg-3 col-md-4" style="height:350px">
-                        <a href="../KursIzlemeSayfasi/@item.kursId" style="height:75%">
-                            <div class="img-responsive" style="height:145px">
-                                <img src="@item.kursResim" alt="Denim Jeans" style="width:100%;height:100%">
-                            </div>
-
-                            <h4>@item.kursAdi</h4>
-                            @if (item.kursUcretsiz == true)
+                            if (kurslarim.Any(x => x.kursKat.Id == item3.Id))
                             {
-                                <p class="card-price">Ücretsiz</p>
+                                <div class="cat-name" style="width:100%;color: #4f004f; font-size:1.4rem"><i class="fas fa-long-arrow-alt-right"></i>@item3.Ad kursları</div>
                             }
-                            else
+                            foreach (var item in kurslarim.ToList().Where(x => x.kursKat.Id == item3.Id))
                             {
-                                <p class="card-price">@item.kursFiyat ₺</p>
-                            }
-                        </a>
-                            @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
-                            <p style="position: absolute;bottom: 0;left: 0%; width: 100%;padding: inherit;"><button onclick="window.location.href='../KursIzlemeSayfasi/@item.kursId'">Kursunuza gidin</button></p>
-                       
-                    </div>
 
+                                <div class="card col-lg-3 col-md-4" style="height:350px">
+                                    <a href="../KursIzlemeSayfasi/@item.kursId" style="height:75%">
+                                        <div class="img-responsive" style="height:145px">
+                                            <img src="@item.kursResim" alt="Denim Jeans" style="width:100%;height:100%">
+                                        </div>
+
+                                        <h4>@item.kursAdi</h4>
+                                        @if (item.kursUcretsiz == true)
+                                        {
+                                            <p class="card-price">Ücretsiz</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-price">@item.kursFiyat ₺</p>
+                                        }
+                                    </a>
+                                    @*<p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>*@
+                                    <p style="position: absolute;bottom: 0;left: 0%; width: 100%;padding: inherit;"><button onclick="window.location.href='../KursIzlemeSayfasi/@item.kursId'">Kursunuza gidin</button></p>
+
+                                </div>
+
+                            }
                         }
+
+
                     }
                 }
             </div>

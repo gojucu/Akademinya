@@ -35,9 +35,18 @@ namespace Akademinya.Controllers
         [ValidateInput(false)]
         public ActionResult Destek(Destek destek)
         {
+            try
+            {
+            Genel.MailSenderDestek(destek);
             db.Destek.Add(destek);
             db.SaveChanges();
             return View();
+            }
+            catch
+            {
+                return View();
+            }
+
         }
 
         [Route("MenuList")]

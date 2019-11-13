@@ -95,5 +95,32 @@ namespace Akademinya.Controllers
 
 
         }
+
+
+        public static void MailSenderDestek(Akademinya.Models.Destek destek)
+        {
+            string body = "";
+            body = "Yollayan kişi:"+destek.Ad+"Yollayan kişinin mail adresi:"+destek.Mail+"Mesajı:"+destek.Mesaj;
+            var fromAddress = new MailAddress("destek@mail.com");
+            var toAddress = new MailAddress("destek@mail.com");
+            const string subject = "Akademinya | Destek";
+            using (var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, "destek password")
+            })
+            {
+                using (var message = new MailMessage(fromAddress, toAddress) { Subject = subject, Body = body })
+                {
+                    smtp.Send(message);
+                }
+            }
+
+
+        }
     }
 }
