@@ -377,6 +377,16 @@ namespace Akademinya.Controllers
 
                         UyeKurs uyeKurs = new UyeKurs();
 
+                        foreach (var item in kurs.Video)
+                        {
+                            UyeVideo uv = new UyeVideo();
+                            uv.VideoID = item.Id;
+                            uv.Izlendi = false;
+                            uv.KalinanZaman = "0";
+                            uv.UyeID = uye.Id;
+                            db.UyeVideo.Add(uv);
+                        }
+
                         islem.IslemTarihi = DateTime.Now;
                         islem.UyeID = uye.Id;
                         islem.KursID = kurs.Id;
@@ -547,7 +557,7 @@ namespace Akademinya.Controllers
                     //Furkan allah kahretmesin seni napıyon sen ne bu karışıklık kendine gel Ya MAL
                     var uyeVideo = db.UyeVideo.FirstOrDefault(x => x.Id == uyeVideoID && x.UyeID == uye.Id);
 
-                    ViewBag.Baslik = uyeVideo.Video.Kurs.Ad + "/" + uyeVideo.Video.VideoAdı;
+                    ViewBag.Baslik = uyeVideo.Video.Kurs.Ad;
 
                     if (uye.UyeKurs.FirstOrDefault(x => x.KursID == kursId) != null && uyeVideo != null)
                     {

@@ -15,20 +15,35 @@
             uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
         }
     }
+    int a = 1;
+    foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == Model.Video.KursID && x.UyeID == uye.Id))
+    {
+        if (item.Id != Model.Id)
+        {
+            a++;
+
+        }
+        else
+        {
+            break;
+        }
+    }
 }
 
 <div class="container" style="background-color:white;padding-bottom:1%;padding-top:1%">
-
+    <h4 style="font-family: montserrat;">@a.@Model.Video.VideoAdı</h4>
     <div class="row">
-        <div class="col-md-9 col-video" style="background-color:#454242; display: inline-table;">
-            <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
-                   controls preload="none" poster='~/Content/Videos/foto-5.jpg'
-                   data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-                <source src="@Model.Video.Link" type='video/mp4' />
-                <source src="@Model.Video.Link" type='video/webm' />
-            </video>
+        <div class="col-md-9 col-video" style="background-color:#454242; display: inline-table;text-align: center;">
+            @*<video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
+                       controls preload="none" poster='~/Content/Videos/foto-5.jpg'
+                       data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+
+                    <source src="@Model.Video.Link" type='video/mp4' />
+                    <source src="@Model.Video.Link" type='video/webm' />
+                </video>*@
+            <iframe width="640" height="440" src="@Model.Video.Link" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="col-md-3" style="background-color:#454242">
+        <div class="col-md-3" style="background-color:#454242; display:inline-table;">
 
             <div class="kd">
                 <div class="kd-header">
@@ -39,31 +54,76 @@
 
                     @{
                         int i = 0;
-                        foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == 1&&x.UyeID==uye.Id))
+                        foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == Model.Video.KursID && x.UyeID == uye.Id))
                         {
                             i++;
-                            <a href="@item.Id">
-                                <div style="border-bottom-style: solid; padding: 10px;margin:10px 0 10px 0;">
-                                    @i.
-                                    @item.Video.VideoAdı
-                                    @if (item.Izlendi == true)
+                            if (Model.Id == item.Id)
+                            {
+                    <a href="@item.Id">
+                        <div class="degisik row" style="border-bottom-style: solid; padding-top: 10px;padding-bottom: 10px;margin:0;background-color:#e6f2f5 ">
+                            <div class="col-10">
+
+
+                                @i.
+                                @item.Video.VideoAdı
+
+                            </div>
+                            <div class="col-2">
+                                @if (item.Izlendi == true)
+                                {
+                                    <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
+                                }
+                                else
+                                {
+                                    if (item.Id == Model.Id)
                                     {
-                                        <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
+                                        <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
                                     }
                                     else
                                     {
-                                        if (item.Id == Model.Id)
-                                        {
-                                            <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
-                                        }
-                                        else
-                                        {
-                                            <p style="display:inline-block;float:right"><i class="far fa-circle" style="font-size: 1.5rem;"></i></p>
-                                        }
-
+                                        <p style="display:inline-block;float:right"><i class="far fa-circle" style="font-size: 1.5rem;"></i></p>
                                     }
-                                </div>
-                            </a>
+
+                                }
+                            </div>
+                        </div>
+                    </a>
+
+                            }
+                            else
+                            {
+                    <a href="@item.Id">
+                        <div class="degisik row" style="border-bottom-style: solid; padding-top: 10px;padding-bottom: 10px;margin:0; ">
+                            <div class="col-10">
+
+
+                                @i.
+                                @item.Video.VideoAdı
+
+                            </div>
+                            <div class="col-2">
+                                @if (item.Izlendi == true)
+                                {
+                                    <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
+                                }
+                                else
+                                {
+                                    if (item.Id == Model.Id)
+                                    {
+                                        <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
+                                    }
+                                    else
+                                    {
+                                        <p style="display:inline-block;float:right"><i class="far fa-circle" style="font-size: 1.5rem;"></i></p>
+                                    }
+
+                                }
+                            </div>
+                        </div>
+                    </a>
+                            }
+                            
+
                         }
                     }
 

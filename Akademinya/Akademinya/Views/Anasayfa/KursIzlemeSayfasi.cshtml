@@ -1,6 +1,6 @@
 ﻿@model Akademinya.Models.Kurs
-   
-    @using Akademinya.Models
+
+@using Akademinya.Models
 @{
     ViewBag.Title = "KursIzlemeSayfasi";
     AkademinyaEntities db = new AkademinyaEntities();
@@ -28,9 +28,9 @@
         </div>
         <div class="col-md-3" style="background-color:gainsboro">
 
-                <button type="button" onclick="return islemler.PuanVer(@Model.Id)" class="btn btn-warning float-right" style="width:100%; margin: 10px 0 10px 0;">
-                    Puan ver
-                </button>
+            <button type="button" onclick="return islemler.PuanVer(@Model.Id)" class="btn btn-warning float-right" style="width:100%; margin: 10px 0 10px 0;">
+                Puan ver
+            </button>
 
 
             <div class="kd" style="margin: 50px 0;">
@@ -38,22 +38,28 @@
                 <div class="panel">
                     @{
                         int i = 0;
-                        foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == Model.Id&& x.UyeID==uye.Id))
+                        foreach (var item in db.UyeVideo.ToList().Where(x => x.Video.KursID == Model.Id && x.UyeID == uye.Id))
                         {
                             i++;
                             <a href="@item.Video.KursID/@item.Id">
-                                <div style="border-bottom-style: solid; padding: 10px;margin:10px 0 10px 0;">
-                                    @i.
-                                    @item.Video.VideoAdı
+                                <div class="row" style="border-bottom-style: solid; padding-top: 10px;margin:10px 0 10px 0;">
+                                    <div class="col-10">
 
-                                    @if (item.Izlendi == true)
-                                    {
-                                        <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
-                                    }
-                                    else
-                                    {
-                                        <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
-                                    }
+                                        @i.
+                                        @item.Video.VideoAdı
+                                    </div>
+                                    <div class="col-2">
+
+
+                                        @if (item.Izlendi == true)
+                                        {
+                                            <p style="display:inline-block;float:right"><i class="far fa-check-circle" style="font-size: 1.5rem;"></i></p>
+                                        }
+                                        else
+                                        {
+                                            <p id="p-izlendi" style="display:inline-block;float:right"><i class="bos-icon far fa-circle" style="font-size: 1.5rem;"></i></p>
+                                        }
+                                    </div>
                                 </div>
                             </a>
 
@@ -81,9 +87,9 @@
         max-width: 25px;
     }
 
-    .vjs-brand-container img {
-        height: 100%;
-    }
+        .vjs-brand-container img {
+            height: 100%;
+        }
 </style>
 <script src='~/Scripts/jquery-3.3.1.min.js'></script>
 <script>
@@ -103,6 +109,6 @@
         });
     }
     //accordion son
-    
+
 </script>
 

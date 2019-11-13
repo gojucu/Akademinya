@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Akademinya.Models.AlisverisSepeti>
 @using Akademinya.Models
+
 @{
     ViewBag.Title = "AlisverisSepeti";
     AkademinyaEntities db = new AkademinyaEntities();
@@ -12,6 +13,18 @@
             uye = db.Uye.FirstOrDefault(x => x.CookieGuid == userGuid);
 
         }
+    }
+}
+
+@helper Kisalt(string metin)
+{
+    if (metin.Length > 200)
+    {
+        <p>@metin.Substring(0, 200)...</p>
+    }
+    else
+    {
+        <p>@metin</p>
     }
 }
 
@@ -38,22 +51,25 @@
                 {
                     foreach (var item in Model)
                     {
-                    <div class="row">
-                        <a href="../Kurslar/KursDetay/@item.KursID">
+                        <div class="row">
                             <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="@item.Kurs.Resim" alt="prewiew" width="120" height="80">
+                                <a href="../Kurslar/KursDetay/@item.KursID">
+
+                                    <img class="img-responsive" src="@item.Kurs.Resim" alt="prewiew" width="165" height="110">
+
+                                </a>
+                            </div><div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                <a href="../Kurslar/KursDetay/@item.KursID" style="width:50%">
+
+                                    <h4 class="product-name"><strong>@item.Kurs.Ad</strong></h4>
+                                    <h4>
+                                        <small>@Kisalt(item.Kurs.Acikklama)</small>
+                                    </h4>
+
+                                </a>
                             </div>
-                        </a>
-                        <a href="../Kurslar/KursDetay/@item.KursID"style="width:50%">
-                            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                                <h4 class="product-name"><strong>@item.Kurs.Ad</strong></h4>
-                                <h4>
-                                    <small>@item.Kurs.Acikklama</small>
-                                </h4>
-                            </div>
-                        </a>
                             <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px;margin: auto;">
+                                <div class="col-4 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px;margin: auto;">
                                     <h6><strong>@item.Kurs.Fiyat<span class="text-muted">₺</span></strong></h6>
                                 </div>
                                 <div class="col-4 col-sm-4 col-md-4">
@@ -64,7 +80,7 @@
                                     </button>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                         <hr>
                     }
                 }

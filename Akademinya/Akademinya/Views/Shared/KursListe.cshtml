@@ -26,14 +26,27 @@
         uyekurs = db.UyeKurs.ToList().Where(x => x.UyeID == uye.Id);
     }
 }
+@helper Kisalt(string metin)
+{
+    if (metin.Length > 280)
+    {
+        <p style="display: inline-block; width: 80%;">@metin.Substring(0, 280)...</p>
+    }
+    else
+    {
+        <p style="display: inline-block; width: 80%;">@metin</p>
+    }
+}
+
 
 <script src="/Content/OneTech/js/jquery-3.3.1.min.js"></script>
-<div class="container" style="background-color:white;height:200px">
-    <div class="row" style="top: 45%;"> @*top 45% çok hoşuma gitmedi bak/ burda ki bulunamadı yazısına da birşeyler yapabilirsin*@
+<div class="container" style="background-color:white;min-height:200px">
+    <div class="row" style="top: 45%;">
+        @*top 45% çok hoşuma gitmedi bak/ burda ki bulunamadı yazısına da birşeyler yapabilirsin*@
         <div class="col-md-12" style="margin:auto">
             @if (Model == null || Model.Count() <= 0)
             {
-                <div style="text-align:center">
+                <div style="text-align:center;padding: 80px;">
                     <p>Aradığınız kriterlere uygun kurs bulunamadı. </p>
 
                 </div>
@@ -68,7 +81,7 @@
                         ViewBag.totalRating = decimal.Parse(rating.ToString());
                     }
 
-                    <div class="katKurs-Liste row">
+                    <div class="katKurs-Liste row" style="min-height:188px">
                         <div class="img-responsive col-sm-3" style="float:left">
                             <a href="../Kurslar/KursDetay/@item.Id"> <img src="@item.Resim" style="width:100%;height:100%" /></a>
                         </div>
@@ -105,7 +118,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../Kurslar/KursDetay/@item.Id">   @item.Icerik </a> <div style="float:right">
+                                        <a href="../Kurslar/KursDetay/@item.Id">   @Kisalt(item.Icerik) </a> <div style="float:right">
                                             @if (item.Ücretsiz == true)
                                             {
                                                 if (uye == null)

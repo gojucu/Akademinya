@@ -1,12 +1,12 @@
 ﻿@using Akademinya.Models;
 
-@{ 
+@{
     Layout = null;
     AkademinyaEntities db = new AkademinyaEntities();
     var kategoriler = db.Kategori.ToList();
 }
 
- <!-- Categories Menu -->
+<!-- Categories Menu -->
 
 <div class="L-renk cat_menu_container" @*style="background-color:#06d1d3"*@>
     <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
@@ -34,7 +34,7 @@
                 <li><a href="/Kurslarr/@item.Ad">@item.Ad<i class="fas fa-chevron-right ml-auto"></i></a></li>
             }
         }
-        </ul>
+    </ul>
 </div>
 
 <!-- Main Nav Menu -->
@@ -55,11 +55,13 @@
                     <li><a href="/UyeCikis">Çıkış yap<i class="fas fa-chevron-down"></i></a></li>
                 </ul>
             </li>
+            <li><a href="~/Destek"><i style="display:inline-block;font-size:1.1rem" class="far fa-question-circle" title="Destek"></i></a></li>
         }
         else
         {
             <li><a href="/UyeOl">Uye Ol<i class="fas fa-chevron-down"></i></a></li>
             <li><a href="/UyeGirisi">Uye Girişi<i class="fas fa-chevron-down"></i></a></li>
+            <li><a href="~/Destek"><i style="display:inline-block;font-size:1.1rem" class="far fa-question-circle"></i></a></li>
         }
     </ul>
 </div>

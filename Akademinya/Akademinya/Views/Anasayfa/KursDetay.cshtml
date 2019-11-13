@@ -72,10 +72,17 @@
                 <div class="kd">
                     <button class="accordion">1. Bölüm</button>
                     <div class="panel">
-                        <p>1.video</p><hr />
-                        <p>2.video</p><hr />
-                        <p>3.video</p><hr />
-                        <p>4.video</p><hr />
+                        @{
+                            int a = 0;
+                            foreach (var item in db.Video.ToList().Where(x => x.KursID == Model.Id ))
+                            {
+                                a++;
+                                    <div style="border-bottom-style: solid; padding: 10px;margin:10px 0 10px 0;">
+                                        @a.
+                                        @item.VideoAdı
+                                    </div>
+                            }
+                        }
                     </div>
                     <button class="accordion">2. Bölüm</button>
                     <div class="panel">
